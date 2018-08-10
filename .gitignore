@@ -1,0 +1,6 @@
+node_modules/
+data/
+pgdata/
+*.pyc
+*.sock
+postgres.env
