@@ -32,8 +32,6 @@ services:
 
     api:
         build: ./seslr-api
-        volumes:
-            - ./seslr-api/seslr-api:/app
         env_file:
             - ./database/postgres.env
         depends_on:

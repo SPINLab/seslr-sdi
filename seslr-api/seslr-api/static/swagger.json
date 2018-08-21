@@ -1,0 +1,325 @@
+{
+    "basePath": "/api/",
+    "consumes": [
+        "application/json"
+    ],
+    "definitions": {
+        "Find": {
+            "properties": {
+                "description": {
+                    "description": "The description of the find.",
+                    "type": "string"
+                },
+                "features": {
+                    "description": "The features of the find.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "features_architecture": {
+                    "description": "The architectural features of the find.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "features_sepulchral": {
+                    "description": "The sepulchral features of the find.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "The ID of the find.",
+                    "type": "integer"
+                },
+                "material": {
+                    "description": "The material of the find.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "material_bone": {
+                    "description": "The bone material of the find.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "material_building": {
+                    "description": "The building material of the find.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Find Spot": {
+            "properties": {
+                "chronology": {
+                    "description": "The chronology of the find spot.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A description of the find spot.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The ID of the find spot.",
+                    "type": "integer"
+                },
+                "toponym": {
+                    "description": "The toponym of the find spot.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the find spot.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Find Spots": {
+            "properties": {
+                "find_spot_ids": {
+                    "description": "All find spot ids found in the database.",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Finds": {
+            "properties": {
+                "find_spot_ids": {
+                    "description": "All find spot ids found in the database.",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Period": {
+            "properties": {
+                "spot_ids": {
+                    "description": "All find spot ids from the period.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Periods": {
+            "properties": {
+                "periods": {
+                    "description": "All periods found in the database.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "info": {
+        "description": "The data API for the SESLR project.",
+        "title": "SESLR Data API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/find_spots/": {
+            "get": {
+                "operationId": "get_find_spots",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Find Spots"
+                        }
+                    }
+                },
+                "summary": "List all find spots in database by id",
+                "tags": [
+                    "Find Spots"
+                ]
+            }
+        },
+        "/find_spots/{find_spot_id}": {
+            "get": {
+                "operationId": "get_find_spot",
+                "parameters": [
+                    {
+                        "description": "The id of the find spot",
+                        "in": "path",
+                        "name": "find_spot_id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Find Spot"
+                        }
+                    }
+                },
+                "summary": "Get a find spot by a certain id",
+                "tags": [
+                    "Find Spots"
+                ]
+            },
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "find_spot_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/finds/": {
+            "get": {
+                "operationId": "get_finds",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Finds"
+                        }
+                    }
+                },
+                "summary": "Get all finds in database by id",
+                "tags": [
+                    "Finds"
+                ]
+            }
+        },
+        "/finds/{find_spot_id}": {
+            "get": {
+                "operationId": "get_find",
+                "parameters": [
+                    {
+                        "description": "The id of the find spot",
+                        "in": "path",
+                        "name": "find_spot_id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Find"
+                        }
+                    }
+                },
+                "summary": "Get a find by a certain id",
+                "tags": [
+                    "Finds"
+                ]
+            },
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "find_spot_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/periods/": {
+            "get": {
+                "operationId": "get_periods",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Periods"
+                        }
+                    }
+                },
+                "summary": "Get all valid periods",
+                "tags": [
+                    "Periods"
+                ]
+            }
+        },
+        "/periods/{period}": {
+            "get": {
+                "operationId": "get_period",
+                "parameters": [
+                    {
+                        "description": "The period of the find spots",
+                        "in": "path",
+                        "name": "period",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Period"
+                        }
+                    }
+                },
+                "summary": "Get all find spot ids for a certain period",
+                "tags": [
+                    "Periods"
+                ]
+            },
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "period",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "produces": [
+        "application/json"
+    ],
+    "responses": {
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        },
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        }
+    },
+    "swagger": "2.0",
+    "tags": [
+        {
+            "description": "Information on the spots where finds were found",
+            "name": "Find Spots"
+        },
+        {
+            "description": "Information on the finds",
+            "name": "Finds"
+        },
+        {
+            "description": "Get the find spots by period",
+            "name": "Periods"
+        }
+    ]
+}

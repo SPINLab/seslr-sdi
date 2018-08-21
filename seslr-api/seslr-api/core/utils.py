@@ -4,6 +4,7 @@
 @author: Chris Lucas
 """
 
+import os
 import psycopg2
 
 
