@@ -541,38 +541,38 @@ const imagery = [
     {
         text: 'WW2',
         children: [
-    { text: 'RLM_13628_sharpened1' },
-    { text: 'RLM_13633_sharpened1' },
-    { text: 'RLM_13657_detail1_Paleochora1' },
-    { text: 'RLM_13728sharpened1' },
-    { text: 'RLM_13729sharpened1' },
-    { text: 'RLM_13732_sharpened1' },
-    { text: 'RLM_13782_11' },
-    { text: 'RLM_13632_sharpened1' },
-    { text: 'RLM_13638_detail11' },
-    { text: 'RLM_13716_11' },
-    { text: 'RLM_13728sharpened1_reproj' },
-    { text: 'RLM_13731sharpened1' },
-    { text: 'RLM_13771_enhanced1' },
-    { text: 'RLM_13784_11' }
+            { text: 'RLM_13628_sharpened1' },
+            { text: 'RLM_13633_sharpened1' },
+            { text: 'RLM_13657_detail1_Paleochora1' },
+            { text: 'RLM_13728sharpened1' },
+            { text: 'RLM_13729sharpened1' },
+            { text: 'RLM_13732_sharpened1' },
+            { text: 'RLM_13782_11' },
+            { text: 'RLM_13632_sharpened1' },
+            { text: 'RLM_13638_detail11' },
+            { text: 'RLM_13716_11' },
+            { text: 'RLM_13728sharpened1_reproj' },
+            { text: 'RLM_13731sharpened1' },
+            { text: 'RLM_13771_enhanced1' },
+            { text: 'RLM_13784_11' }
         ]
     }
 ];
 
 for (let imageCategory of imagery) {
     for (let imageName of imageCategory.children) {
-    const image = viewer.scene.imageryLayers.addImageryProvider(
-        new Cesium.createTileMapServiceImageryProvider({
-            url: '../imagery/' + imageName.text,
-            maximumLevel: 18,
-            credit: ''
-        })
-    );
-    image.show = false;
-    image.name = imageName.text;
+        const image = viewer.scene.imageryLayers.addImageryProvider(
+            new Cesium.createTileMapServiceImageryProvider({
+                url: '../imagery/' + imageName.text,
+                maximumLevel: 18,
+                credit: ''
+            })
+        );
+        image.show = false;
+        image.name = imageName.text;
 
-    data[imageName.text] = image;
-}
+        data[imageName.text] = image;
+    }
 }
 
 const maps = [
@@ -598,7 +598,7 @@ for (let mapName of maps) {
 const treeData = [
     {
         text: 'Imagery',
-            children: imagery
+        children: imagery
     },
     {
         text: 'Features',
