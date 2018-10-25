@@ -71,9 +71,10 @@ viewer.camera.setView({
 viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function(
     commandInfo
 ) {
-    viewer.camera.setView({
+    viewer.camera.flyTo({
         destination: homeViewPosition,
-        orientation: homeViewOrientation
+        orientation: homeViewOrientation,
+        duration: 0.5
     });
     commandInfo.cancel = true;
 });
