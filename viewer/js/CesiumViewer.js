@@ -1,5 +1,20 @@
 'use strict';
 
+const getUrlParams = function(prop) {
+    var params = {};
+    var search = decodeURIComponent(
+        window.location.href.slice(window.location.href.indexOf('?') + 1)
+    );
+    var definitions = search.split('&');
+
+    definitions.forEach(function(val, key) {
+        var parts = val.split('=', 2);
+        params[parts[0]] = parts[1];
+    });
+
+    return prop && prop in params ? params[prop] : undefined;
+};
+
 Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZWNjNmNiOC0xZDhiLTQ1NTktOGNiZi1jZjE3YzIwMDNkMDMiLCJpZCI6NDk1LCJpYXQiOjE1MjUyNTUyNzV9.R-_alHqdFwfZODeZRMbU3b_Cqakop-X5w2mbtoAS3fA';
 
@@ -12,7 +27,7 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     animation: false,
     timeline: false,
     vrButton: true,
-    sceneModePicker: false,
+    sceneModePicker: true,
     navigationInstructionsInitiallyVisible: false,
     selectionIndicator: false,
     terrainProvider: terrainProvider,
@@ -54,28 +69,63 @@ frame.addEventListener(
     false
 );
 
+viewer.scene.mode = parseInt(getUrlParams('mode')) || 3;
+viewer.sceneModePicker.viewModel.duration = 0;
+
 const homeViewPosition = {
-    x: 4593831.766374706,
-    y: 2095344.1934905865,
-    z: 3899118.3510605167
+    '3D': {
+        x: 4593831.766374706,
+        y: 2095344.1934905865,
+        z: 3899118.3510605167
+    },
+    '2D': {
+        x: 4614210.007026895,
+        y: 2096711.9402057289,
+        z: 3940807.687153852
+    }
 };
 const homeViewOrientation = {
-    heading: 5.996852473587961,
-    pitch: -0.5282780951788908,
-    roll: 6.282120347716106
+    '3D': {
+        heading: 5.996852473587961,
+        pitch: -0.5282780951788908,
+        roll: 6.282120347716106
+    },
+    '2D': {
+        heading: 2 * Math.PI,
+        pitch: -Math.PI / 2,
+        roll: 0
+    }
 };
-viewer.camera.setView({
-    destination: homeViewPosition,
-    orientation: homeViewOrientation
-});
+
+if (viewer.scene.mode === 3) {
+    viewer.camera.setView({
+        destination: homeViewPosition['3D'],
+        orientation: homeViewOrientation['3D']
+    });
+} else {
+    viewer.camera.setView({
+        destination: homeViewPosition['2D'],
+        orientation: homeViewOrientation['2D']
+    });
+}
+
 viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function(
     commandInfo
 ) {
-    viewer.camera.flyTo({
-        destination: homeViewPosition,
-        orientation: homeViewOrientation,
-        duration: 0.5
-    });
+    if (viewer.scene.mode === 3) {
+        viewer.camera.flyTo({
+            destination: homeViewPosition['3D'],
+            orientation: homeViewOrientation['3D'],
+            duration: 0.5
+        });
+    } else {
+        viewer.camera.flyTo({
+            destination: homeViewPosition['2D'],
+            orientation: homeViewOrientation['2D'],
+            duration: 0.5
+        });
+    }
+
     commandInfo.cancel = true;
 });
 
