@@ -711,6 +711,32 @@ const layerSelector = new Vue({
     }
 });
 
+new Vue({
+    el: '#opacitySlider',
+    data() {
+        return {
+            opacity: 100
+        };
+    },
+    components: {
+        vueSlider: window['vue-slider-component']
+    },
+    methods: {
+        onChange() {
+            for (const image in data) {
+                if (data.hasOwnProperty(image)) {
+                    if (data[image].show === true) {
+                        if (data[image].alpha !== null) {
+                            data[image].alpha = this.opacity / 100;
+                        }
+                    }
+                }
+            }
+            viewer.scene.requestRender();
+        }
+    }
+});
+
 const listToString = (list, delimiter) => {
     return _.replace(list.join(delimiter), new RegExp('_', 'g'), ' ')
         .split(' ')

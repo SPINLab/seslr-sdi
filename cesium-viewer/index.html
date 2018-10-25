@@ -11,6 +11,7 @@
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script src="./node_modules/lodash/lodash.min.js"></script>
     <script src="./node_modules/liquor-tree/dist/liquor-tree.umd.js"></script>
+    <script src="./node_modules/vue-slider-component/dist/index.js"></script>
     <script src="./node_modules/chroma-js/chroma.js"></script>
 
     <link rel="stylesheet" href="./css/CesiumViewer.css">
@@ -21,7 +22,13 @@
 
     <div id="layerSelector">
         <input type="text" placeholder="Type to filter.." v-model="treeFilter" class="filter-field">
-        <tree :data="treeData" :filter="treeFilter" :options="treeOptions" @node:checked="onNodeChecked" @node:unchecked="onNodeUnchecked"></tree>
+        <tree :data="treeData" :filter="treeFilter" :options="treeOptions" @node:checked="onNodeChecked"
+            @node:unchecked="onNodeUnchecked">
+        </tree>
+    </div>
+
+    <div id="opacitySlider" class="container">
+        <vue-slider ref="slider" v-model="opacity" v-bind:width="100" @callback="onChange"></vue-slider>
     </div>
 
     <div id="legend" style="position: absolute; bottom: 40px; left: 15px;">
@@ -35,8 +42,8 @@
                 </li>
             </ul>
             <button @click="showLegend = false" style="position: absolute; top: 16px; right: 4px;">
-                <svg height="12" width="12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                    y="0px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">
+                <svg height="12" width="12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">
                     <polygon fill="white" points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 " />
                 </svg>
             </button>
