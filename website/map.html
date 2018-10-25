@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SESLR Project - Map</title>
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/map.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="title">
+                <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC.</h1>
+                <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
+            </div>
+
+            <div class="tabs" id="headerTabs">
+                <div>
+                    <a class="tab" href="/index.html">Home</a>
+                </div>
+                <div>
+                    <a class="tab" style="background-color: black" href="/map.html">Map Viewer</a>
+                    <a class="tab" href="/data.html">Data</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="tabs" id="viewerTabs">
+            <div>
+                <a class="tab" href="/2dviewer/" target="vieweriframe">2D Viewer</a>
+                <a class="tab" style="background-color: black" href="/3dviewer/" target="vieweriframe">3D Viewer</a>
+            </div>
+            <div>
+                <input class="searchInput" type="text" placeholder="Search..">
+            </div>
+        </div>
+
+        <div class="viewer">
+            <iframe name="vieweriframe" src="/3dviewer/"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>

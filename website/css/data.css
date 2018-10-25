@@ -1,0 +1,36 @@
+.content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h3 {
+    margin: 0;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+h4 {
+    font-weight: bolder;
+    margin: 0;
+    margin-bottom: 3px;
+    color: rgb(119, 119, 119);
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-top-style: solid;
+    border-top-width: 2px;
+}
+
+th {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+th,
+td {
+    padding: 5px;
+}

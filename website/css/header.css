@@ -1,0 +1,39 @@
+header {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-color: cornflowerblue;
+    padding: 5px;
+    margin-bottom: 30px;
+}
+
+.title {
+    padding-bottom: 30px;
+}
+
+.tabs {
+    display: flex;
+    padding-bottom: 3px;
+}
+.tabs a {
+    text-decoration: none;
+}
+.tabs a:link {
+    color: antiquewhite;
+}
+.tabs a:visited {
+    color: antiquewhite;
+}
+
+#headerTabs {
+    justify-content: space-between;
+}
+
+.tab {
+    background-color: cornflowerblue;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.tab:hover {
+    background-color: rgb(100, 100, 100);
+}
