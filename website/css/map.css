@@ -45,3 +45,9 @@
 .tab.unselected {
     background-color: cornflowerblue;
 }
+
+#bottomTabs {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 5px;
+}

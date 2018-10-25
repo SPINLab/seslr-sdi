@@ -40,19 +40,24 @@
                     3D Viewer
                 </a>
             </div>
-            <div>
+            <!-- <div>
                 <input class="searchInput" type="text" placeholder="Search..">
-            </div>
+            </div> -->
         </div>
 
         <div class="viewer">
             <iframe name="vieweriframe" src="/viewer/?mode=3"></iframe>
+        </div>
+
+        <div class="tabs" id="bottomTabs">
+            <a class="tab" id="newWindowButton" href="/viewer/?mode=3" target="_blank">Open in new window</a>
         </div>
     </div>
 
     <script>
         const button2D = document.getElementById("2dButton");
         const button3D = document.getElementById("3dButton");
+        const buttonNewWindow = document.getElementById("newWindowButton");
 
         const toggleSelected = function () {
             if (button2D.className.includes("unselected")) {
@@ -65,6 +70,12 @@
                 button3D.className = button3D.className.replace('unselected', 'selected')
             } else {
                 button3D.className = button3D.className.replace('selected', 'unselected')
+            }
+
+            if (newWindowButton.href.includes('mode=2')) {
+                newWindowButton.href = newWindowButton.href.replace('mode=2', 'mode=3')
+            } else {
+                newWindowButton.href = newWindowButton.href.replace('mode=3', 'mode=2')
             }
         };
 
