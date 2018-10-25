@@ -538,6 +538,9 @@ for (let featureName of features) {
 }
 
 const imagery = [
+    {
+        text: 'WW2',
+        children: [
     { text: 'RLM_13628_sharpened1' },
     { text: 'RLM_13633_sharpened1' },
     { text: 'RLM_13657_detail1_Paleochora1' },
@@ -552,9 +555,12 @@ const imagery = [
     { text: 'RLM_13731sharpened1' },
     { text: 'RLM_13771_enhanced1' },
     { text: 'RLM_13784_11' }
+        ]
+    }
 ];
 
-for (let imageName of imagery) {
+for (let imageCategory of imagery) {
+    for (let imageName of imageCategory.children) {
     const image = viewer.scene.imageryLayers.addImageryProvider(
         new Cesium.createTileMapServiceImageryProvider({
             url: '../imagery/' + imageName.text,
@@ -566,6 +572,7 @@ for (let imageName of imagery) {
     image.name = imageName.text;
 
     data[imageName.text] = image;
+}
 }
 
 const maps = [
@@ -591,14 +598,10 @@ for (let mapName of maps) {
 const treeData = [
     {
         text: 'Imagery',
-        children: {
-            text: 'WW2',
             children: imagery
-        }
     },
     {
         text: 'Features',
-        // state: { checked: true },
         children: features
     },
     {
