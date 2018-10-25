@@ -6,6 +6,8 @@ services:
         volumes:
             - ./reverseproxy/nginx.conf:/etc/nginx/nginx.conf:ro
             - ./data:/data:ro
+            - ./viewer:/viewer:ro
+            - ./website:/website:ro
             - ./log:/var/log/nginx/
         ports:
             - 127.0.0.1:8000:80

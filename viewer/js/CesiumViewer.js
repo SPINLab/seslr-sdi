@@ -4,7 +4,7 @@ Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZWNjNmNiOC0xZDhiLTQ1NTktOGNiZi1jZjE3YzIwMDNkMDMiLCJpZCI6NDk1LCJpYXQiOjE1MjUyNTUyNzV9.R-_alHqdFwfZODeZRMbU3b_Cqakop-X5w2mbtoAS3fA';
 
 const terrainProvider = new Cesium.CesiumTerrainProvider({
-    url: window.location.href + '/terrain/tilesets/tiles'
+    url: '/terrain/tilesets/tiles'
 });
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
