@@ -556,6 +556,16 @@ const imagery = [
             { text: 'RLM_13771_enhanced1' },
             { text: 'RLM_13784_11' }
         ]
+    },
+    {
+        text: 'Drone',
+        children: [
+            { text: 'fs38_kiln_20151106' },
+            { text: 'fs376_EBA_settlement_2015111' },
+            { text: 'fs376_elliniko_20151021' },
+            { text: 'fs534_quarry_20151012' },
+            { text: 'Karababa_1-2-3-4-5-6-7-8-9' }
+        ]
     }
 ];
 
