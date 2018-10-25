@@ -22,3 +22,15 @@ iframe {
     margin-top: -20px;
     font-size: medium;
 }
+
+.tab {
+    color: antiquewhite;
+}
+
+.tab.selected {
+    background-color: black;
+}
+
+.tab.unselected {
+    background-color: cornflowerblue;
+}
