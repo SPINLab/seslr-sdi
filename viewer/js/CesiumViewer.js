@@ -37,7 +37,8 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     // imageryProvider: false,
     // imageryProviderViewModels: providers.imagery.viewModels,
     requestRenderMode: true,
-    maximumRenderTimeChange: Infinity
+    maximumRenderTimeChange: Infinity,
+    mapProjection: new Cesium.WebMercatorProjection(Cesium.Ellipsoid.WGS84)
 });
 
 // viewer.scene.globe.depthTestAgainstTerrain = false;
