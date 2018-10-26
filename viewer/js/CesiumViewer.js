@@ -12,8 +12,10 @@ const getUrlParams = function(prop) {
         params[parts[0]] = parts[1];
     });
 
-    return prop && prop in params ? params[prop] : undefined;
+    return prop && prop in params ? params[prop] : params;
 };
+
+const urlParams = getUrlParams();
 
 Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZWNjNmNiOC0xZDhiLTQ1NTktOGNiZi1jZjE3YzIwMDNkMDMiLCJpZCI6NDk1LCJpYXQiOjE1MjUyNTUyNzV9.R-_alHqdFwfZODeZRMbU3b_Cqakop-X5w2mbtoAS3fA';
@@ -69,7 +71,7 @@ frame.addEventListener(
     false
 );
 
-viewer.scene.mode = parseInt(getUrlParams('mode')) || 3;
+viewer.scene.mode = parseInt(urlParams.mode) || 3;
 viewer.sceneModePicker.viewModel.duration = 0;
 
 const homeViewPosition = {
@@ -285,7 +287,7 @@ const descToCode = {
 const features = [
     {
         text: 'Find Spots',
-        // state: { checked: true },
+        state: { checked: 0 },
         children: [
             {
                 text: 'Neolithic',
@@ -721,7 +723,7 @@ function removeSpots(spot_ids) {
 
 const layerSelector = new Vue({
     el: '#layerSelector',
-    data: function() {
+    data() {
         return {
             treeData: treeData,
             treeFilter: '',
@@ -732,6 +734,19 @@ const layerSelector = new Vue({
                 }
             }
         };
+    },
+    mounted() {
+        this.$nextTick(() => {
+            if (parseInt(urlParams.findspots)) {
+                this.$refs.tree.find('Find Spots').check();
+            }
+            if (parseInt(urlParams.geomap)) {
+                this.$refs.tree.find('Geology').check();
+            }
+            if (parseInt(urlParams.histairphoto)) {
+                this.$refs.tree.find('Imagery').check();
+            }
+        });
     },
     methods: {
         onNodeChecked(node) {

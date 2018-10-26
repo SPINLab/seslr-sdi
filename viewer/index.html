@@ -22,7 +22,7 @@
 
     <div id="layerSelector">
         <input type="text" placeholder="Type to filter.." v-model="treeFilter" class="filter-field">
-        <tree :data="treeData" :filter="treeFilter" :options="treeOptions" @node:checked="onNodeChecked"
+        <tree ref="tree" :data="treeData" :filter="treeFilter" :options="treeOptions" @node:checked="onNodeChecked"
             @node:unchecked="onNodeUnchecked">
         </tree>
     </div>
