@@ -270,337 +270,51 @@ const descToCode = {
 
 const features = [
     {
-        text: 'Find Spots',
-        state: { checked: 0 },
-        children: [
-            {
-                text: 'Neolithic',
-                children: [
-                    {
-                        text: 'Late Neolithic'
-                    },
-                    {
-                        text: 'Final Neolithic'
-                    },
-                    {
-                        text: 'Neolithic'
-                    },
-                    {
-                        text: 'Uncertain Final Neolithic'
-                    },
-                    {
-                        text: 'Uncertain Neolithic'
-                    }
-                ]
-            },
-            {
-                text: 'Bronze Age',
-                children: [
-                    {
-                        text: 'Early Bronze Age'
-                    },
-                    {
-                        text: 'Middle Bronze Age'
-                    },
-                    {
-                        text: 'Late Bronze Age'
-                    },
-                    {
-                        text: 'Uncertain Early Bronze Age'
-                    },
-                    {
-                        text: 'Uncertain Middle Bronze Age'
-                    },
-                    {
-                        text: 'Uncertain Late Bronze Age'
-                    }
-                ]
-            },
-            {
-                text: 'Proto Geometric',
-                children: [
-                    {
-                        text: 'Early Proto Geometric'
-                    },
-                    {
-                        text: 'Middle Proto Geometric'
-                    },
-                    {
-                        text: 'Late Proto Geometric'
-                    },
-                    {
-                        text: 'Proto Geometric'
-                    },
-                    {
-                        text: 'Uncertain Early Proto Geometric'
-                    },
-                    {
-                        text: 'Uncertain Middle Proto Geometric'
-                    },
-                    {
-                        text: 'Uncertain Late Proto Geometric'
-                    },
-                    {
-                        text: 'Uncertain Proto Geometric'
-                    }
-                ]
-            },
-            {
-                text: 'Geometric',
-                children: [
-                    {
-                        text: 'Early Geometric'
-                    },
-                    {
-                        text: 'Middle Geometric'
-                    },
-                    {
-                        text: 'Late Geometric'
-                    },
-                    {
-                        text: 'Geometric'
-                    },
-                    {
-                        text: 'Uncertain Early Geometric'
-                    },
-                    {
-                        text: 'Uncertain Middle Geometric'
-                    },
-                    {
-                        text: 'Uncertain Late Geometric'
-                    },
-                    {
-                        text: 'Uncertain Geometric'
-                    }
-                ]
-            },
-            {
-                text: 'Archaic',
-                children: [
-                    {
-                        text: 'Early Archaic'
-                    },
-                    {
-                        text: 'Middle Archaic'
-                    },
-                    {
-                        text: 'Late Archaic'
-                    },
-                    {
-                        text: 'Archaic'
-                    },
-                    {
-                        text: 'Uncertain Early Archaic'
-                    },
-                    {
-                        text: 'Uncertain Middle Archaic'
-                    },
-                    {
-                        text: 'Uncertain Late Archaic'
-                    },
-                    {
-                        text: 'Uncertain Archaic'
-                    }
-                ]
-            },
-            {
-                text: 'Classical',
-                children: [
-                    {
-                        text: 'Early Classical'
-                    },
-                    {
-                        text: 'Middle Classical'
-                    },
-                    {
-                        text: 'Late Classical'
-                    },
-                    {
-                        text: 'Classical'
-                    },
-                    {
-                        text: 'Uncertain Early Classical'
-                    },
-                    {
-                        text: 'Uncertain Middle Classical'
-                    },
-                    {
-                        text: 'Uncertain Late Classical'
-                    },
-                    {
-                        text: 'Uncertain Classical'
-                    }
-                ]
-            },
-            {
-                text: 'Hellenistic',
-                children: [
-                    {
-                        text: 'Early Hellenistic'
-                    },
-                    {
-                        text: 'Middle Hellenistic'
-                    },
-                    {
-                        text: 'Late Hellenistic'
-                    },
-                    {
-                        text: 'Hellenistic'
-                    },
-                    {
-                        text: 'Uncertain Early Hellenistic'
-                    },
-                    {
-                        text: 'Uncertain Middle Hellenistic'
-                    },
-                    {
-                        text: 'Uncertain Late Hellenistic'
-                    },
-                    {
-                        text: 'Uncertain Hellenistic'
-                    }
-                ]
-            },
-            {
-                text: 'Roman',
-                children: [
-                    {
-                        text: 'Early Roman'
-                    },
-                    {
-                        text: 'Middle Roman'
-                    },
-                    {
-                        text: 'Late Roman'
-                    },
-                    {
-                        text: 'Roman'
-                    },
-                    {
-                        text: 'Uncertain Early Roman'
-                    },
-                    {
-                        text: 'Uncertain Middle Roman'
-                    },
-                    {
-                        text: 'Uncertain Late Roman'
-                    },
-                    {
-                        text: 'Uncertain Roman'
-                    }
-                ]
-            },
-            {
-                text: 'Byzantine',
-                children: [
-                    {
-                        text: 'Early Byzantine'
-                    },
-                    {
-                        text: 'Middle Byzantine'
-                    },
-                    {
-                        text: 'Late Byzantine'
-                    },
-                    {
-                        text: 'Byzantine'
-                    },
-                    {
-                        text: 'Uncertain Early Byzantine'
-                    },
-                    {
-                        text: 'Uncertain Middle Byzantine'
-                    },
-                    {
-                        text: 'Uncertain Late Byzantine'
-                    },
-                    {
-                        text: 'Uncertain Byzantine'
-                    }
-                ]
-            },
-            {
-                text: 'Frankish',
-                children: [
-                    {
-                        text: 'Frankish'
-                    },
-                    {
-                        text: 'Uncertain Frankish'
-                    }
-                ]
-            },
-            {
-                text: 'Ottoman',
-                children: [
-                    {
-                        text: 'Ottoman'
-                    },
-                    {
-                        text: 'Uncertain Ottoman'
-                    }
-                ]
-            },
-            {
-                text: 'Modern',
-                children: [
-                    {
-                        text: 'Modern'
-                    },
-                    {
-                        text: 'Uncertain Modern'
-                    }
-                ]
-            },
-            {
-                text: 'Uncertain prehistoric date'
-            }
-        ]
+        id: 'find_spots',
+        label: 'Find Spots'
     }
 ];
 
 for (let featureName of features) {
     const feature = new Cesium.GeoJsonDataSource();
-    feature
-        .load('../features/find_spots.json', {
-            markerColor: Cesium.Color.RED
-        })
-        .then(function(feature) {
-            viewer.dataSources.add(feature);
-            stylePoints(feature.entities.values);
-        });
-    feature.show = true;
-    data[featureName.text] = feature;
+    feature.load(`../features/${featureName.id}.json`).then(function(feature) {
+        viewer.dataSources.add(feature);
+        stylePoints(feature.entities.values);
+    });
+    feature.show = false;
+    data[featureName.id] = feature;
 }
 
 const imagery = [
     {
-        text: 'WW2',
+        id: 'WW2',
+        label: 'World War 2',
         children: [
-            { text: 'RLM_13628_sharpened1' },
-            { text: 'RLM_13633_sharpened1' },
-            { text: 'RLM_13657_detail1_Paleochora1' },
-            { text: 'RLM_13728sharpened1' },
-            { text: 'RLM_13729sharpened1' },
-            { text: 'RLM_13732_sharpened1' },
-            { text: 'RLM_13782_11' },
-            { text: 'RLM_13632_sharpened1' },
-            { text: 'RLM_13638_detail11' },
-            { text: 'RLM_13716_11' },
-            { text: 'RLM_13728sharpened1_reproj' },
-            { text: 'RLM_13731sharpened1' },
-            { text: 'RLM_13771_enhanced1' },
-            { text: 'RLM_13784_11' }
+            { id: 'RLM_13628_sharpened1', label: 'RLM_13628' },
+            { id: 'RLM_13633_sharpened1', label: 'RLM_13633' },
+            { id: 'RLM_13657_detail1_Paleochora1', label: 'RLM_13657' },
+            { id: 'RLM_13728sharpened1', label: 'RLM_13728' },
+            { id: 'RLM_13729sharpened1', label: 'RLM_13729' },
+            { id: 'RLM_13732_sharpened1', label: 'RLM_13732' },
+            { id: 'RLM_13782_11', label: 'RLM_13782' },
+            { id: 'RLM_13632_sharpened1', label: 'RLM_13632' },
+            // { id: 'RLM_13638_detail11', label: 'RLM_13638' },
+            { id: 'RLM_13716_11', label: 'RLM_13716' },
+            // { id: 'RLM_13728sharpened1_reproj', label: 'RLM_13728' },
+            { id: 'RLM_13731sharpened1', label: 'RLM_13731' },
+            { id: 'RLM_13771_enhanced1', label: 'RLM_13771' },
+            { id: 'RLM_13784_11', label: 'RLM_13784' }
         ]
     },
     {
-        text: 'Drone',
+        id: 'Drone',
+        label: 'Drone',
         children: [
-            { text: 'fs38_kiln_20151106' },
-            { text: 'fs376_EBA_settlement_2015111' },
-            { text: 'fs376_elliniko_20151021' },
-            { text: 'fs534_quarry_20151012' },
-            { text: 'Karababa_1-2-3-4-5-6-7-8-9' }
+            { id: 'fs38_kiln_20151106', label: 'Kiln' },
+            { id: 'fs376_EBA_settlement_2015111', label: 'EBA_settlement' },
+            { id: 'fs376_elliniko_20151021', label: 'Elliniko' },
+            { id: 'fs534_quarry_20151012', label: 'Quarry' },
+            { id: 'Karababa_1-2-3-4-5-6-7-8-9', label: 'Karababa' }
         ]
     }
 ];
@@ -609,68 +323,42 @@ for (let imageCategory of imagery) {
     for (let imageName of imageCategory.children) {
         const image = viewer.scene.imageryLayers.addImageryProvider(
             new Cesium.createTileMapServiceImageryProvider({
-                url: '../imagery/' + imageCategory.text + '/' + imageName.text,
+                url: '../imagery/' + imageCategory.id + '/' + imageName.id,
                 maximumLevel: 18,
                 credit: ''
             })
         );
         image.show = false;
-        image.name = imageName.text;
-
-        data[imageName.text] = image;
+        image.name = imageName.label;
+        data[imageName.id] = image;
     }
 }
 
 const maps = [
     {
-        text: 'Geology'
+        id: 'Geology',
+        label: 'Geology'
     }
 ];
 
 for (let mapName of maps) {
     const map = viewer.scene.imageryLayers.addImageryProvider(
         new Cesium.createTileMapServiceImageryProvider({
-            url: '../maps/' + mapName.text,
+            url: '../maps/' + mapName.id,
             maximumLevel: 15,
             credit: ''
         })
     );
     map.show = false;
-    map.name = mapName.text;
+    map.name = mapName.labal;
 
-    data[mapName.text] = map;
-}
-
-const treeData = [
-    {
-        text: 'Imagery',
-        children: imagery
-    },
-    {
-        text: 'Features',
-        children: features
-    },
-    {
-        text: 'Maps',
-        children: maps
-    }
-];
-
-function isDescendant(parent, child) {
-    let node = child.parent;
-    while (node != null) {
-        if (node.data.text == parent) {
-            return true;
-        }
-        node = node.parent;
-    }
-    return false;
+    data[mapName.id] = map;
 }
 
 const visibleSpots = {};
 
 function updateSpotVisibility() {
-    for (let entity of data['Find Spots'].entities.values) {
+    for (let entity of data['find_spots'].entities.values) {
         const id = Cesium.Property.getValueOrUndefined(
             entity.properties.find_spot_id
         );
@@ -705,94 +393,505 @@ function removeSpots(spot_ids) {
     updateSpotVisibility();
 }
 
+const getLeafNodes = function(nodes, result = []) {
+    for (var i = 0, length = nodes.length; i < length; i++) {
+        if (!nodes[i].children) {
+            result.push(nodes[i]);
+        } else {
+            result = getLeafNodes(nodes[i].children, result);
+        }
+    }
+    return result;
+};
+
 const layerSelector = new Vue({
     el: '#layerSelector',
+    data: {
+        selectedImagery: [],
+        prevSelectedImagery: [],
+        selectedFeatures: [],
+        prevSelectedFeatures: [],
+        selectedMaps: [],
+        prevSelectedMaps: [],
+        imagery: imagery,
+        features: features,
+        maps: maps,
+        valueConsistsOf: 'LEAF_PRIORITY',
+        clearable: false,
+        searchable: false,
+        valueFormat: 'object',
+        opacities: {}
+    },
+    mounted() {
+        if (parseInt(urlParams.findspots)) {
+            for (let node of features) {
+                this.selectedFeatures.push(node);
+            }
+        }
+
+        if (parseInt(urlParams.geomap)) {
+            for (let node of maps) {
+                this.selectedMaps.push(node);
+            }
+        }
+
+        if (parseInt(urlParams.histairphoto)) {
+            for (let node of imagery[0].children) {
+                this.selectedImagery.push(node);
+            }
+        }
+    },
+    methods: {
+        onSelect(layerGroup, layerGroupName) {
+            this.$set(
+                this,
+                'prev' +
+                    layerGroupName[0].toUpperCase() +
+                    layerGroupName.slice(1),
+                layerGroup.slice(0)
+            );
+        },
+        onChangeImagery() {
+            for (let node of this.prevSelectedImagery) {
+                data[node.id].show = false;
+            }
+            for (let node of this.selectedImagery) {
+                this.opacities[node.id] = 1;
+                data[node.id].alpha = 1;
+                data[node.id].show = true;
+            }
+            viewer.scene.requestRender();
+        },
+        onChangeFeatures() {
+            for (let node of this.prevSelectedFeatures) {
+                data[node.id].show = false;
+            }
+            for (let node of this.selectedFeatures) {
+                data[node.id].show = true;
+            }
+            viewer.scene.requestRender();
+        },
+        onChangeMaps() {
+            for (let node of this.prevSelectedMaps) {
+                data[node.id].show = false;
+            }
+            for (let node of this.selectedMaps) {
+                this.opacities[node.id] = 1;
+                data[node.id].alpha = 1;
+                data[node.id].show = true;
+            }
+            viewer.scene.requestRender();
+        },
+        removeLayer(node, layerGroup, layerGroupName) {
+            data[node.id].show = false;
+            this.$set(
+                this,
+                layerGroupName,
+                layerGroup.filter(layerNode => {
+                    return node !== layerNode;
+                })
+            );
+            viewer.scene.requestRender();
+        },
+        toggleLayer(node) {
+            data[node.id].show = !data[node.id].show;
+        },
+        mouseOver(node) {
+            data[node.id].hue = 2.0;
+            viewer.scene.requestRender();
+        },
+        mouseLeave(node) {
+            data[node.id].hue = 0.0;
+            viewer.scene.requestRender();
+        },
+        changeOpacity(node) {
+            data[node.id].alpha = this.opacities[node.id];
+            viewer.scene.requestRender();
+        }
+    },
+    components: {
+        treeselect: VueTreeselect.Treeselect,
+        'vue-slider': window['vue-slider-component']
+    }
+});
+
+const periodSelector = new Vue({
+    el: '#periodSelector',
     data() {
         return {
-            treeData: treeData,
-            treeFilter: '',
+            neolithic: [
+                {
+                    text: 'Neolithic',
+                    children: [
+                        {
+                            text: 'Late Neolithic'
+                        },
+                        {
+                            text: 'Final Neolithic'
+                        },
+                        {
+                            text: 'Neolithic'
+                        },
+                        {
+                            text: 'Uncertain Final Neolithic'
+                        },
+                        {
+                            text: 'Uncertain Neolithic'
+                        }
+                    ]
+                }
+            ],
+            bronzeAge: [
+                {
+                    text: 'Bronze Age',
+                    children: [
+                        {
+                            text: 'Early Bronze Age'
+                        },
+                        {
+                            text: 'Middle Bronze Age'
+                        },
+                        {
+                            text: 'Late Bronze Age'
+                        },
+                        {
+                            text: 'Uncertain Early Bronze Age'
+                        },
+                        {
+                            text: 'Uncertain Middle Bronze Age'
+                        },
+                        {
+                            text: 'Uncertain Late Bronze Age'
+                        }
+                    ]
+                }
+            ],
+            protoGeometric: [
+                {
+                    text: 'Proto Geometric',
+                    children: [
+                        {
+                            text: 'Early Proto Geometric'
+                        },
+                        {
+                            text: 'Middle Proto Geometric'
+                        },
+                        {
+                            text: 'Late Proto Geometric'
+                        },
+                        {
+                            text: 'Proto Geometric'
+                        },
+                        {
+                            text: 'Uncertain Early Proto Geometric'
+                        },
+                        {
+                            text: 'Uncertain Middle Proto Geometric'
+                        },
+                        {
+                            text: 'Uncertain Late Proto Geometric'
+                        },
+                        {
+                            text: 'Uncertain Proto Geometric'
+                        }
+                    ]
+                }
+            ],
+            geometric: [
+                {
+                    text: 'Geometric',
+                    children: [
+                        {
+                            text: 'Early Geometric'
+                        },
+                        {
+                            text: 'Middle Geometric'
+                        },
+                        {
+                            text: 'Late Geometric'
+                        },
+                        {
+                            text: 'Geometric'
+                        },
+                        {
+                            text: 'Uncertain Early Geometric'
+                        },
+                        {
+                            text: 'Uncertain Middle Geometric'
+                        },
+                        {
+                            text: 'Uncertain Late Geometric'
+                        },
+                        {
+                            text: 'Uncertain Geometric'
+                        }
+                    ]
+                }
+            ],
+            archaic: [
+                {
+                    text: 'Archaic',
+                    children: [
+                        {
+                            text: 'Early Archaic'
+                        },
+                        {
+                            text: 'Middle Archaic'
+                        },
+                        {
+                            text: 'Late Archaic'
+                        },
+                        {
+                            text: 'Archaic'
+                        },
+                        {
+                            text: 'Uncertain Early Archaic'
+                        },
+                        {
+                            text: 'Uncertain Middle Archaic'
+                        },
+                        {
+                            text: 'Uncertain Late Archaic'
+                        },
+                        {
+                            text: 'Uncertain Archaic'
+                        }
+                    ]
+                }
+            ],
+            classical: [
+                {
+                    text: 'Classical',
+                    children: [
+                        {
+                            text: 'Early Classical'
+                        },
+                        {
+                            text: 'Middle Classical'
+                        },
+                        {
+                            text: 'Late Classical'
+                        },
+                        {
+                            text: 'Classical'
+                        },
+                        {
+                            text: 'Uncertain Early Classical'
+                        },
+                        {
+                            text: 'Uncertain Middle Classical'
+                        },
+                        {
+                            text: 'Uncertain Late Classical'
+                        },
+                        {
+                            text: 'Uncertain Classical'
+                        }
+                    ]
+                }
+            ],
+            hellenistic: [
+                {
+                    text: 'Hellenistic',
+                    children: [
+                        {
+                            text: 'Early Hellenistic'
+                        },
+                        {
+                            text: 'Middle Hellenistic'
+                        },
+                        {
+                            text: 'Late Hellenistic'
+                        },
+                        {
+                            text: 'Hellenistic'
+                        },
+                        {
+                            text: 'Uncertain Early Hellenistic'
+                        },
+                        {
+                            text: 'Uncertain Middle Hellenistic'
+                        },
+                        {
+                            text: 'Uncertain Late Hellenistic'
+                        },
+                        {
+                            text: 'Uncertain Hellenistic'
+                        }
+                    ]
+                }
+            ],
+            roman: [
+                {
+                    text: 'Roman',
+                    children: [
+                        {
+                            text: 'Early Roman'
+                        },
+                        {
+                            text: 'Middle Roman'
+                        },
+                        {
+                            text: 'Late Roman'
+                        },
+                        {
+                            text: 'Roman'
+                        },
+                        {
+                            text: 'Uncertain Early Roman'
+                        },
+                        {
+                            text: 'Uncertain Middle Roman'
+                        },
+                        {
+                            text: 'Uncertain Late Roman'
+                        },
+                        {
+                            text: 'Uncertain Roman'
+                        }
+                    ]
+                }
+            ],
+            byzantine: [
+                {
+                    text: 'Byzantine',
+                    children: [
+                        {
+                            text: 'Early Byzantine'
+                        },
+                        {
+                            text: 'Middle Byzantine'
+                        },
+                        {
+                            text: 'Late Byzantine'
+                        },
+                        {
+                            text: 'Byzantine'
+                        },
+                        {
+                            text: 'Uncertain Early Byzantine'
+                        },
+                        {
+                            text: 'Uncertain Middle Byzantine'
+                        },
+                        {
+                            text: 'Uncertain Late Byzantine'
+                        },
+                        {
+                            text: 'Uncertain Byzantine'
+                        }
+                    ]
+                }
+            ],
+            frankish: [
+                {
+                    text: 'Frankish',
+                    children: [
+                        {
+                            text: 'Frankish'
+                        },
+                        {
+                            text: 'Uncertain Frankish'
+                        }
+                    ]
+                }
+            ],
+            ottoman: [
+                {
+                    text: 'Ottoman',
+                    children: [
+                        {
+                            text: 'Ottoman'
+                        },
+                        {
+                            text: 'Uncertain Ottoman'
+                        }
+                    ]
+                }
+            ],
+            modern: [
+                {
+                    text: 'Modern',
+                    children: [
+                        {
+                            text: 'Modern'
+                        },
+                        {
+                            text: 'Uncertain Modern'
+                        }
+                    ]
+                }
+            ],
+            prehistoric: [
+                {
+                    text: 'Prehistoric',
+                    children: [
+                        {
+                            text: 'Uncertain prehistoric date'
+                        }
+                    ]
+                }
+            ],
             treeOptions: {
                 checkbox: true,
-                filter: {
-                    emptyText: 'No matching layers found..'
-                }
+                selectable: false
             }
         };
     },
-    mounted() {
-        this.$nextTick(() => {
-            if (parseInt(urlParams.findspots)) {
-                this.$refs.tree.find('Find Spots').check();
-            }
-            if (parseInt(urlParams.geomap)) {
-                this.$refs.tree.find('Geology').check();
-            }
-            if (parseInt(urlParams.histairphoto)) {
-                this.$refs.tree.find('Imagery').check();
-            }
-        });
-    },
     methods: {
+        onTreeMounted(tree) {
+            if (parseInt(urlParams.findspots)) {
+                tree.find(tree.data[0].text).check();
+            }
+        },
         onNodeChecked(node) {
-            if (isDescendant('Features', node)) {
-                if (node.children.length === 0) {
-                    const period = descToCode[node.text];
-                    fetch('../api/periods/' + period, {
-                        credentials: 'include'
-                    }).then(function(response) {
-                        response.json().then(function(json) {
-                            addSpots(json.spot_ids);
-                        });
+            if (node.children.length === 0) {
+                const period = descToCode[node.text];
+                fetch('../api/periods/' + period, {
+                    credentials: 'include'
+                }).then(function(response) {
+                    response.json().then(function(json) {
+                        addSpots(json.spot_ids);
                     });
-                }
-            } else if (node.children.length === 0) {
-                data[node.text].show = true;
+                });
             }
             viewer.scene.requestRender();
         },
         onNodeUnchecked(node) {
-            if (isDescendant('Features', node)) {
-                if (node.children.length === 0) {
-                    const period = descToCode[node.text];
-                    fetch('../api/periods/' + period, {
-                        credentials: 'include'
-                    }).then(function(response) {
-                        response.json().then(function(json) {
-                            removeSpots(json.spot_ids);
-                        });
+            if (node.children.length === 0) {
+                const period = descToCode[node.text];
+                fetch('../api/periods/' + period, {
+                    credentials: 'include'
+                }).then(function(response) {
+                    response.json().then(function(json) {
+                        removeSpots(json.spot_ids);
                     });
-                }
-            } else if (node.children.length === 0) {
-                data[node.text].show = false;
+                });
             }
             viewer.scene.requestRender();
-        }
-    }
-});
-
-new Vue({
-    el: '#opacitySlider',
-    data() {
-        return {
-            opacity: 100
-        };
-    },
-    components: {
-        vueSlider: window['vue-slider-component']
-    },
-    methods: {
-        onChange() {
-            for (const image in data) {
-                if (data.hasOwnProperty(image)) {
-                    if (data[image].show === true) {
-                        if (data[image].alpha !== null) {
-                            data[image].alpha = this.opacity / 100;
-                        }
-                    }
+        },
+        onNodeExpanded(node) {
+            for (let sibling of node.vm.$parent.$parent.$children) {
+                if (sibling.model[0] !== node) {
+                    sibling.collapseAll();
                 }
             }
-            viewer.scene.requestRender();
+        },
+        documentClick(e) {
+            const el = this.$el;
+            const target = e.target;
+            if (el !== target && !el.contains(target)) {
+                for (let child of this.$children) {
+                    child.collapseAll();
+                }
+            }
         }
+    },
+    created() {
+        document.addEventListener('click', this.documentClick);
+    },
+    destroyed() {
+        document.removeEventListener('click', this.documentClick);
     }
 });
 

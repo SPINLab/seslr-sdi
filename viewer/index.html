@@ -11,29 +11,86 @@
     <script src="./node_modules/vue/dist/vue.js"></script>
     <script src="./node_modules/lodash/lodash.min.js"></script>
     <script src="./node_modules/liquor-tree/dist/liquor-tree.umd.js"></script>
+    <script src="./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.min.js"></script>
     <script src="./node_modules/vue-slider-component/dist/index.js"></script>
+    <script src="./node_modules/vuebar/vuebar.js"></script>
     <script src="./node_modules/chroma-js/chroma.js"></script>
 
     <link rel="stylesheet" href="./css/CesiumViewer.css">
+    <link rel="stylesheet" href="./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.min.css">
 </head>
 
 <body>
-    <div id="cesiumContainer"></div>
+    <div class="column" id="left">
+        <div id="layerSelector">
+            <div class="selectorContainer" id="imagerySelectorContainer">
+                <treeselect placeholder="Imagery" :value-format="valueFormat" :clearable="clearable" :searchable="searchable"
+                    :multiple="true" :options="imagery" :value-consists-of="valueConsistsOf" v-model="selectedImagery"
+                    @input="onChangeImagery" @select="onSelect(selectedImagery, 'selectedImagery')" @deselect="onSelect(selectedImagery, 'selectedImagery')">
+                </treeselect>
 
-    <div id="layerSelector">
-        <input type="text" placeholder="Type to filter.." v-model="treeFilter" class="filter-field">
-        <tree ref="tree" :data="treeData" :filter="treeFilter" :options="treeOptions" @node:checked="onNodeChecked"
-            @node:unchecked="onNodeUnchecked">
-        </tree>
-    </div>
+                <div v-bar="{ preventParentScroll: true, scrollThrottle: 30 }">
+                    <ul class="selectedLayers" id="selectedImageryContainer">
+                        <li v-for="imageNode in selectedImagery">
+                            <div class="layerLabel">
+                                <button @click="removeLayer(imageNode, selectedImagery, 'selectedImagery')"> x </button>
+                                <span @mouseover="mouseOver(imageNode)" @mouseleave="mouseLeave(imageNode)">
+                                    {{ imageNode.label }}
+                                </span>
+                            </div>
+                            <vue-slider ref="slider" :width="50" :dot-size="10" :min="0" :max="1" :interval="0.01"
+                                :tooltip="false" v-model="opacities[imageNode.id]" @callback="changeOpacity(imageNode)"></vue-slider>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-    <div id="opacitySlider" class="container">
-        <vue-slider ref="slider" v-model="opacity" v-bind:width="100" @callback="onChange"></vue-slider>
-    </div>
+            <div class="selectorContainer" id="featureSelectorContainer">
+                <treeselect placeholder="Features" :value-format="valueFormat" :clearable="clearable" :searchable="searchable"
+                    :multiple="true" :options="features" :value-consists-of="valueConsistsOf" v-model="selectedFeatures"
+                    @input="onChangeFeatures" @select="onSelect(selectedFeatures, 'selectedFeatures')" @deselect="onSelect(selectedFeatures, 'selectedFeatures')">
+                </treeselect>
 
-    <div id="legend" style="position: absolute; bottom: 40px; left: 15px;">
-        <div v-if="showLegend">
-            <ul style="list-style-type: none; columns: 4; -webkit-columns: 4; -moz-columns: 4; color: white; background-color: #2c3e50; margin-left: -4px; padding: 8px; border: solid 1px black; font-size: 10pt;">
+                <div v-bar="{ preventParentScroll: true, scrollThrottle: 30 }">
+                    <ul class="selectedLayers" id="selectedFeatureContainer">
+                        <li v-for="featureNode in selectedFeatures">
+                            <div class="layerLabel">
+                                <button @click="removeLayer(featureNode, selectedFeatures, 'selectedFeatures')">
+                                    x
+                                </button>
+                                <span> {{ featureNode.label }} </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="selectorContainer" id="mapsSelectorContainer">
+                <treeselect placeholder="Maps" :value-format="valueFormat" :clearable="clearable" :searchable="searchable"
+                    :multiple="true" :options="maps" :value-consists-of="valueConsistsOf" v-model="selectedMaps" @input="onChangeMaps"
+                    @select="onSelect(selectedMaps, 'selectedMaps')" @deselect="onSelect(selectedMaps, 'selectedMaps')">
+                </treeselect>
+
+                <div v-bar="{ preventParentScroll: true, scrollThrottle: 30 }">
+                    <ul class="selectedLayers" id="selectedMapsContainer">
+                        <li v-for="mapNode in selectedMaps">
+                            <div class="layerLabel">
+                                <button @click="removeLayer(mapNode, selectedMaps, 'selectedMaps')"> x </button>
+                                <span @mouseover="mouseOver(mapNode)" @mouseleave="mouseLeave(mapNode)">
+                                    {{ mapNode.label }}
+                                </span>
+                            </div>
+                            <vue-slider ref="slider" :width="50" :dot-size="10" :min="0" :max="1" :interval="0.01"
+                                :tooltip="false" v-model="opacities[mapNode.id]" @callback="changeOpacity(mapNode)"></vue-slider>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="legendContainer" id="legend">
+            <ul style="list-style-type: none; columns: 2; -webkit-columns: 2; -moz-columns: 2; color: white; background-color: #2c3e50; margin-left: -4px; padding: 8px; border: solid 1px black; font-size: 8pt;">
                 <li v-for="item in items">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" :style="item.color">
                         <circle cx="6" cy="6" r="4" />
@@ -41,17 +98,46 @@
                     <span>{{ item.name }}</span>
                 </li>
             </ul>
-            <button @click="showLegend = false" style="position: absolute; top: 16px; right: 4px;">
-                <svg height="12" width="12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                    x="0px" y="0px" viewBox="0 0 96 96" enable-background="new 0 0 96 96" xml:space="preserve">
-                    <polygon fill="white" points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 " />
-                </svg>
-            </button>
         </div>
-        <button v-else class="button" @click="showLegend = true" style="color: white; background-color: #2c3e50; border: solid 1px black; padding: 3px; font-size: 10pt;">Show
-            Legend
-        </button>
     </div>
+
+    <div class="column" id="right">
+        <div class="column" id="top-right">
+            <div id="periodSelector">
+                <tree ref="treePrehistoric" :data="prehistoric" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeNeolithic" :data="neolithic" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeBronzeAge" :data="bronzeAge" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeProtoGeometric" :data="protoGeometric" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeGeometric" :data="geometric" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeArchaic" :data="archaic" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeClassical" :data="classical" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeHellenistic" :data="hellenistic" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeRoman" :data="roman" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeByzantine" :data="byzantine" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeFrankish" :data="frankish" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeOttoman" :data="ottoman" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+                <tree ref="treeModern" :data="modern" :options="treeOptions" @node:checked="onNodeChecked"
+                    @node:unchecked="onNodeUnchecked" @node:expanded="onNodeExpanded" @tree:mounted="onTreeMounted"></tree>
+            </div>
+        </div>
+
+        <div class="column" id="bottom-right">
+            <div id="cesiumContainer"></div>
+        </div>
+    </div>
+
 
     <script src="./js/CesiumViewer.js"></script>
 </body>

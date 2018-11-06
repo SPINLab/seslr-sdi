@@ -9,11 +9,13 @@
   "author": "Chris Lucas (SPINLab)",
   "license": "MIT",
   "dependencies": {
-    "cesium": "^1.48.0",
-    "chroma-js": "^1.3.7",
-    "liquor-tree": "^0.2.32",
-    "lodash": "^4.17.10",
+    "@riophae/vue-treeselect": "0.0.37",
+    "cesium": "^1.50.0",
+    "chroma-js": "^1.4.0",
+    "liquor-tree": "^0.2.40",
+    "lodash": "^4.17.11",
     "vue": "^2.5.17",
-    "vue-slider-component": "^2.7.9"
+    "vue-slider-component": "^2.8.0",
+    "vuebar": "0.0.20"
   }
 }
