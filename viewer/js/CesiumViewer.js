@@ -41,28 +41,11 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     mapProjection: new Cesium.WebMercatorProjection(Cesium.Ellipsoid.WGS84)
 });
 
-// viewer.scene.globe.depthTestAgainstTerrain = false;
-
 // Style the infobox
 const frame = viewer.infoBox.frame;
-// frame.sandbox = 'allow-same-origin allow-scripts allow-popups allow-forms';
 frame.addEventListener(
     'load',
     function() {
-        // const simplebarLink = frame.contentDocument.createElement('script');
-        // simplebarLink.src = Cesium.buildModuleUrl(
-        //     '../../../simplebar/dist/simplebar.js'
-        // );
-        // viewer.infoBox.frame.contentDocument.head.appendChild(simplebarLink);
-
-        // const simplebarCssLink = frame.contentDocument.createElement('link');
-        // simplebarCssLink.href = Cesium.buildModuleUrl(
-        //     '../../../simplebar/dist/simplebar.css'
-        // );
-        // simplebarCssLink.rel = 'stylesheet';
-        // simplebarCssLink.type = 'text/css';
-        // viewer.infoBox.frame.contentDocument.head.appendChild(simplebarCssLink);
-
         const cssLink = frame.contentDocument.createElement('link');
         cssLink.href = Cesium.buildModuleUrl('../../../../css/infobox.css');
         cssLink.rel = 'stylesheet';
@@ -821,7 +804,6 @@ const listToString = (list, delimiter) => {
 };
 
 viewer.selectedEntityChanged.addEventListener(function(entity) {
-    // console.log(entity);
     if (typeof entity !== 'undefined') {
         const id = Cesium.Property.getValueOrUndefined(
             entity.properties.find_spot_id
