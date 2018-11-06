@@ -28,7 +28,7 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: true,
     animation: false,
     timeline: false,
-    vrButton: true,
+    vrButton: false,
     sceneModePicker: true,
     navigationInstructionsInitiallyVisible: false,
     selectionIndicator: false,
