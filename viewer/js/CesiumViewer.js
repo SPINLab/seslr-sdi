@@ -324,7 +324,7 @@ for (let imageCategory of imagery) {
         const image = viewer.scene.imageryLayers.addImageryProvider(
             new Cesium.createTileMapServiceImageryProvider({
                 url: '../imagery/' + imageCategory.id + '/' + imageName.id,
-                maximumLevel: 18,
+                maximumLevel: 23,
                 credit: ''
             })
         );
