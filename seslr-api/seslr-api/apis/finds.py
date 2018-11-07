@@ -36,7 +36,7 @@ class Finds(Resource):
         db = connect_to_database()
         cursor = db.cursor()
 
-        query = "SELECT find_spot_id FROM public.find_spot;"
+        query = 'SELECT "find_spot_ID" FROM seslr.find_spot;'
 
         cursor.execute(query)
         results = cursor.fetchall()
@@ -61,7 +61,7 @@ class Find(Resource):
         db = connect_to_database()
         cursor = db.cursor()
 
-        query = "SELECT description FROM public.find_categories WHERE find_spot_id = %s;"
+        query = "SELECT description FROM seslr.find_categories WHERE find_spot_id = %s;"
 
         cursor.execute(query, (find_spot_id,))
         try:
@@ -74,7 +74,7 @@ class Find(Resource):
 		find_spot_id,
 		UNNEST(ARRAY['architecture', 'floors', 'pavement', 'stone_alignment', 'remotely_sensed_features', 'rock_cuttings', 'sepulchral', 'negative_feature']) AS col_name,
 		UNNEST(ARRAY["architecture", "floors", "pavement", "stone_alignment", "remotely_sensed_features", "rock_cuttings", "sepulchral", "negative_feature"]) AS col_value
-	FROM public.find_features
+	FROM seslr.find_features
 )
 SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
 
@@ -89,7 +89,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 		find_spot_id,
 		UNNEST(ARRAY['enclosure_walls', 'terrace_walls', 'foundation_walls', 'defensive_walls', 'building_walls', 'wall', 'retaining_walls', 'other']) AS col_name,
 		UNNEST(ARRAY["enclosure_walls", "terrace_walls", "foundation_walls", "defensive_walls", "building_walls", "wall", "retaining_walls", "other"]) AS col_value
-	FROM public.find_features_architecture
+	FROM seslr.find_features_architecture
 )
 SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
 
@@ -104,7 +104,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 		find_spot_id,
 		UNNEST(ARRAY['cist', 'sarcophagus', 'mausoleum']) AS col_name,
 		UNNEST(ARRAY["cist", "sarcophagus", "mausoleum"]) AS col_value
-	FROM public.find_features_sepulchral
+	FROM seslr.find_features_sepulchral
 )
 SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
 
@@ -119,7 +119,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 		find_spot_id,
 		UNNEST(ARRAY['pottery', 'glass', 'metal', 'lithics', 'various', 'ceramic_building_material', 'botanical', 'bone', 'slag']) AS col_name,
 		UNNEST(ARRAY["pottery", "glass", "metal", "lithics", "various", "ceramic_building_material", "botanical", "bone", "slag"]) AS col_value
-	FROM public.find_material
+	FROM seslr.find_material
 )
 SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
 
@@ -134,7 +134,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 		find_spot_id,
 		UNNEST(ARRAY['human', 'animal', 'unknown']) AS col_name,
 		UNNEST(ARRAY["human", "animal", "unknown"]) AS col_value
-	FROM public.find_material_bone
+	FROM seslr.find_material_bone
 )
 SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
 
@@ -149,7 +149,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 		find_spot_id,
 		UNNEST(ARRAY['tile', 'brick', 'spolia', 'mortar', 'blocks', 'rubble', 'arch_members']) AS col_name,
 		UNNEST(ARRAY["tile", "brick", "spolia", "mortar", "blocks", "rubble", "arch_members"]) AS col_value
-	FROM public.find_material_building
+	FROM seslr.find_material_building
 )
 SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
 

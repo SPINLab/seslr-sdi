@@ -35,7 +35,7 @@ class FindSpots(Resource):
         db = connect_to_database()
         cursor = db.cursor()
 
-        query = "SELECT find_spot_id FROM public.find_spot;"
+        query = 'SELECT "find_spot_ID" FROM seslr.find_spot;'
 
         cursor.execute(query)
         results = cursor.fetchall()
@@ -60,7 +60,7 @@ class FindSpot(Resource):
         db = connect_to_database()
         cursor = db.cursor()
 
-        query = "SELECT toponym, type, description FROM public.find_spot WHERE find_spot_id = %s;"
+        query = 'SELECT toponym, type2, description FROM seslr.find_spot WHERE "find_spot_ID" = %s;'
 
         cursor.execute(query, (find_spot_id,))
         try:
@@ -70,12 +70,12 @@ class FindSpot(Resource):
 
         query = """WITH coltorows AS (
 	SELECT
-		find_spot_id,
+		"find_spot_ID",
 		UNNEST(ARRAY['LN', 'FN', 'N', 'EBA', 'MBA', 'LBA', 'EPG', 'MPG', 'LPG', 'PG', 'EG', 'MG', 'LG', 'G', 'EA', 'MA', 'LA', 'A', 'EC', 'MC', 'LC', 'C', 'EH', 'MH', 'LH', 'H', 'ER', 'MR', 'LR', 'R', 'EB', 'MB', 'LB', 'B', 'F', 'O', 'M', 'xPh', 'xFN', 'xN', 'xEBA', 'xMBA', 'xLBA', 'xEPG', 'xMPG', 'xLPG', 'xPG', 'xEG', 'xMG', 'xLG', 'xG', 'xEA', 'xMA', 'xLA', 'xA', 'xEC', 'xMC', 'xLC', 'xC', 'xEH', 'xMH', 'xLH', 'xH', 'xER', 'xMR', 'xLR', 'xR', 'xEB', 'xMB', 'xLB', 'xB', 'xF', 'xO', 'xM']) AS col_name,
 		UNNEST(ARRAY["LN", "FN", "N", "EBA", "MBA", "LBA", "EPG", "MPG", "LPG", "PG", "EG", "MG", "LG", "G", "EA", "MA", "LA", "A", "EC", "MC", "LC", "C", "EH", "MH", "LH", "H", "ER", "MR", "LR", "R", "EB", "MB", "LB", "B", "F", "O", "M", "xPh", "xFN", "xN", "xEBA", "xMBA", "xLBA", "xEPG", "xMPG", "xLPG", "xPG", "xEG", "xMG", "xLG", "xG", "xEA", "xMA", "xLA", "xA", "xEC", "xMC", "xLC", "xC", "xEH", "xMH", "xLH", "xH", "xER", "xMR", "xLR", "xR", "xEB", "xMB", "xLB", "xB", "xF", "xO", "xM"]) AS col_value
-	FROM public.find_spot_chronology
+	FROM seslr.find_spot_chronology
 )
-SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND "find_spot_ID" = %s GROUP BY "find_spot_ID";"""
 
         cursor.execute(query, (find_spot_id,))
         try:
