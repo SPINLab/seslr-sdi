@@ -1,173 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>SESLR Project - Data</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SESLR Project - Data</title>
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/header.css" />
+        <link rel="stylesheet" href="./css/data.css" />
+    </head>
 
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/data.css">
-</head>
-
-<body>
-    <div class="container">
-        <header>
-            <div class="title">
-                <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC.</h1>
-                <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
-            </div>
-
-            <div class="tabs" id="headerTabs">
-                <div>
-                    <a class="tab" href="/index.html">Home</a>
+    <body>
+        <div class="container">
+            <header>
+                <div class="title">
+                    <h1>
+                        THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA.
+                        4000-1 BC.
+                    </h1>
+                    <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
                 </div>
-                <div>
-                    <a class="tab" href="/map.html">Map Viewer</a>
-                    <a class="tab" style="background-color: black" href="/data.html">Data</a>
+
+                <div class="tabs" id="headerTabs">
+                    <div>
+                        <a class="tab" href="index.html">Home</a>
+                        <a class="tab" href="about.html">About Us</a>
+                    </div>
+                    <div>
+                        <a class="tab" href="map.html">Map Viewer</a>
+                        <a
+                            class="tab"
+                            style="background-color: black"
+                            href="data.html"
+                            >Data</a
+                        >
+                    </div>
                 </div>
+            </header>
+
+            <div class="content">
+                <h3>Primary data</h3>
+                <h4>Data which is the direct result of the project</h4>
+                <table>
+                    <tr>
+                        <th align="left">Name</th>
+                        <th align="left">Acquisition</th>
+                        <th align="left">By</th>
+                        <th align="left">Map View</th>
+                        <th align="left">Get Data</th>
+                    </tr>
+                    <tr>
+                        <td>Find Spot</td>
+                        <td>Fieldwork</td>
+                        <td>Stefan & Ruben</td>
+                        <td>
+                            <a href="viewer/?mode=2&findspots=1">2D</a> |
+                            <a href="viewer/?mode=3&findspots=1">3D</a>
+                        </td>
+                        <td>Download | <a href="api">API</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>Site</td>
+                        <td>Fieldwork</td>
+                        <td>Stefan & Ruben</td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+
+                    <tr>
+                        <td>Point of Interest</td>
+                        <td>Fieldwork</td>
+                        <td>Stefan & Ruben</td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+
+                    <tr>
+                        <td>Remote Sensing Feature</td>
+                        <td>Fieldwork</td>
+                        <td>Anke</td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+                    <tr>
+                        <td>Reconnaissance</td>
+                        <td>Fieldwork</td>
+                        <td>Anke</td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+
+                    <tr>
+                        <td>3D point clouds</td>
+                        <td>Fieldwork</td>
+                        <td>Stefan & Ruben</td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+                </table>
+
+                <h3>Secondary data</h3>
+                <h4>
+                    Data which is obtained by third parties and used in the
+                    project
+                </h4>
+                <table>
+                    <tr>
+                        <th align="left">Name</th>
+                        <th align="left"></th>
+                        <th align="left"></th>
+                        <th align="left">Map View</th>
+                        <th align="left"></th>
+                    </tr>
+
+                    <tr>
+                        <td>Digital Elevation Models</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Geological Map</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2&geomap=1">2D</a> |
+                            <a href="viewer/?mode=3&geomap=1">3D</a>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Satellite Images</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Historical Aerial Photographs</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2&histairphoto=1">2D</a> |
+                            <a href="viewer/?mode=3&histairphoto=1">3D</a>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Historical Maps</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <h3>Analysis result data</h3>
+                <h4>Data which is the result of spatial analysis</h4>
+                <table>
+                    <tr>
+                        <th align="left">Story</th>
+                        <th align="left">By</th>
+                        <th align="left"></th>
+                        <th align="left">Map View</th>
+                        <th align="left">Get Data</th>
+                    </tr>
+                    <tr>
+                        <td>A Story</td>
+                        <td>Stefan & Ruben</td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+
+                    <tr>
+                        <td>Another Story</td>
+                        <td>Anke</td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2">2D</a> |
+                            <a href="viewer/?mode=3">3D</a>
+                        </td>
+                        <td>Download</td>
+                    </tr>
+                </table>
             </div>
-        </header>
-
-        <div class="content">
-            <h3>Primary data</h3>
-            <h4>Data which is the direct result of the project</h4>
-            <table>
-                <tr>
-                    <th align="left">Name</th>
-                    <th align="left">Acquisition</th>
-                    <th align="left">By</th>
-                    <th align="left">Map View</th>
-                    <th align="left">Get Data</th>
-                </tr>
-                <tr>
-                    <td>Find Spot</td>
-                    <td>Fieldwork</td>
-                    <td>Stefan & Ruben</td>
-                    <td> <a href="/viewer/?mode=2&findspots=1">2D</a> | <a href="/viewer/?mode=3&findspots=1">3D</a></td>
-                    <td>Download | <a href="/api">API</a></td>
-                </tr>
-
-                <tr>
-                    <td>Site</td>
-                    <td>Fieldwork</td>
-                    <td>Stefan & Ruben</td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-
-                <tr>
-                    <td>Point of Interest</td>
-                    <td>Fieldwork</td>
-                    <td>Stefan & Ruben</td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-
-                <tr>
-                    <td>Remote Sensing Feature</td>
-                    <td>Fieldwork</td>
-                    <td>Anke</td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-                <tr>
-                    <td>Reconnaissance</td>
-                    <td>Fieldwork</td>
-                    <td>Anke</td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-
-                <tr>
-                    <td>3D point clouds</td>
-                    <td>Fieldwork</td>
-                    <td>Stefan & Ruben</td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-            </table>
-            <h3>Secondary data</h3>
-            <h4>Data which is obtained by third parties and used in the project</h4>
-            <table>
-                <tr>
-                    <th align="left">Name</th>
-                    <th align="left"></th>
-                    <th align="left"></th>
-                    <th align="left">Map View</th>
-                    <th align="left"></th>
-                </tr>
-
-                <tr>
-                    <td>Digital Elevation Models</td>
-                    <td></td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>Geological Map</td>
-                    <td></td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2&geomap=1">2D</a> | <a href="/viewer/?mode=3&geomap=1">3D</a></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>Satellite Images</td>
-                    <td></td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>Historical Aerial Photographs</td>
-                    <td></td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2&histairphoto=1">2D</a> | <a href="/viewer/?mode=3&histairphoto=1">3D</a></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>Historical Maps</td>
-                    <td></td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td></td>
-                </tr>
-            </table>
-            <h3>Analysis result data</h3>
-            <h4>Data which is the result of spatial analysis</h4>
-            <table>
-                <tr>
-                    <th align="left">Story</th>
-                    <th align="left">By</th>
-                    <th align="left"></th>
-                    <th align="left">Map View</th>
-                    <th align="left">Get Data</th>
-                </tr>
-                <tr>
-                    <td>A Story</td>
-                    <td>Stefan & Ruben</td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-
-                <tr>
-                    <td>Another Story</td>
-                    <td>Anke</td>
-                    <td></td>
-                    <td> <a href="/viewer/?mode=2">2D</a> | <a href="/viewer/?mode=3">3D</a></td>
-                    <td>Download</td>
-                </tr>
-            </table>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
