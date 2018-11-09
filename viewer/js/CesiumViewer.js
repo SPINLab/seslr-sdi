@@ -424,9 +424,7 @@ const layerSelector = new Vue({
     },
     mounted() {
         if (parseInt(urlParams.findspots)) {
-            for (let node of features) {
-                this.selectedFeatures.push(node);
-            }
+            this.selectedFeatures.push(features[0]);
         }
 
         if (parseInt(urlParams.geomap)) {
