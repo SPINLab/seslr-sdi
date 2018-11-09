@@ -137,6 +137,14 @@ const features = [
     {
         id: 'find_spots',
         label: 'Find Spots'
+    },
+    {
+        id: 'mines',
+        label: 'Mines'
+    },
+    {
+        id: 'archaeological_surveys',
+        label: 'Archaeological Surveys'
     }
 ];
 
@@ -498,94 +506,100 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
         const id = Cesium.Property.getValueOrUndefined(
             entity.properties.find_spot_id
         );
-        entity.name = 'Find Spot ' + id;
 
-        const findSpotInfo = fetch('../api/find_spots/' + id, {
-            credentials: 'include'
-        });
+        if (typeof id !== 'undefined') {
+            entity.name = 'Find Spot ' + id;
 
-        const findInfo = fetch('../api/finds/' + id, {
-            credentials: 'include'
-        });
-
-        Promise.all([findSpotInfo, findInfo]).then(function(responses) {
-            const promises = [];
-            for (let response of responses) {
-                promises.push(response.json());
-            }
-            Promise.all(promises).then(function(jsons) {
-                const findSpotJson = jsons[0];
-                const findJson = jsons[1];
-                const findSpotHTML =
-                    '<h3>Type</h3><p>' +
-                    _.startCase(
-                        _.toLower(_.replace(findSpotJson.type, '_', ' '))
-                    ) +
-                    '</p>' +
-                    '<h3>Toponym</h3><p>' +
-                    findSpotJson.toponym +
-                    '</p>' +
-                    '<h3>Description</h3><p>' +
-                    findSpotJson.description +
-                    '</p>' +
-                    '<h3>Chronology</h3><p>' +
-                    findSpotJson.chronology.join(' | ') +
-                    '</p></div>';
-                let findHTML = '';
-                if (findJson.description !== null) {
-                    findHTML +=
-                        '<h3>Description</h3><p>' +
-                        findJson.description +
-                        '</p>';
-                }
-                if (findJson.features !== null) {
-                    findHTML +=
-                        '<h3>Features</h3><p>' +
-                        listToString(findJson.features, ' | ') +
-                        '</p>';
-                }
-                if (findJson.features_architecture !== null) {
-                    findHTML +=
-                        '<h3>Features architecture</h3><p>' +
-                        listToString(findJson.features_architecture, ' | ') +
-                        '</p>';
-                }
-                if (findJson.features_sepulchral !== null) {
-                    findHTML +=
-                        '<h3>Features sepulchral</h3><p>' +
-                        listToString(findJson.features_sepulchral, ' | ') +
-                        '</p>';
-                }
-                if (findJson.material !== null) {
-                    findHTML +=
-                        '<h3>Material</h3><p>' +
-                        listToString(findJson.material, ' | ') +
-                        '</p>';
-                }
-                if (findJson.material_bone !== null) {
-                    findHTML +=
-                        '<h3>Material bone</h3><p>' +
-                        listToString(findJson.material_bone, ' | ') +
-                        '</p>';
-                }
-                if (findJson.material_building !== null) {
-                    findHTML +=
-                        '<h3>Material building</h3><p>' +
-                        listToString(findJson.material_building, ' | ') +
-                        '</p>';
-                }
-                findHTML += '</div>';
-
-                entity.description =
-                    '<div id="findSpotInfo">' +
-                    '<h2>Find Spot</h2>' +
-                    findSpotHTML +
-                    '</div>' +
-                    '<div id="findInfo">' +
-                    '<h2>Find</h2>' +
-                    findHTML +
-                    '</div>';
+            const findSpotInfo = fetch('../api/find_spots/' + id, {
+                credentials: 'include'
             });
-        });
+
+            const findInfo = fetch('../api/finds/' + id, {
+                credentials: 'include'
+            });
+
+            Promise.all([findSpotInfo, findInfo]).then(function(responses) {
+                const promises = [];
+                for (let response of responses) {
+                    promises.push(response.json());
+                }
+                Promise.all(promises).then(function(jsons) {
+                    const findSpotJson = jsons[0];
+                    const findJson = jsons[1];
+                    const findSpotHTML =
+                        '<h3>Type</h3><p>' +
+                        _.startCase(
+                            _.toLower(_.replace(findSpotJson.type, '_', ' '))
+                        ) +
+                        '</p>' +
+                        '<h3>Toponym</h3><p>' +
+                        findSpotJson.toponym +
+                        '</p>' +
+                        '<h3>Description</h3><p>' +
+                        findSpotJson.description +
+                        '</p>' +
+                        '<h3>Chronology</h3><p>' +
+                        findSpotJson.chronology.join(' | ') +
+                        '</p></div>';
+                    let findHTML = '';
+                    if (findJson.description !== null) {
+                        findHTML +=
+                            '<h3>Description</h3><p>' +
+                            findJson.description +
+                            '</p>';
+                    }
+                    if (findJson.features !== null) {
+                        findHTML +=
+                            '<h3>Features</h3><p>' +
+                            listToString(findJson.features, ' | ') +
+                            '</p>';
+                    }
+                    if (findJson.features_architecture !== null) {
+                        findHTML +=
+                            '<h3>Features architecture</h3><p>' +
+                            listToString(
+                                findJson.features_architecture,
+                                ' | '
+                            ) +
+                            '</p>';
+                    }
+                    if (findJson.features_sepulchral !== null) {
+                        findHTML +=
+                            '<h3>Features sepulchral</h3><p>' +
+                            listToString(findJson.features_sepulchral, ' | ') +
+                            '</p>';
+                    }
+                    if (findJson.material !== null) {
+                        findHTML +=
+                            '<h3>Material</h3><p>' +
+                            listToString(findJson.material, ' | ') +
+                            '</p>';
+                    }
+                    if (findJson.material_bone !== null) {
+                        findHTML +=
+                            '<h3>Material bone</h3><p>' +
+                            listToString(findJson.material_bone, ' | ') +
+                            '</p>';
+                    }
+                    if (findJson.material_building !== null) {
+                        findHTML +=
+                            '<h3>Material building</h3><p>' +
+                            listToString(findJson.material_building, ' | ') +
+                            '</p>';
+                    }
+                    findHTML += '</div>';
+
+                    entity.description =
+                        '<div id="findSpotInfo">' +
+                        '<h2>Find Spot</h2>' +
+                        findSpotHTML +
+                        '</div>' +
+                        '<div id="findInfo">' +
+                        '<h2>Find</h2>' +
+                        findHTML +
+                        '</div>';
+                });
+            });
+        }
     }
 });
