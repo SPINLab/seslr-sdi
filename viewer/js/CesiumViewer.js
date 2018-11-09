@@ -115,54 +115,11 @@ viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function(
     commandInfo.cancel = true;
 });
 
-const types = {
-    large_cluster_buildings: Cesium.Color.fromCssColorString('#3d7d5a'),
-    marble_quarry: Cesium.Color.fromCssColorString('#cd3b61'),
-    kiln: Cesium.Color.fromCssColorString('#62e274'),
-    terrace: Cesium.Color.fromCssColorString('#5582e7'),
-    small_cluster_buildings: Cesium.Color.fromCssColorString('#afdb46'),
-    inscription: Cesium.Color.fromCssColorString('#3059a8'),
-    paved_road: Cesium.Color.fromCssColorString('#ded543'),
-    church: Cesium.Color.fromCssColorString('#5f8dce'),
-    road: Cesium.Color.fromCssColorString('#9de36d'),
-    fortress: Cesium.Color.fromCssColorString('#c9412a'),
-    tower: Cesium.Color.fromCssColorString('#58e59a'),
-    harbour_installation: Cesium.Color.fromCssColorString('#e26b5e'),
-    bridge: Cesium.Color.fromCssColorString('#5be9c8'),
-    quarry_chute: Cesium.Color.fromCssColorString('#dc842e'),
-    olive_wine_press: Cesium.Color.fromCssColorString('#5ab4d9'),
-    temple: Cesium.Color.fromCssColorString('#dab343'),
-    villa: Cesium.Color.fromCssColorString('#3e5c80'),
-    single_grave_tomb: Cesium.Color.fromCssColorString('#51a738'),
-    fortification_wall: Cesium.Color.fromCssColorString('#9cb2e0'),
-    artifact: Cesium.Color.fromCssColorString('#8ea63f'),
-    quarry: Cesium.Color.fromCssColorString('#8c4448'),
-    steps: Cesium.Color.fromCssColorString('#99dfa4'),
-    fortification: Cesium.Color.fromCssColorString('#8c4920'),
-    chapel: Cesium.Color.fromCssColorString('#59ceca'),
-    castle: Cesium.Color.fromCssColorString('#44ad71'),
-    artifact_concentration: Cesium.Color.fromCssColorString('#d78d69'),
-    threshing_floor: Cesium.Color.fromCssColorString('#d38694'),
-    fountain_house: Cesium.Color.fromCssColorString('#467427'),
-    void: Cesium.Color.fromCssColorString('#b3dee4'),
-    metallurgical_remains: Cesium.Color.fromCssColorString('#9b802a'),
-    unknown: Cesium.Color.fromCssColorString('#588591'),
-    single_house: Cesium.Color.fromCssColorString('#89afb1'),
-    metal_workshop: Cesium.Color.fromCssColorString('#405d53'),
-    cluster_graves_tombs: Cesium.Color.fromCssColorString('#d1b678'),
-    single_building: Cesium.Color.fromCssColorString('#d5e28d'),
-    well: Cesium.Color.fromCssColorString('#5d5e2c'),
-    sanctuary: Cesium.Color.fromCssColorString('#cfdfbd'),
-    mine: Cesium.Color.fromCssColorString('#8c6f5b'),
-    cistern: Cesium.Color.fromCssColorString('#87a679'),
-    bath: Cesium.Color.fromCssColorString('#d1b19f')
-};
-
 const legendItems = [];
-for (let type of Object.keys(types)) {
+for (let type of Object.keys(icons)) {
     legendItems.push({
         name: _.startCase(_.toLower(type)),
-        color: 'fill:' + types[type].toCssColorString()
+        icon: 'assets/' + type + '.svg'
     });
 }
 
@@ -173,21 +130,6 @@ const legend = new Vue({
         showLegend: false
     }
 });
-
-function stylePoints(entities) {
-    for (let entity of entities) {
-        entity.billboard = undefined;
-        entity.point = new Cesium.PointGraphics({
-            color:
-                types[
-                    Cesium.Property.getValueOrUndefined(entity.properties.type)
-                ],
-            pixelSize: 10,
-            disableDepthTestDistance: Number.POSITIVE_INFINITY
-        });
-        entity.show = false;
-    }
-}
 
 const data = {};
 
@@ -200,10 +142,19 @@ const features = [
 
 for (let featureName of features) {
     const feature = new Cesium.GeoJsonDataSource();
-    feature.load(`../features/${featureName.id}.json`).then(function(feature) {
-        viewer.dataSources.add(feature);
-        stylePoints(feature.entities.values);
-    });
+    feature
+        .load(`../features/${featureName.id}.json`, {
+            clampToGround: true
+        })
+        .then(function(feature) {
+            viewer.dataSources.add(feature);
+
+            if (featureName.id === 'find_spots') {
+                for (const entity of feature.entities.values) {
+                    entity.billboard = undefined;
+                }
+            }
+        });
     feature.show = false;
     data[featureName.id] = feature;
 }
@@ -278,6 +229,26 @@ for (let mapName of maps) {
     data[mapName.id] = map;
 }
 
+function exportSVG(svg) {
+    return 'data:image/svg+xml;base64,' + btoa(svg);
+}
+
+function styleSpot(spot, period) {
+    const type = Cesium.Property.getValueOrUndefined(spot.properties.type);
+    const color = periodColors[period];
+
+    if (typeof icons[type] !== 'undefined') {
+        spot.billboard = {
+            image: exportSVG(icons[type].replace(/#ff0000/g, color)),
+            scale: 0.15,
+            heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+            disableDepthTestDistance: 50000
+        };
+    } else {
+        spot.billboard = undefined;
+    }
+}
+
 const visibleSpots = {};
 
 function updateSpotVisibility() {
@@ -285,33 +256,32 @@ function updateSpotVisibility() {
         const id = Cesium.Property.getValueOrUndefined(
             entity.properties.find_spot_id
         );
-        if (String(id) in visibleSpots) {
-            entity.show = true;
-        } else {
-            entity.show = false;
+        if (typeof visibleSpots[id] !== 'undefined') {
+            if (visibleSpots[id].length > 0) {
+                styleSpot(entity, visibleSpots[id][0]);
+                entity.show = true;
+            } else {
+                entity.show = false;
+            }
         }
     }
     viewer.scene.requestRender();
 }
 
-function addSpots(spot_ids) {
+function addSpots(spot_ids, period) {
     for (let id of spot_ids) {
-        visibleSpots[id] = (visibleSpots[id] || 0) + 1;
+        if (typeof visibleSpots[id] !== 'undefined') {
+            visibleSpots[id].push(period);
+        } else {
+            visibleSpots[id] = [period];
+        }
     }
     updateSpotVisibility();
 }
 
-function removeSpots(spot_ids) {
+function removeSpots(spot_ids, period) {
     for (let id of spot_ids) {
-        visibleSpots[id] -= 1;
-    }
-    for (const spot_id in visibleSpots) {
-        if (visibleSpots.hasOwnProperty(spot_id)) {
-            const value = visibleSpots[spot_id];
-            if (value <= 0) {
-                delete visibleSpots[spot_id];
-            }
-        }
+        visibleSpots[id].splice(visibleSpots[id].indexOf(period), 1);
     }
     updateSpotVisibility();
 }
@@ -472,7 +442,7 @@ const periodSelector = new Vue({
                     credentials: 'include'
                 }).then(function(response) {
                     response.json().then(function(json) {
-                        addSpots(json.spot_ids);
+                        addSpots(json.spot_ids, period);
                     });
                 });
             }
@@ -485,7 +455,7 @@ const periodSelector = new Vue({
                     credentials: 'include'
                 }).then(function(response) {
                     response.json().then(function(json) {
-                        removeSpots(json.spot_ids);
+                        removeSpots(json.spot_ids, period);
                     });
                 });
             }

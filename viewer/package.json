@@ -10,9 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "@riophae/vue-treeselect": "0.0.37",
+    "axios": "^0.18.0",
     "cesium": "^1.50.0",
     "chroma-js": "^1.4.0",
-    "liquor-tree": "^0.2.40",
+    "liquor-tree": "^0.2.42",
     "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-slider-component": "^2.8.0",
