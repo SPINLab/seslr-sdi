@@ -191,83 +191,6 @@ function stylePoints(entities) {
 
 const data = {};
 
-const descToCode = {
-    'Late Neolithic': 'LN',
-    'Final Neolithic': 'FN',
-    Neolithic: 'N',
-    'Early Bronze Age': 'EBA',
-    'Middle Bronze Age': 'MBA',
-    'Late Bronze Age': 'LBA',
-    'Early Proto Geometric': 'EPG',
-    'Middle Proto Geometric': 'MPG',
-    'Late Proto Geometric': 'LPG',
-    'Proto Geometric': 'PG',
-    'Early Geometric': 'EG',
-    'Middle Geometric': 'MG',
-    'Late Geometric': 'LG',
-    Geometric: 'G',
-    'Early Archaic': 'EA',
-    'Middle Archaic': 'MA',
-    'Late Archaic': 'LA',
-    Archaic: 'A',
-    'Early Classical': 'EC',
-    'Middle Classical': 'MC',
-    'Late Classical': 'LC',
-    Classical: 'C',
-    'Early Hellenistic': 'EH',
-    'Middle Hellenistic': 'MH',
-    'Late Hellenistic': 'LH',
-    Hellenistic: 'H',
-    'Early Roman': 'ER',
-    'Middle Roman': 'MR',
-    'Late Roman': 'LR',
-    Roman: 'R',
-    'Early Byzantine': 'EB',
-    'Middle Byzantine': 'MB',
-    'Late Byzantine': 'LB',
-    Byzantine: 'B',
-    Frankish: 'F',
-    Ottoman: 'O',
-    Modern: 'M',
-    'Uncertain prehistoric date': 'xPh',
-    'Uncertain Final Neolithic': 'xFN',
-    'Uncertain Neolithic': 'xN',
-    'Uncertain Early Bronze Age': 'xEBA',
-    'Uncertain Middle Bronze Age': 'xMBA',
-    'Uncertain Late Bronze Age': 'xLBA',
-    'Uncertain Early Proto Geometric': 'xEPG',
-    'Uncertain Middle Proto Geometric': 'xMPG',
-    'Uncertain Late Proto Geometric': 'xLPG',
-    'Uncertain Proto Geometric': 'xPG',
-    'Uncertain Early Geometric': 'xEG',
-    'Uncertain Middle Geometric': 'xMG',
-    'Uncertain Late Geometric': 'xLG',
-    'Uncertain Geometric': 'xG',
-    'Uncertain Early Archaic': 'xEA',
-    'Uncertain Middle Archaic': 'xMA',
-    'Uncertain Late Archaic': 'xLA',
-    'Uncertain Archaic': 'xA',
-    'Uncertain Early Classical': 'xEC',
-    'Uncertain Middle Classical': 'xMC',
-    'Uncertain Late Classical': 'xLC',
-    'Uncertain Classical': 'xC',
-    'Uncertain Early Hellenistic': 'xEH',
-    'Uncertain Middle Hellenistic': 'xMH',
-    'Uncertain Late Hellenistic': 'xLH',
-    'Uncertain Hellenistic': 'xH',
-    'Uncertain Early Roman': 'xER',
-    'Uncertain Middle Roman': 'xMR',
-    'Uncertain Late Roman': 'xLR',
-    'Uncertain Roman': 'xR',
-    'Uncertain Early Byzantine': 'xEB',
-    'Uncertain Middle Byzantine': 'xMB',
-    'Uncertain Late Byzantine': 'xLB',
-    'Uncertain Byzantine': 'xB',
-    'Uncertain Frankish': 'xF',
-    'Uncertain Ottoman': 'xO',
-    'Uncertain Modern': 'xM'
-};
-
 const features = [
     {
         id: 'find_spots',
@@ -544,7 +467,7 @@ const periodSelector = new Vue({
         },
         onNodeChecked(node) {
             if (node.children.length === 0) {
-                const period = descToCode[node.text];
+                const period = periodCode[node.text];
                 fetch('../api/periods/' + period, {
                     credentials: 'include'
                 }).then(function(response) {
@@ -557,7 +480,7 @@ const periodSelector = new Vue({
         },
         onNodeUnchecked(node) {
             if (node.children.length === 0) {
-                const period = descToCode[node.text];
+                const period = periodCode[node.text];
                 fetch('../api/periods/' + period, {
                     credentials: 'include'
                 }).then(function(response) {
