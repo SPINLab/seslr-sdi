@@ -325,7 +325,14 @@ const layerSelector = new Vue({
     },
     mounted() {
         if (parseInt(urlParams.findspots)) {
-            this.selectedFeatures.push(features[0]);
+            const tilesLoaded = viewer.scene.globe.tileLoadProgressEvent.addEventListener(
+                e => {
+                    if (e === 0) {
+                        this.selectedFeatures.push(features[0]);
+                        tilesLoaded();
+                    }
+                }
+            );
         }
 
         if (parseInt(urlParams.geomap)) {
