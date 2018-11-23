@@ -31,7 +31,7 @@ class Periods(Resource):
         db = connect_to_database()
         cursor = db.cursor()
 
-        query = "SELECT column_name FROM information_schema.columns WHERE table_schema = 'seslr' AND table_name = 'find_spot_chronology' AND column_name != 'find_spot_ID' AND column_name != 'based_on';"
+        query = 'SELECT column_name FROM information_schema.columns WHERE table_schema = "seslr" AND table_name = "find_spot_chronology" AND column_name != "find_spot_ID" AND column_name != "based_on";'
 
         cursor.execute(query)
         results = cursor.fetchall()
@@ -58,7 +58,7 @@ class Period(Resource):
         db = connect_to_database()
         cursor = db.cursor()
 
-        query = 'SELECT find_spot_id FROM seslr.find_spot_chronology WHERE {} = true;'.format(psycopg2.extensions.quote_ident(period, db))
+        query = 'SELECT "find_spot_ID" FROM seslr.find_spot_chronology WHERE {} = true;'.format(psycopg2.extensions.quote_ident(period, db))
 
         cursor.execute(query)
         results = cursor.fetchall()
