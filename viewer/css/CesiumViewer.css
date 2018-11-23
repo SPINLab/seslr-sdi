@@ -349,12 +349,14 @@ body {
 }
 .legendContainer ul {
     list-style-type: none;
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
     color: #ecf0f1;
     padding: 8px;
     font-size: 8pt;
+}
+.two-columns {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
 }
 .legendItem {
     display: flex;
@@ -362,10 +364,22 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.legendItem svg {
+    margin-right: 15px;
+}
 .legendIcon {
     width: 25px;
     height: 25px;
     margin-right: 15px;
+}
+.VueCarousel-slide {
+    width: 100%;
+}
+.VueCarousel-dot[data-v-438fd353] {
+    margin-top: 0 !important;
+}
+.VueCarousel-dot-button[data-v-438fd353]:focus {
+    outline: 0;
 }
 
 #treePrehistoric .tree-node .tree-content .tree-anchor span {

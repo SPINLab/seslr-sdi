@@ -14,7 +14,8 @@
         <script src="./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.min.js"></script>
         <script src="./node_modules/vue-slider-component/dist/index.js"></script>
         <script src="./node_modules/vuebar/vuebar.js"></script>
-        <script src="./node_modules/chroma-js/chroma.js"></script>
+        <!-- <script src="./node_modules/chroma-js/chroma.js"></script> -->
+        <script src="./node_modules/vue-carousel/dist/vue-carousel.min.js"></script>
 
         <link rel="stylesheet" href="./css/CesiumViewer.css" />
         <link
@@ -168,18 +169,78 @@
             </div>
 
             <div class="legendContainer" id="legend">
-                <ul>
-                    <li v-for="item in items">
-                        <div class="legendItem">
-                            <img
-                                class="legendIcon"
-                                :src="item.icon"
-                                :alt="item.name"
-                            />
-                            <span>{{ item.name }}</span>
-                        </div>
-                    </li>
-                </ul>
+                <carousel
+                    ref="carousel"
+                    :pagination-active-color="'#2980b9'"
+                    :per-page="1"
+                >
+                    <slide>
+                        <ul class="two-columns">
+                            <li v-for="item in items.findspot">
+                                <div class="legendItem">
+                                    <img
+                                        class="legendIcon"
+                                        :src="item.icon"
+                                        :alt="item.name"
+                                    />
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </slide>
+                    <slide>
+                        <ul>
+                            <li v-for="item in items.mines">
+                                <div class="legendItem">
+                                    <img
+                                        class="legendIcon"
+                                        :src="item.icon"
+                                        :alt="item.name"
+                                    />
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </slide>
+                    <slide>
+                        <ul>
+                            <li v-for="item in items.survey">
+                                <div class="legendItem">
+                                    <svg height="20" width="20">
+                                        <circle
+                                            cx="10"
+                                            cy="10"
+                                            r="8"
+                                            stroke="black"
+                                            stroke-width="1"
+                                            :fill="item.color"
+                                        />
+                                    </svg>
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </slide>
+                    <slide>
+                        <ul>
+                            <li v-for="item in items.geology">
+                                <div class="legendItem">
+                                    <svg height="20" width="20">
+                                        <circle
+                                            cx="10"
+                                            cy="10"
+                                            r="8"
+                                            stroke="black"
+                                            stroke-width="1"
+                                            :fill="item.color"
+                                        />
+                                    </svg>
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </slide>
+                </carousel>
             </div>
         </div>
 

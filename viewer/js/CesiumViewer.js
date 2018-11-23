@@ -150,22 +150,6 @@ viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function(
     commandInfo.cancel = true;
 });
 
-const legendItems = [];
-for (let type of Object.keys(icons)) {
-    legendItems.push({
-        name: _.startCase(_.toLower(type)),
-        icon: 'assets/' + type + '.svg'
-    });
-}
-
-const legend = new Vue({
-    el: '#legend',
-    data: {
-        items: legendItems,
-        showLegend: false
-    }
-});
-
 const data = {};
 
 const features = [
@@ -512,12 +496,43 @@ const layerSelector = new Vue({
             viewer.scene.requestRender();
         },
         onChangeFeatures() {
-            for (let node of this.prevSelectedFeatures) {
-                data[node.id].show = false;
+            let selectedFeature;
+            if (
+                this.prevSelectedFeatures.length > this.selectedFeatures.length
+            ) {
+                for (let feature of this.prevSelectedFeatures) {
+                    if (!this.selectedFeatures.includes(feature)) {
+                        selectedFeature = feature;
+                    }
+                }
+            } else {
+                for (let feature of this.selectedFeatures) {
+                    if (!this.prevSelectedFeatures.includes(feature)) {
+                        selectedFeature = feature;
+                    }
+                }
             }
-            for (let node of this.selectedFeatures) {
-                data[node.id].show = true;
+            let shown = data[selectedFeature.id].show;
+            if (!shown) {
+                switch (selectedFeature.id) {
+                    case 'find_spots':
+                        legendCarousel.$refs.carousel.goToPage(0);
+                        break;
+                    case 'mines':
+                        legendCarousel.$refs.carousel.goToPage(1);
+                        break;
+                    case 'archaeological_surveys':
+                        legendCarousel.$refs.carousel.goToPage(2);
+                        break;
+                    case 'geology':
+                        legendCarousel.$refs.carousel.goToPage(3);
+                        break;
+                    default:
+                        break;
+                }
             }
+            data[selectedFeature.id].show = !shown;
+
             viewer.scene.requestRender();
         },
         onChangeMaps() {
@@ -532,7 +547,7 @@ const layerSelector = new Vue({
             viewer.scene.requestRender();
         },
         removeLayer(node, layerGroup, layerGroupName) {
-            data[node.id].show = false;
+            this.onSelect(layerGroup, layerGroupName);
             this.$set(
                 this,
                 layerGroupName,
@@ -641,6 +656,56 @@ const periodSelector = new Vue({
     },
     destroyed() {
         document.removeEventListener('click', this.documentClick);
+    }
+});
+
+const legendItems = {
+    findspot: [],
+    mines: [],
+    survey: [],
+    geology: []
+};
+
+for (let type of Object.keys(icons)) {
+    legendItems.findspot.push({
+        name: _.startCase(_.toLower(type)),
+        icon: 'assets/' + type + '.svg'
+    });
+}
+
+for (let mine of ['ASB', 'Fe-Cu', 'Fe-Mn', 'Fe', 'Mn', 'PBG', 'tc']) {
+    legendItems.mines.push({
+        name: mine,
+        icon: 'assets/' + mine + '.svg'
+    });
+}
+
+for (let survey in surveyColors) {
+    if (surveyColors.hasOwnProperty(survey)) {
+        legendItems.survey.push({
+            name: _.startCase(_.toLower(survey)),
+            color: surveyColors[survey]
+        });
+    }
+}
+
+for (let unit in geologyColors) {
+    if (geologyColors.hasOwnProperty(unit)) {
+        legendItems.geology.push({
+            name: _.startCase(_.toLower(unit)),
+            color: geologyColors[unit]
+        });
+    }
+}
+
+const legendCarousel = new Vue({
+    el: '#legend',
+    data: {
+        items: legendItems
+    },
+    components: {
+        carousel: VueCarousel.Carousel,
+        slide: VueCarousel.Slide
     }
 });
 
