@@ -6,13 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>SESLR Project - Map</title>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-        <link rel="manifest" href="assets/site.webmanifest">
-        <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0C3183">
-        <meta name="msapplication-TileColor" content="#0C3183">
-        <meta name="theme-color" content="#0C3183">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+        <link rel="manifest" href="assets/manifest.json" />
+        <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0C3183" />
+        <meta name="msapplication-TileColor" content="#0C3183" />
+        <meta name="theme-color" content="#0C3183" />
 
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./css/header.css" />
@@ -23,10 +23,7 @@
         <div class="container">
             <header>
                 <div class="title">
-                    <h1>
-                        THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA.
-                        4000-1 BC.
-                    </h1>
+                    <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC.</h1>
                     <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
                 </div>
 
@@ -36,10 +33,7 @@
                         <a class="tab" href="about.html">About Us</a>
                     </div>
                     <div>
-                        <a
-                            class="tab"
-                            style="background-color: black"
-                            href="map.html"
+                        <a class="tab" style="background-color: black" href="map.html"
                             >Map Viewer</a
                         >
                         <a class="tab" href="data.html">Data</a>
@@ -68,16 +62,10 @@
                 </div>
             </div>
 
-            <div class="viewer">
-                <iframe name="vieweriframe" src="viewer/?mode=3"></iframe>
-            </div>
+            <div class="viewer"><iframe name="vieweriframe" src="viewer/?mode=3"></iframe></div>
 
             <div class="tabs" id="bottomTabs">
-                <a
-                    class="tab"
-                    id="newWindowButton"
-                    href="viewer/?mode=3"
-                    target="_blank"
+                <a class="tab" id="newWindowButton" href="viewer/?mode=3" target="_blank"
                     >Open in new window</a
                 >
             </div>
@@ -90,39 +78,21 @@
 
             const toggleSelected = function() {
                 if (button2D.className.includes('unselected')) {
-                    button2D.className = button2D.className.replace(
-                        'unselected',
-                        'selected'
-                    );
+                    button2D.className = button2D.className.replace('unselected', 'selected');
                 } else {
-                    button2D.className = button2D.className.replace(
-                        'selected',
-                        'unselected'
-                    );
+                    button2D.className = button2D.className.replace('selected', 'unselected');
                 }
 
                 if (button3D.className.includes('unselected')) {
-                    button3D.className = button3D.className.replace(
-                        'unselected',
-                        'selected'
-                    );
+                    button3D.className = button3D.className.replace('unselected', 'selected');
                 } else {
-                    button3D.className = button3D.className.replace(
-                        'selected',
-                        'unselected'
-                    );
+                    button3D.className = button3D.className.replace('selected', 'unselected');
                 }
 
                 if (newWindowButton.href.includes('mode=2')) {
-                    newWindowButton.href = newWindowButton.href.replace(
-                        'mode=2',
-                        'mode=3'
-                    );
+                    newWindowButton.href = newWindowButton.href.replace('mode=2', 'mode=3');
                 } else {
-                    newWindowButton.href = newWindowButton.href.replace(
-                        'mode=3',
-                        'mode=2'
-                    );
+                    newWindowButton.href = newWindowButton.href.replace('mode=3', 'mode=2');
                 }
             };
 
