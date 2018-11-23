@@ -20,9 +20,43 @@ const urlParams = getUrlParams();
 Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZWNjNmNiOC0xZDhiLTQ1NTktOGNiZi1jZjE3YzIwMDNkMDMiLCJpZCI6NDk1LCJpYXQiOjE1MjUyNTUyNzV9.R-_alHqdFwfZODeZRMbU3b_Cqakop-X5w2mbtoAS3fA';
 
-const terrainProvider = new Cesium.CesiumTerrainProvider({
-    url: '/terrain/tilesets/tiles'
-});
+const terrainProviders = {
+    seslr: new Cesium.CesiumTerrainProvider({
+        url: '/terrain/tilesets/tiles',
+        requestVertexNormals: true
+    }),
+    cesiumWorld: Cesium.createWorldTerrain(),
+    ellipsoid: new Cesium.EllipsoidTerrainProvider(),
+    viewModels: [
+        new Cesium.ProviderViewModel({
+            name: 'SESLR Terrain Model',
+            iconUrl: Cesium.buildModuleUrl(
+                'Widgets/Images/TerrainProviders/CesiumWorldTerrain.png'
+            ),
+            creationFunction: function() {
+                return terrainProviders.seslr;
+            }
+        }),
+        new Cesium.ProviderViewModel({
+            name: 'Cesium World Terrain',
+            iconUrl: Cesium.buildModuleUrl(
+                'Widgets/Images/TerrainProviders/CesiumWorldTerrain.png'
+            ),
+            creationFunction: function() {
+                return terrainProviders.cesiumWorld;
+            }
+        }),
+        new Cesium.ProviderViewModel({
+            name: 'World Ellipsoid',
+            iconUrl: Cesium.buildModuleUrl(
+                'Widgets/Images/TerrainProviders/Ellipsoid.png'
+            ),
+            creationFunction: function() {
+                return terrainProviders.ellipsoid;
+            }
+        })
+    ]
+};
 
 const viewer = new Cesium.Viewer('cesiumContainer', {
     baseLayerPicker: true,
@@ -32,8 +66,9 @@ const viewer = new Cesium.Viewer('cesiumContainer', {
     sceneModePicker: true,
     navigationInstructionsInitiallyVisible: false,
     selectionIndicator: false,
-    terrainProvider: terrainProvider,
-    // terrainProviderViewModels: providers.terrain.viewModels,
+    terrainProvider: terrainProviders.seslr,
+    terrainProviderViewModels: terrainProviders.viewModels,
+    // selectedTerrainProviderViewModel: terrainProviders.viewModels[1],
     // imageryProvider: false,
     // imageryProviderViewModels: providers.imagery.viewModels,
     requestRenderMode: true,
