@@ -338,7 +338,7 @@ function styleSpot(spot, period) {
 
     if (typeof icons[type] !== 'undefined') {
         spot.billboard = {
-            image: exportSVG(icons[type].replace(/#ff0000/g, color)),
+            image: exportSVG(icons[type].replace(/#afafaf/g, color)),
             scale: 0.15,
             heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
             disableDepthTestDistance: 50000
