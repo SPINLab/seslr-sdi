@@ -375,13 +375,13 @@ body {
     border-bottom: 3px solid #696969;
 }
 #treeBronzeAge .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #cdc673;
+    border-bottom: 3px solid #cd8162;
 }
 #treeProtoGeometric .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #c1ffc1;
+    border-bottom: 3px solid #9bcd9b;
 }
 #treeGeometric .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #458b00;
+    border-bottom: 3px solid #bcee68;
 }
 #treeArchaic .tree-node .tree-content .tree-anchor span {
     border-bottom: 3px solid #ee0000;
@@ -390,20 +390,20 @@ body {
     border-bottom: 3px solid #ffff00;
 }
 #treeHellenistic .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #4682b4;
+    border-bottom: 3px solid #7ec0ee;
 }
 #treeRoman .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #a020f0;
+    border-bottom: 3px solid #7a378b;
 }
 #treeByzantine .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 3px solid #ff7f00;
 }
 #treeFrankish .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #ee6aa7;
+    border-bottom: 3px solid #ffe4b5;
 }
 #treeOttoman .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #cd1076;
+    border-bottom: 3px solid #556b2f;
 }
 #treeModern .tree-node .tree-content .tree-anchor span {
-    border-bottom: 3px solid #8b0a50;
+    border-bottom: 3px solid #fffafa;
 }

@@ -180,8 +180,37 @@ const features = [
     {
         id: 'archaeological_surveys',
         label: 'Archaeological Surveys'
+    },
+    {
+        id: 'geology',
+        label: 'Geology'
     }
 ];
+
+const geologyColors = {
+    'alluvial deposits': '#ffd37f',
+    amphibolites: '#f25aeb',
+    'lacustrine deposits': '#8f67f5',
+    'marble layers': '#f5e35b',
+    'marbles and cipolins': '#e8beff',
+    ophiolites: '#89cd66',
+    orthogneisses: '#a8a800',
+    'quartz schists': '#734c00',
+    schists: '#bee8ff',
+    'schists with marble layers': '#6e872f',
+    'scree and talus cones': '#c45e73',
+    'sliding area': '#74e399',
+    'terrestrial deposits': '#5be851'
+};
+
+const surveyColors = {
+    'Kampos 2006-2008': '#FF00FF',
+    'Keller 1979-1981': '#8B008B',
+    'NASK 2012-2014': '#9B30FF',
+    'SEEP 1986-1988': '#AB82FF',
+    'SEEP 1989-1993': '#5D478B',
+    'SESLR 2016-2019': '#EE0000'
+};
 
 for (let featureName of features) {
     const feature = new Cesium.GeoJsonDataSource();
@@ -195,6 +224,33 @@ for (let featureName of features) {
             if (featureName.id === 'find_spots') {
                 for (const entity of feature.entities.values) {
                     entity.billboard = undefined;
+                }
+            } else if (featureName.id === 'mines') {
+                for (const entity of feature.entities.values) {
+                    entity.billboard = {
+                        image: 'assets/' + entity.properties.Mines + '.svg',
+                        scale: 0.3,
+                        heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+                        disableDepthTestDistance: 50000
+                    };
+                }
+            } else if (featureName.id === 'archaeological_surveys') {
+                for (const entity of feature.entities.values) {
+                    const survey = Cesium.Property.getValueOrUndefined(
+                        entity.properties.arch_proje
+                    );
+                    entity.polygon.material = Cesium.Color.fromCssColorString(
+                        surveyColors[survey]
+                    );
+                }
+            } else if (featureName.id === 'geology') {
+                for (const entity of feature.entities.values) {
+                    const geologyUnit = Cesium.Property.getValueOrUndefined(
+                        entity.properties.geology_lo
+                    );
+                    entity.polygon.material = Cesium.Color.fromCssColorString(
+                        geologyColors[geologyUnit]
+                    );
                 }
             }
         });
