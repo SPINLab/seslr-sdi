@@ -296,8 +296,8 @@ for (let imageCategory of imagery) {
     for (let imageName of imageCategory.children) {
         const image = viewer.scene.imageryLayers.addImageryProvider(
             new Cesium.createTileMapServiceImageryProvider({
-                url: '../imagery/' + imageCategory.id + '/' + imageName.id,
-                maximumLevel: 23,
+                url: '../tms/1.0.0/' + imageName.id,
+                maximumLevel: 19,
                 credit: ''
             })
         );
@@ -317,8 +317,8 @@ const maps = [
 for (let mapName of maps) {
     const map = viewer.scene.imageryLayers.addImageryProvider(
         new Cesium.createTileMapServiceImageryProvider({
-            url: '../maps/' + mapName.id,
-            maximumLevel: 15,
+            url: '../tms/1.0.0/' + mapName.id,
+            // maximumLevel: 15,
             credit: ''
         })
     );

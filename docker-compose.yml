@@ -40,3 +40,10 @@ services:
             - reverseproxy
             - database
         restart: always
+
+    tms:
+        image: nginx:alpine
+        volumes:
+            - ./data/tms:/data:ro
+            - ./tms/nginx.conf:/etc/nginx/nginx.conf:ro
+        restart: always
