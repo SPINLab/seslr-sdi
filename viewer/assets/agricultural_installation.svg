@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="agriculture.svg">
+   sodipodi:docname="agriculture_installation.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-73.626809"
-     inkscape:cy="159.66556"
+     inkscape:cx="-17.310805"
+     inkscape:cy="98.046255"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -44,45 +44,45 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="variable">
+     inkscape:label="variable"
+     style="display:inline">
     <g
-       style=""
        id="g30"
-       transform="matrix(-0.81595947,-0.7331851,-0.73574582,0.81311954,257.20257,-181.01273)">
+       transform="matrix(-0.81595947,-0.7331851,-0.73574582,0.81311954,257.20257,-181.01273)"
+       style="stroke:none;stroke-opacity:1;fill:#afafaf;fill-opacity:1">
       <ellipse
          ry="6.2808337"
          rx="9.8889723"
          cy="280.16202"
          cx="16.904799"
          id="path27"
-         style="fill:#fe0000;fill-opacity:1;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none" />
+         style="fill:#afafaf;fill-opacity:1;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke:none;stroke-opacity:1" />
     </g>
     <g
-       style=""
        id="g30-3"
-       transform="matrix(0.46985722,-0.99125397,-0.98926285,-0.47312186,285.41104,183.80609)">
+       transform="matrix(0.46985722,-0.99125397,-0.98926285,-0.47312186,285.41104,183.80609)"
+       style="stroke:none;stroke-opacity:1;fill:#afafaf;fill-opacity:1">
       <ellipse
          ry="6.2808337"
          rx="9.8889723"
          cy="280.16202"
          cx="16.904799"
          id="path27-1"
-         style="fill:#fe0000;fill-opacity:1;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none" />
+         style="fill:#afafaf;fill-opacity:1;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke:none;stroke-opacity:1" />
     </g>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="fixed"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <path
        transform="translate(0,-247)"
        style="fill:#000000;fill-opacity:1;stroke:#010000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -126,6 +126,26 @@
          cx="16.904799"
          id="path27-3-8"
          style="fill:#000000;fill-opacity:1;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <ellipse
+       transform="matrix(-0.74382807,-0.668371,-0.67094653,0.74150572,0,0)"
+       ry="6.8874297"
+       rx="10.847938"
+       cy="0.60746008"
+       cx="-50.591782"
+       id="path27-9"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.20000362;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <g
+       style="fill:none;stroke:#000000;stroke-width:1.09411907;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="g30-3-5"
+       transform="matrix(0.46985722,-0.99125397,-0.98926285,-0.47312186,285.35418,183.67246)">
+      <ellipse
+         ry="6.2808337"
+         rx="9.8889723"
+         cy="280.16202"
+         cx="16.904799"
+         id="path27-1-4"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.09411907;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
   </g>
 </svg>

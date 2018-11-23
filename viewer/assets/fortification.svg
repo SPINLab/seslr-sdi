@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="91.831567"
-     inkscape:cy="153.72864"
+     inkscape:cx="33.795853"
+     inkscape:cy="54.521962"
      inkscape:document-units="mm"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -55,8 +55,8 @@
      style="display:inline"
      transform="translate(0,-247)">
     <path
-       style="display:inline;fill:#fe0000;fill-opacity:1;stroke:none;stroke-width:2.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 3.198419,256.57223 v 33.70089 h 44.732993 v -33.70089 h -6.390431 v 6.93842 h -6.390423 v -6.93842 h -6.390423 v 6.93842 h -6.390431 v -6.93842 h -6.39043 v 6.93842 H 9.588849 v -6.93842 h -6.39043"
+       style="display:inline;fill:#afafaf;fill-opacity:1;stroke:none;stroke-width:2.32568884;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3.198419,256.57223 v 29.16518 h 44.732993 v -29.16518 h -6.390431 v 6.0046 h -6.390423 v -6.0046 h -6.390423 v 6.0046 h -6.390431 v -6.0046 h -6.39043 v 6.0046 H 9.588849 v -6.0046 h -6.39043"
        id="path3831-9-0"
        inkscape:connector-curvature="0" />
   </g>
@@ -65,11 +65,10 @@
      id="layer3"
      inkscape:label="fixed"
      style="display:inline"
-     transform="translate(0,-247)"
-     sodipodi:insensitive="true">
+     transform="translate(0,-247)">
     <path
-       style="display:inline;fill:#fe0000;fill-opacity:1;stroke:#000000;stroke-width:2.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 3.198419,256.57223 v 33.70089 H 47.931413 V 256.57223 H 41.54098 l 2e-6,6.93842 h -6.390423 v -6.93842 h -6.390425 v 6.93842 h -6.39043 v -6.93842 h -6.39043 v 6.93842 H 9.588849 v -6.93842 h -6.39043"
+       style="display:inline;fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.27923083;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3.0880345,256.46185 v 27.87404 H 48.041798 v -27.87404 h -6.421972 l 2e-6,5.73877 h -6.421961 v -5.73877 h -6.421964 v 5.73877 h -6.421968 v -5.73877 h -6.421969 v 5.73877 H 9.5100029 v -5.73877 H 3.0880345"
        id="path3831-9"
        inkscape:connector-curvature="0" />
   </g>

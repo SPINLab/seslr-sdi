@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-73.626809"
+     inkscape:cx="-155.7017"
      inkscape:cy="159.66556"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -88,28 +88,28 @@
      id="layer2"
      inkscape:label="variable">
     <ellipse
-       style="fill:#ff0000;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#afafaf;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path917-2"
        cx="20.446119"
        cy="14.987692"
        rx="4.8278069"
        ry="4.7109036" />
     <ellipse
-       style="fill:#ff0000;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#afafaf;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path917-2-2"
        cx="34.728085"
        cy="21.101202"
        rx="4.8278069"
        ry="4.7109036" />
     <ellipse
-       style="fill:#ff0000;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#afafaf;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path917-2-9"
        cx="13.555448"
        cy="27.799786"
        rx="4.8278069"
        ry="4.7109036" />
     <ellipse
-       style="fill:#ff0000;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#afafaf;fill-opacity:1;stroke:#010000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path917-2-2-6"
        cx="27.837416"
        cy="33.913296"
