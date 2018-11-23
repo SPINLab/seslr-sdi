@@ -49,10 +49,10 @@ body {
     height: 100%;
 }
 
-#layerSelector {
-    /* max-height: 50%; */
-    /* overflow: auto; */
-}
+/* #layerSelector { */
+/* max-height: 50%; */
+/* overflow: auto; */
+/* } */
 
 #cesiumContainer {
     width: 100%;
@@ -315,8 +315,7 @@ body {
     transform: rotate3d(0, 0, 0, 0);
     -webkit-transition: background-color 100ms ease-out, margin 100ms ease-out,
         height 100ms ease-out;
-    transition: background-color 100ms ease-out, margin 100ms ease-out,
-        height 100ms ease-out;
+    transition: background-color 100ms ease-out, margin 100ms ease-out, height 100ms ease-out;
     background-color: #297fb975;
     margin: 5px 5px 5px 0;
     border-radius: 20px;
@@ -357,6 +356,12 @@ body {
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
+}
+.two-columns li {
+    list-style-position: inside;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 .legendItem {
     display: flex;
