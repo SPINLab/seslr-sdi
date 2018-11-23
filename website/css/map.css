@@ -48,6 +48,7 @@
 
 #bottomTabs {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
     padding-top: 5px;
 }
