@@ -361,8 +361,8 @@ for (let imageCategory of imagery) {
 
 const maps = [
     {
-        id: 'Geology',
-        label: 'Geology'
+        id: 'topo_1860',
+        label: 'Topography (1860)'
     }
 ];
 
@@ -375,7 +375,7 @@ for (let mapName of maps) {
         })
     );
     map.show = false;
-    map.name = mapName.labal;
+    map.name = mapName.label;
 
     data[mapName.id] = map;
 }
