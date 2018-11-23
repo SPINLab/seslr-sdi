@@ -48,9 +48,7 @@ const terrainProviders = {
         }),
         new Cesium.ProviderViewModel({
             name: 'World Ellipsoid',
-            iconUrl: Cesium.buildModuleUrl(
-                'Widgets/Images/TerrainProviders/Ellipsoid.png'
-            ),
+            iconUrl: Cesium.buildModuleUrl('Widgets/Images/TerrainProviders/Ellipsoid.png'),
             creationFunction: function() {
                 return terrainProviders.ellipsoid;
             }
@@ -130,9 +128,7 @@ if (viewer.scene.mode === 3) {
     });
 }
 
-viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function(
-    commandInfo
-) {
+viewer.homeButton.viewModel.command.beforeExecute.addEventListener(function(commandInfo) {
     if (viewer.scene.mode === 3) {
         viewer.camera.flyTo({
             destination: homeViewPosition['3D'],
@@ -223,9 +219,7 @@ for (let featureName of features) {
                     const survey = Cesium.Property.getValueOrUndefined(
                         entity.properties.arch_proje
                     );
-                    entity.polygon.material = Cesium.Color.fromCssColorString(
-                        surveyColors[survey]
-                    );
+                    entity.polygon.material = Cesium.Color.fromCssColorString(surveyColors[survey]);
                 }
             } else if (featureName.id === 'geology') {
                 for (const entity of feature.entities.values) {
@@ -388,13 +382,14 @@ const visibleSpots = {};
 
 function updateSpotVisibility() {
     for (let entity of data['find_spots'].entities.values) {
-        const id = Cesium.Property.getValueOrUndefined(
-            entity.properties.find_spot_id
-        );
+        const id = Cesium.Property.getValueOrUndefined(entity.properties.find_spot_id);
+        const find_spot_type = Cesium.Property.getValueOrUndefined(entity.properties.type);
         if (typeof visibleSpots[id] !== 'undefined') {
             if (visibleSpots[id].length > 0) {
-                styleSpot(entity, visibleSpots[id][0]);
-                entity.show = true;
+                if (find_spot_type !== 'void') {
+                    styleSpot(entity, visibleSpots[id][0]);
+                    entity.show = true;
+                }
             } else {
                 entity.show = false;
             }
@@ -452,14 +447,12 @@ const layerSelector = new Vue({
     },
     mounted() {
         if (parseInt(urlParams.findspots)) {
-            const tilesLoaded = viewer.scene.globe.tileLoadProgressEvent.addEventListener(
-                e => {
-                    if (e === 0) {
-                        this.selectedFeatures.push(features[0]);
-                        tilesLoaded();
-                    }
+            const tilesLoaded = viewer.scene.globe.tileLoadProgressEvent.addEventListener(e => {
+                if (e === 0) {
+                    this.selectedFeatures.push(features[0]);
+                    tilesLoaded();
                 }
-            );
+            });
         }
 
         if (parseInt(urlParams.geomap)) {
@@ -478,9 +471,7 @@ const layerSelector = new Vue({
         onSelect(layerGroup, layerGroupName) {
             this.$set(
                 this,
-                'prev' +
-                    layerGroupName[0].toUpperCase() +
-                    layerGroupName.slice(1),
+                'prev' + layerGroupName[0].toUpperCase() + layerGroupName.slice(1),
                 layerGroup.slice(0)
             );
         },
@@ -497,9 +488,7 @@ const layerSelector = new Vue({
         },
         onChangeFeatures() {
             let selectedFeature;
-            if (
-                this.prevSelectedFeatures.length > this.selectedFeatures.length
-            ) {
+            if (this.prevSelectedFeatures.length > this.selectedFeatures.length) {
                 for (let feature of this.prevSelectedFeatures) {
                     if (!this.selectedFeatures.includes(feature)) {
                         selectedFeature = feature;
@@ -718,9 +707,7 @@ const listToString = (list, delimiter) => {
 
 viewer.selectedEntityChanged.addEventListener(function(entity) {
     if (typeof entity !== 'undefined') {
-        const id = Cesium.Property.getValueOrUndefined(
-            entity.properties.find_spot_id
-        );
+        const id = Cesium.Property.getValueOrUndefined(entity.properties.find_spot_id);
 
         if (typeof id !== 'undefined') {
             entity.name = 'Find Spot ' + id;
@@ -743,9 +730,7 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
                     const findJson = jsons[1];
                     const findSpotHTML =
                         '<h3>Type</h3><p>' +
-                        _.startCase(
-                            _.toLower(_.replace(findSpotJson.type, '_', ' '))
-                        ) +
+                        _.startCase(_.toLower(_.replace(findSpotJson.type, '_', ' '))) +
                         '</p>' +
                         '<h3>Toponym</h3><p>' +
                         findSpotJson.toponym +
@@ -758,10 +743,7 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
                         '</p></div>';
                     let findHTML = '';
                     if (findJson.description !== null) {
-                        findHTML +=
-                            '<h3>Description</h3><p>' +
-                            findJson.description +
-                            '</p>';
+                        findHTML += '<h3>Description</h3><p>' + findJson.description + '</p>';
                     }
                     if (findJson.features !== null) {
                         findHTML +=
@@ -772,10 +754,7 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
                     if (findJson.features_architecture !== null) {
                         findHTML +=
                             '<h3>Features architecture</h3><p>' +
-                            listToString(
-                                findJson.features_architecture,
-                                ' | '
-                            ) +
+                            listToString(findJson.features_architecture, ' | ') +
                             '</p>';
                     }
                     if (findJson.features_sepulchral !== null) {
