@@ -437,27 +437,31 @@ const layerSelector = new Vue({
         opacities: {}
     },
     mounted() {
-        if (parseInt(urlParams.findspots)) {
-            const tilesLoaded = viewer.scene.globe.tileLoadProgressEvent.addEventListener(e => {
-                if (e === 0) {
+        const tilesLoaded = viewer.scene.globe.tileLoadProgressEvent.addEventListener(e => {
+            if (e === 0) {
+                const loadingOverlay = document.querySelector('.loadingOverlay');
+
+                if (parseInt(urlParams.findspots)) {
                     this.selectedFeatures.push(features[0]);
-                    viewer.scene.requestRender();
-                    setTimeout(() => {
-                        viewer.scene.requestRender();
-                    }, 500);
-                    setTimeout(() => {
-                        viewer.scene.requestRender();
-                    }, 1000);
-                    setTimeout(() => {
-                        viewer.scene.requestRender();
-                    }, 2000);
-                    setTimeout(() => {
-                        viewer.scene.requestRender();
-                    }, 4000);
-                    tilesLoaded();
                 }
-            });
-        }
+
+                viewer.scene.requestRender();
+                setTimeout(() => {
+                    viewer.scene.requestRender();
+                }, 500);
+                setTimeout(() => {
+                    viewer.scene.requestRender();
+                }, 1000);
+                setTimeout(() => {
+                    loadingOverlay.style = 'visibility: hidden;';
+                    viewer.scene.requestRender();
+                }, 2000);
+                setTimeout(() => {
+                    viewer.scene.requestRender();
+                }, 4000);
+                tilesLoaded();
+            }
+        });
 
         if (parseInt(urlParams.geomap)) {
             for (let node of maps) {
