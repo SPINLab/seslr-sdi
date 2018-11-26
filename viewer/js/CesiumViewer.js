@@ -363,7 +363,8 @@ function exportSVG(svg) {
 }
 
 function styleSpot(spot, period) {
-    const type = Cesium.Property.getValueOrUndefined(spot.properties.type);
+    let type = Cesium.Property.getValueOrUndefined(spot.properties.type);
+    type = type.replace(/ /g, '_');
     const color = periodColors[period];
 
     if (typeof icons[type] !== 'undefined') {
@@ -374,6 +375,7 @@ function styleSpot(spot, period) {
             disableDepthTestDistance: 50000
         };
     } else {
+        console.log(type);
         spot.billboard = undefined;
     }
 }
