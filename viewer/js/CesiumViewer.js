@@ -207,8 +207,12 @@ for (let featureName of features) {
                 }
             } else if (featureName.id === 'mines') {
                 for (const entity of feature.entities.values) {
+                    // entity.billboard.image = 'assets/' + entity.properties.Mines + '.png';
+                    // console.log(entity);
+                    // entity.billboard.heightReference = Cesium.HeightReference.CLAMP_TO_GROUND;
+                    // entity.billboard.scale = 0.3;
                     entity.billboard = {
-                        image: 'assets/' + entity.properties.Mines + '.svg',
+                        image: 'assets/' + entity.properties.Mines + '.png',
                         scale: 0.3,
                         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                         disableDepthTestDistance: 50000
