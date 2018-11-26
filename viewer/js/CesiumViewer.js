@@ -418,17 +418,6 @@ function removeSpots(spot_ids, period) {
     updateSpotVisibility();
 }
 
-const getLeafNodes = function(nodes, result = []) {
-    for (var i = 0, length = nodes.length; i < length; i++) {
-        if (!nodes[i].children) {
-            result.push(nodes[i]);
-        } else {
-            result = getLeafNodes(nodes[i].children, result);
-        }
-    }
-    return result;
-};
-
 const layerSelector = new Vue({
     el: '#layerSelector',
     data: {
