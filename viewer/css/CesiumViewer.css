@@ -138,17 +138,24 @@ body {
     font-size: small;
 }
 
-.filter-field {
+#periodSelector .tree {
     display: block;
-    width: 93%;
-    background-color: #34495e;
-    color: #ecf0f1;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    border-radius: 0px;
-    padding: 5px;
-    font-size: small;
+    overflow: auto;
+    padding: 0px;
+    margin: 0px;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+#periodSelector .tree > .tree-root {
+    padding: 0px;
+    margin: 2px;
+}
+
+#periodSelector .tree-node .tree-content {
+    background-color: #2c3e50;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #periodSelector li > ul.tree-children li {
@@ -175,27 +182,6 @@ body {
 
 #periodSelector .treechildren > .tree-arrow {
     display: none;
-}
-
-#periodSelector .tree {
-    display: block;
-    overflow: auto;
-    height: 100%;
-    padding: 0px;
-    margin: 0px;
-    white-space: nowrap;
-    overflow: visible;
-}
-
-#periodSelector .tree > .tree-root {
-    padding: 0px;
-    margin: 2px;
-}
-
-#periodSelector .tree-node .tree-content {
-    background-color: #2c3e50;
-    padding-left: 0;
-    padding-right: 0;
 }
 
 .tree-filter-empty {
