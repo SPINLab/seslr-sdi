@@ -441,6 +441,19 @@ const layerSelector = new Vue({
             const tilesLoaded = viewer.scene.globe.tileLoadProgressEvent.addEventListener(e => {
                 if (e === 0) {
                     this.selectedFeatures.push(features[0]);
+                    viewer.scene.requestRender();
+                    setTimeout(() => {
+                        viewer.scene.requestRender();
+                    }, 500);
+                    setTimeout(() => {
+                        viewer.scene.requestRender();
+                    }, 1000);
+                    setTimeout(() => {
+                        viewer.scene.requestRender();
+                    }, 2000);
+                    setTimeout(() => {
+                        viewer.scene.requestRender();
+                    }, 4000);
                     tilesLoaded();
                 }
             });
