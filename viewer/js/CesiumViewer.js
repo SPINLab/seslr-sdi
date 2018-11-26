@@ -207,10 +207,6 @@ for (let featureName of features) {
                 }
             } else if (featureName.id === 'mines') {
                 for (const entity of feature.entities.values) {
-                    // entity.billboard.image = 'assets/' + entity.properties.Mines + '.png';
-                    // console.log(entity);
-                    // entity.billboard.heightReference = Cesium.HeightReference.CLAMP_TO_GROUND;
-                    // entity.billboard.scale = 0.3;
                     entity.billboard = {
                         image: 'assets/' + entity.properties.Mines + '.png',
                         scale: 0.3,
@@ -673,7 +669,7 @@ for (let type of Object.keys(icons)) {
 for (let mine of ['ASB', 'Fe-Cu', 'Fe-Mn', 'Fe', 'Mn', 'PBG', 'tc']) {
     legendItems.mines.push({
         name: mine,
-        icon: 'assets/' + mine + '.svg'
+        icon: 'assets/' + mine + '.png'
     });
 }
 
