@@ -788,6 +788,9 @@ const listToString = (list, delimiter) => {
 viewer.selectedEntityChanged.addEventListener(function(entity) {
   if (typeof entity !== 'undefined') {
     const id = Cesium.Property.getValueOrUndefined(entity.properties.find_spot_id);
+    const geology = Cesium.Property.getValueOrUndefined(entity.properties.Geology);
+    const archProject = Cesium.Property.getValueOrUndefined(entity.properties.arch_proje);
+    const mines = Cesium.Property.getValueOrUndefined(entity.properties.Mines);
 
     if (typeof id !== 'undefined') {
       entity.name = 'Find Spot ' + id;
@@ -808,19 +811,19 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
         Promise.all(promises).then(function(jsons) {
           const findSpotJson = jsons[0];
           const findJson = jsons[1];
-          const findSpotHTML =
-            '<h3>Type</h3><p>' +
-            _.startCase(_.toLower(_.replace(findSpotJson.type, '_', ' '))) +
-            '</p>' +
-            '<h3>Toponym</h3><p>' +
-            findSpotJson.toponym +
-            '</p>' +
-            '<h3>Description</h3><p>' +
-            findSpotJson.description +
-            '</p>' +
-            '<h3>Chronology</h3><p>' +
-            findSpotJson.chronology.join(' | ') +
-            '</p></div>';
+          const findSpotHTML = `<h3>Type</h3><p>
+            ${_.startCase(_.toLower(_.replace(findSpotJson.type, '_', ' ')))}
+            </p>
+            <h3>Toponym</h3><p>
+            ${findSpotJson.toponym}
+            </p>
+            <h3>Description</h3><p>
+            ${findSpotJson.description}
+            </p>
+            <h3>Chronology</h3><p>
+            ${findSpotJson.chronology.join(' | ')}
+            </p></div>`;
+
           let findHTML = '';
           if (findJson.description !== null) {
             findHTML += '<h3>Description</h3><p>' + findJson.description + '</p>';
@@ -855,17 +858,43 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
           }
           findHTML += '</div>';
 
-          entity.description =
-            '<div id="findSpotInfo">' +
-            '<h2>Find Spot</h2>' +
-            findSpotHTML +
-            '</div>' +
-            '<div id="findInfo">' +
-            '<h2>Find</h2>' +
-            findHTML +
-            '</div>';
+          entity.description = `<div class="info-item">
+            <h2>Find Spot</h2>
+            ${findSpotHTML}
+            </div>
+            <div class="info-item">
+            <h2>Find</h2>
+            ${findHTML}
+            </div>`;
         });
       });
+    } else if (typeof geology !== 'undefined') {
+      entity.name = 'Geology';
+      const geology_lo = Cesium.Property.getValueOrUndefined(entity.properties.geology_lo);
+      entity.description = `<div class="info-item">
+        <h3>Code</h3>
+        ${geology}
+        <h3>Description</h3>
+        ${_.startCase(geology_lo)}
+        </div>`;
+    } else if (typeof archProject !== 'undefined') {
+      entity.name = 'Archeological Survey';
+      const method = Cesium.Property.getValueOrUndefined(entity.properties.method);
+      entity.description = `<div class="info-item">
+        <h3>Project</h3>
+        ${archProject}
+        <h3>Method</h3>
+        ${_.capitalize(method)}
+        </div>`;
+    } else if (typeof mines !== 'undefined') {
+      entity.name = 'Mines';
+      const mines_long = Cesium.Property.getValueOrUndefined(entity.properties.mines_long);
+      entity.description = `<div class="info-item">
+          <h3>Mine</h3>
+          ${mines}
+          <h3>Description</h3>
+          ${_.startCase(mines_long)}
+          </div>`;
     }
   }
 });

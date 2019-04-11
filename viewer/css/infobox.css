@@ -1,26 +1,22 @@
 .cesium-infoBox-description {
-    padding: 10px;
-    font-family: sans-serif;
-    margin-right: 0px;
-    box-sizing: content-box;
-    color: #ecf0f1;
+  padding: 10px;
+  font-family: sans-serif;
+  margin-right: 0px;
+  box-sizing: content-box;
+  color: #ecf0f1;
 }
 
 h2 {
-    font-size: 150%;
-    font-weight: bold;
-    border-bottom: 1px solid white;
+  font-size: 150%;
+  font-weight: bold;
+  border-bottom: 1px solid white;
 }
 
 h3 {
-    font-size: 120%;
-    font-weight: bold;
+  font-size: 120%;
+  font-weight: bold;
 }
 
-#findSpotInfo {
-    padding: 4px;
-}
-
-#findnfo {
-    padding: 4px;
+.info-item {
+  padding: 4px;
 }
