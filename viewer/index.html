@@ -12,6 +12,8 @@
     <meta name="msapplication-TileColor" content="#0C3183" />
     <meta name="theme-color" content="#0C3183" />
 
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+
     <script src="./node_modules/cesium/Build/Cesium/Cesium.js"></script>
 
     <script src="./node_modules/vue/dist/vue.js"></script>
@@ -356,7 +358,11 @@
         </div>
       </div>
 
-      <div class="column" id="bottom-right"><div id="cesiumContainer"></div></div>
+      <div class="column" id="bottom-right">
+        <div id="cesiumContainer">
+          <div id="tooltip"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

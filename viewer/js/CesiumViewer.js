@@ -420,6 +420,41 @@ function removeSpots(spot_ids, period) {
   updateSpotVisibility();
 }
 
+const tooltip = document.getElementById('tooltip');
+
+const handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+const geologyInputAction = movement => {
+  const pickedObject = viewer.scene.pick(movement.endPosition);
+
+  if (typeof pickedObject !== 'undefined') {
+    tooltip.style.visibility = 'visible';
+    tooltip.innerText = _.startCase(
+      Cesium.Property.getValueOrUndefined(pickedObject.id.properties.geology_lo)
+    );
+  } else {
+    tooltip.style.visibility = 'hidden';
+  }
+};
+const surveysInputAction = movement => {
+  const pickedObject = viewer.scene.pick(movement.endPosition);
+
+  if (typeof pickedObject !== 'undefined') {
+    tooltip.style.visibility = 'visible';
+    tooltip.innerText = _.startCase(
+      Cesium.Property.getValueOrUndefined(pickedObject.id.properties.arch_proje)
+    );
+  } else {
+    tooltip.style.visibility = 'hidden';
+  }
+};
+
+window.onmousemove = e => {
+  const x = e.clientX;
+  const y = e.clientY;
+  tooltip.style.top = y + 20 + 'px';
+  tooltip.style.left = x + 20 + 'px';
+};
+
 const layerSelector = new Vue({
   el: '#layerSelector',
   data: {
@@ -522,9 +557,44 @@ const layerSelector = new Vue({
             break;
           case 'archaeological_surveys':
             legendCarousel.$refs.carousel.goToPage(2);
+            if (data['geology'].show !== true) {
+              handler.setInputAction(
+                _.debounce(surveysInputAction, 50),
+                Cesium.ScreenSpaceEventType.MOUSE_MOVE
+              );
+            }
             break;
           case 'geology':
             legendCarousel.$refs.carousel.goToPage(3);
+            handler.setInputAction(
+              _.debounce(geologyInputAction, 50),
+              Cesium.ScreenSpaceEventType.MOUSE_MOVE
+            );
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (selectedFeature.id) {
+          case 'archaeological_surveys':
+            if (data['geology'].show === true) {
+              handler.setInputAction(
+                _.debounce(geologyInputAction, 50),
+                Cesium.ScreenSpaceEventType.MOUSE_MOVE
+              );
+            } else {
+              handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+            }
+            break;
+          case 'geology':
+            if (data['archaeological_surveys'].show === true) {
+              handler.setInputAction(
+                _.debounce(surveysInputAction, 50),
+                Cesium.ScreenSpaceEventType.MOUSE_MOVE
+              );
+            } else {
+              handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+            }
             break;
           default:
             break;
