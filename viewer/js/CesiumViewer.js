@@ -319,6 +319,19 @@ const imagery = [
             { id: '1997_248572', label: '248572' },
             { id: '1997_248574', label: '248574' }
         ]
+    },
+    {
+        id: 'drone',
+        label: 'Drone',
+        children: [
+            // { id: 'elliniko_terrace', label: 'Elliniko Terrace' },
+            // { id: 'kiln', label: 'Kiln' },
+            // { id: 'eba_settlement', label: 'EBA Settlement' },
+            { id: 'n_headland_ortho', label: 'N Headland Ortho' },
+            // { id: 'karababa', label: 'Karababa' },
+            // { id: 'kazara', label: 'Kazara' },
+            { id: 'kylindroi_ortho', label: 'Kylindroi Ortho' }
+        ]
     }
 ];
 
