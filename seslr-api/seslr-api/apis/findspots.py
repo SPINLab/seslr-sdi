@@ -5,6 +5,7 @@
 """
 
 from flask_restplus import Namespace, Resource, fields
+from werkzeug.exceptions import NotFound
 
 from core.db import get_db
 
@@ -42,7 +43,7 @@ class FindSpots(Resource):
         cursor.close()
 
         if results is None:
-            return { 'message' : 'No spots found in database.' }, 404
+            raise NotFound('No spots found in database.')
         else:
             results = [result[0] for result in results]
             return { 'find_spot_ids' : results }
@@ -62,10 +63,9 @@ class FindSpot(Resource):
         query = 'SELECT toponym, type2, description FROM seslr.find_spot WHERE "find_spot_ID" = %s;'
 
         cursor.execute(query, (find_spot_id,))
-        try:
-            find_spot_info = cursor.fetchone()
-        except TypeError:
-            find_spot_info = None
+        find_spot_info = cursor.fetchone()
+        if find_spot_info is None:
+            raise NotFound('No spots with id {} found in database.'.format(find_spot_id))
 
         query = """WITH coltorows AS (
 	SELECT
@@ -84,11 +84,8 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 
         cursor.close()
 
-        if find_spot_info is None:
-            return { 'message' : 'No spots with id {} found in database.'.format(find_spot_id) }, 404
-        else:
-            return { 'id': find_spot_id,
-                     'toponym' : find_spot_info[0],
-                     'type' : find_spot_info[1],
-                     'description' : find_spot_info[2],
-                     'chronology': chronology }
+        return { 'id': find_spot_id,
+                 'toponym' : find_spot_info[0],
+                 'type' : find_spot_info[1],
+                 'description' : find_spot_info[2],
+                 'chronology': chronology }

@@ -6,6 +6,7 @@
 
 import psycopg2
 from flask_restplus import Namespace, Resource, fields
+from werkzeug.exceptions import NotFound
 
 from core.db import get_db
 
@@ -31,14 +32,14 @@ class Periods(Resource):
         db = get_db()
         cursor = db.cursor()
 
-        query = 'SELECT column_name FROM information_schema.columns WHERE table_schema = "seslr" AND table_name = "find_spot_chronology" AND column_name != "find_spot_ID" AND column_name != "based_on";'
+        query = 'SELECT column_name FROM information_schema.columns WHERE table_schema = \'seslr\' AND table_name = \'find_spot_chronology\' AND column_name != \'find_spot_ID\' AND column_name != \'based_on\';'
 
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
 
         if results is None:
-            return { 'message' : 'No periods found in database.'}, 404
+            raise NotFound('No periods found in database.')
         else:
             results = [result[0] for result in results]
             return {
@@ -59,12 +60,16 @@ class Period(Resource):
 
         query = 'SELECT "find_spot_ID" FROM seslr.find_spot_chronology WHERE {} = true;'.format(psycopg2.extensions.quote_ident(period, db))
 
-        cursor.execute(query)
+        try:
+            cursor.execute(query)
+        except psycopg2.ProgrammingError:
+            raise NotFound('No spots found for period: {}'.format(period))
+
         results = cursor.fetchall()
         cursor.close()
 
         if results is None:
-            return { 'message' : 'No spots found for period: {}'.format(period) }, 404
+            raise NotFound('No spots found for period: {}'.format(period))
         else:
             results = [result[0] for result in results]
             return {

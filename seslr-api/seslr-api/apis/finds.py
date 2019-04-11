@@ -5,6 +5,7 @@
 """
 
 from flask_restplus import Namespace, Resource, fields
+from werkzeug.exceptions import NotFound
 
 from core.db import get_db
 
@@ -43,7 +44,7 @@ class Finds(Resource):
         cursor.close()
 
         if results is None:
-            return { 'message' : 'No finds found in database.' }, 404
+            raise NotFound('No finds found in database.')
         else:
             results = [result[0] for result in results]
             return { 'find_spot_ids' : results }
@@ -162,7 +163,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 
         info = [description, features, features_architecture, features_sepulchral, material, material_bone, material_building]
         if all(value is None for value in info):
-            return 'No finds with id {} found in database.'.format(find_spot_id), 404
+            raise NotFound('No finds with id {} found in database.'.format(find_spot_id))
         else:
             return {
                 "id": find_spot_id,
