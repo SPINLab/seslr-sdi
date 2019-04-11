@@ -9,6 +9,7 @@ from flask_restplus import Api
 # from werkzeug.contrib.fixers import ProxyFix
 
 from apis import find_spots, finds, periods
+from core import db
 
 
 app = Flask(__name__)
@@ -34,3 +35,5 @@ api.add_namespace(find_spots, path='/find_spots')
 api.add_namespace(finds, path='/finds')
 api.add_namespace(periods, path='/periods')
 api.namespaces.pop(0)
+
+db.init_app(app)

@@ -7,7 +7,7 @@
 import psycopg2
 from flask_restplus import Namespace, Resource, fields
 
-from core.utils import connect_to_database
+from core.db import get_db
 
 
 api = Namespace('Periods', description='Get the find spots by period')
@@ -28,7 +28,7 @@ class Periods(Resource):
     def get(self):
         """Get all valid periods"""
 
-        db = connect_to_database()
+        db = get_db()
         cursor = db.cursor()
 
         query = 'SELECT column_name FROM information_schema.columns WHERE table_schema = "seslr" AND table_name = "find_spot_chronology" AND column_name != "find_spot_ID" AND column_name != "based_on";'
@@ -36,7 +36,6 @@ class Periods(Resource):
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
-        db.close()
 
         if results is None:
             return { 'message' : 'No periods found in database.'}, 404
@@ -55,7 +54,7 @@ class Period(Resource):
     def get(self, period):
         """Get all find spot ids for a certain period"""
 
-        db = connect_to_database()
+        db = get_db()
         cursor = db.cursor()
 
         query = 'SELECT "find_spot_ID" FROM seslr.find_spot_chronology WHERE {} = true;'.format(psycopg2.extensions.quote_ident(period, db))
@@ -63,7 +62,6 @@ class Period(Resource):
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
-        db.close()
 
         if results is None:
             return { 'message' : 'No spots found for period: {}'.format(period) }, 404

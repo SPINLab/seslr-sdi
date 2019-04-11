@@ -6,7 +6,7 @@
 
 from flask_restplus import Namespace, Resource, fields
 
-from core.utils import connect_to_database
+from core.db import get_db
 
 
 api = Namespace('Finds', description='Information on the finds')
@@ -33,7 +33,7 @@ class Finds(Resource):
     def get(self):
         """Get all finds in database by id"""
 
-        db = connect_to_database()
+        db = get_db()
         cursor = db.cursor()
 
         query = 'SELECT "find_spot_ID" FROM seslr.find_spot;'
@@ -41,7 +41,6 @@ class Finds(Resource):
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
-        db.close()
 
         if results is None:
             return { 'message' : 'No finds found in database.' }, 404
@@ -58,7 +57,7 @@ class Find(Resource):
     def get(self, find_spot_id):
         """Get a find by a certain id"""
 
-        db = connect_to_database()
+        db = get_db()
         cursor = db.cursor()
 
         query = "SELECT description FROM seslr.find_categories WHERE find_spot_id = %s;"
@@ -160,7 +159,6 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
             material_building = None
 
         cursor.close()
-        db.close()
 
         info = [description, features, features_architecture, features_sepulchral, material, material_bone, material_building]
         if all(value is None for value in info):
