@@ -8,7 +8,7 @@ from flask import Flask, render_template
 from flask_restplus import Api
 # from werkzeug.contrib.fixers import ProxyFix
 
-from apis import find_spots, periods
+from apis import find_spots, periods, photos
 from core import db
 
 
@@ -33,6 +33,7 @@ api = Api(
 
 api.add_namespace(find_spots, path='/find_spots')
 api.add_namespace(periods, path='/periods')
+api.add_namespace(photos, path='/photos')
 api.namespaces.pop(0)
 
 db.init_app(app)

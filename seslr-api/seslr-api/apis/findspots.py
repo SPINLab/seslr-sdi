@@ -36,7 +36,7 @@ find = api.model('Find', {
     'material_building': fields.List(fields.String(), description="The building material of the find.")
 })
 
-photos = api.model('Photos', {
+photo = api.model('Photo', {
     'id': fields.Integer(description="The ID of the photo."),
     'url': fields.String(description="The URL where the photo can be found."),
     'date': fields.String(description="The date the photo was taken."),
@@ -241,7 +241,7 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
 class Photos(Resource):
 
     @api.doc(params={"find_spot_id": "The id of the find spot"})
-    @api.marshal_list_with(photos)
+    @api.marshal_list_with(photo)
     def get(self, find_spot_id):
         """Get the photos taken at a find spot"""
 
