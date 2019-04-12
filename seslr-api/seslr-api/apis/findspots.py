@@ -25,7 +25,18 @@ find_spot = api.model('Find Spot', {
     'chronology': fields.List(fields.String(), description="The chronology of the find spot.")
 })
 
-photos = api.model('Find Spot Photos', {
+find = api.model('Find', {
+    'id': fields.Integer(description="The ID of the find."),
+    'description': fields.String(description="The description of the find."),
+    'features': fields.List(fields.String(), description="The features of the find."),
+    'features_architecture': fields.List(fields.String(), description="The architectural features of the find."),
+    'features_sepulchral': fields.List(fields.String(), description="The sepulchral features of the find."),
+    'material': fields.List(fields.String(), description="The material of the find."),
+    'material_bone': fields.List(fields.String(), description="The bone material of the find."),
+    'material_building': fields.List(fields.String(), description="The building material of the find.")
+})
+
+photos = api.model('Photos', {
     'id': fields.Integer(description="The ID of the photo."),
     'url': fields.String(description="The URL where the photo can be found."),
     'date': fields.String(description="The date the photo was taken."),
@@ -97,6 +108,133 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
                  'type' : find_spot_info[1],
                  'description' : find_spot_info[2],
                  'chronology': chronology }
+
+
+@api.route('/<int:find_spot_id>/find')
+class Find(Resource):
+
+    @api.doc(params={"find_spot_id": "The id of the find spot"})
+    @api.marshal_with(find, mask='description, features, features_architecture, features_sepulchral, material, material_bone, material_building')
+    def get(self, find_spot_id):
+        """Get a find by a certain id"""
+
+        db = get_db()
+        cursor = db.cursor()
+
+        query = "SELECT description FROM seslr.find_categories WHERE find_spot_id = %s;"
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            description = cursor.fetchone()[0]
+        except TypeError:
+            description = None
+
+        query = """WITH coltorows AS (
+	SELECT
+		find_spot_id,
+		UNNEST(ARRAY['architecture', 'floors', 'pavement', 'stone_alignment', 'remotely_sensed_features', 'rock_cuttings', 'sepulchral', 'negative_feature']) AS col_name,
+		UNNEST(ARRAY["architecture", "floors", "pavement", "stone_alignment", "remotely_sensed_features", "rock_cuttings", "sepulchral", "negative_feature"]) AS col_value
+	FROM seslr.find_features
+)
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            features = cursor.fetchone()[0]
+        except TypeError:
+            features = None
+
+        query = """WITH coltorows AS (
+	SELECT
+		find_spot_id,
+		UNNEST(ARRAY['enclosure_walls', 'terrace_walls', 'foundation_walls', 'defensive_walls', 'building_walls', 'wall', 'retaining_walls', 'other']) AS col_name,
+		UNNEST(ARRAY["enclosure_walls", "terrace_walls", "foundation_walls", "defensive_walls", "building_walls", "wall", "retaining_walls", "other"]) AS col_value
+	FROM seslr.find_features_architecture
+)
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            features_architecture = cursor.fetchone()[0]
+        except TypeError:
+            features_architecture = None
+
+        query = """WITH coltorows AS (
+	SELECT
+		find_spot_id,
+		UNNEST(ARRAY['cist', 'sarcophagus', 'mausoleum']) AS col_name,
+		UNNEST(ARRAY["cist", "sarcophagus", "mausoleum"]) AS col_value
+	FROM seslr.find_features_sepulchral
+)
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            features_sepulchral = cursor.fetchone()[0]
+        except TypeError:
+            features_sepulchral = None
+
+        query = """WITH coltorows AS (
+	SELECT
+		find_spot_id,
+		UNNEST(ARRAY['pottery', 'glass', 'metal', 'lithics', 'various', 'ceramic_building_material', 'botanical', 'bone', 'slag']) AS col_name,
+		UNNEST(ARRAY["pottery", "glass", "metal", "lithics", "various", "ceramic_building_material", "botanical", "bone", "slag"]) AS col_value
+	FROM seslr.find_material
+)
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            material = cursor.fetchone()[0]
+        except TypeError:
+            material = None
+
+        query = """WITH coltorows AS (
+	SELECT
+		find_spot_id,
+		UNNEST(ARRAY['human', 'animal', 'unknown']) AS col_name,
+		UNNEST(ARRAY["human", "animal", "unknown"]) AS col_value
+	FROM seslr.find_material_bone
+)
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            material_bone = cursor.fetchone()[0]
+        except TypeError:
+            material_bone = None
+
+        query = """WITH coltorows AS (
+	SELECT
+		find_spot_id,
+		UNNEST(ARRAY['tile', 'brick', 'spolia', 'mortar', 'blocks', 'rubble', 'arch_members']) AS col_name,
+		UNNEST(ARRAY["tile", "brick", "spolia", "mortar", "blocks", "rubble", "arch_members"]) AS col_value
+	FROM seslr.find_material_building
+)
+SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND find_spot_id = %s GROUP BY find_spot_id;"""
+
+        cursor.execute(query, (find_spot_id,))
+        try:
+            material_building = cursor.fetchone()[0]
+        except TypeError:
+            material_building = None
+
+        cursor.close()
+
+        info = [description, features, features_architecture, features_sepulchral, material, material_bone, material_building]
+        if all(value is None for value in info):
+            raise NotFound('No finds with id {} found in database.'.format(find_spot_id))
+        else:
+            return {
+                "id": find_spot_id,
+                "description": description,
+                "features": features,
+                "features_architecture": features_architecture,
+                "features_sepulchral": features_sepulchral,
+                "material": material,
+                "material_bone": material_bone,
+                "material_building": material_building
+            }
 
 
 @api.route('/<int:find_spot_id>/photos')
