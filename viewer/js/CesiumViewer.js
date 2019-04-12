@@ -793,70 +793,88 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
     const mines = Cesium.Property.getValueOrUndefined(entity.properties.Mines);
 
     if (typeof id !== 'undefined') {
-      entity.name = 'Find Spot ' + id;
+      entity.name = `Find Spot ${id}`;
 
-      const findSpotInfo = fetch('../api/find_spots/' + id, {
+      const findSpotInfo = fetch(`../api/find_spots/${id}`, {
         credentials: 'include'
       });
 
-      const findInfo = fetch('../api/finds/' + id, {
+      const findInfo = fetch(`../api/find_spots/${id}/find`, {
         credentials: 'include'
       });
 
-      Promise.all([findSpotInfo, findInfo]).then(function(responses) {
+      const photos = fetch(`../api/find_spots/${id}/photos`, {
+        credentials: 'include'
+      });
+
+      Promise.all([findSpotInfo, findInfo, photos]).then(responses => {
         const promises = [];
         for (let response of responses) {
           promises.push(response.json());
         }
-        Promise.all(promises).then(function(jsons) {
+        Promise.all(promises).then(jsons => {
           const findSpotJson = jsons[0];
           const findJson = jsons[1];
-          const findSpotHTML = `<h3>Type</h3><p>
-            ${_.startCase(_.toLower(_.replace(findSpotJson.type, '_', ' ')))}
-            </p>
-            <h3>Toponym</h3><p>
-            ${findSpotJson.toponym}
-            </p>
-            <h3>Description</h3><p>
-            ${findSpotJson.description}
-            </p>
-            <h3>Chronology</h3><p>
-            ${findSpotJson.chronology.join(' | ')}
-            </p></div>`;
+          const photosJson = jsons[2];
 
-          let findHTML = '';
-          if (findJson.description !== null) {
-            findHTML += '<h3>Description</h3><p>' + findJson.description + '</p>';
+          let findSpotHTML;
+          if (typeof findSpotJson.message === 'undefined') {
+            findSpotHTML = `<h3>Type</h3>
+            <p>${_.startCase(_.toLower(_.replace(findSpotJson.type, '_', ' ')))}</p>
+            <h3>Toponym</h3>
+            <p>${findSpotJson.toponym}</p>
+            <h3>Description</h3>
+            <p>${findSpotJson.description}</p>
+            <h3>Chronology</h3>
+            <p>${findSpotJson.chronology.join(' | ')}</p>`;
+          } else {
+            findSpotHTML = '<p>No information found on this find spot.</p>';
           }
-          if (findJson.features !== null) {
-            findHTML += '<h3>Features</h3><p>' + listToString(findJson.features, ' | ') + '</p>';
+
+          let findHTML;
+          if (typeof findJson.message === 'undefined') {
+            findHTML = '';
+            if (findJson.description !== null) {
+              findHTML += `<h3>Description</h3><p>${findJson.description}</p>`;
+            }
+            if (findJson.features !== null) {
+              findHTML += `<h3>Features</h3><p>${listToString(findJson.features, ' | ')}</p>`;
+            }
+            if (findJson.features_architecture !== null) {
+              findHTML += `<h3>Features architecture</h3>
+                <p>${listToString(findJson.features_architecture, ' | ')}</p>`;
+            }
+            if (findJson.features_sepulchral !== null) {
+              findHTML += `<h3>Features sepulchral</h3>
+                <p>${listToString(findJson.features_sepulchral, ' | ')}</p>`;
+            }
+            if (findJson.material !== null) {
+              findHTML += `<h3>Material</h3><p>${listToString(findJson.material, ' | ')}</p>`;
+            }
+            if (findJson.material_bone !== null) {
+              findHTML += `<h3>Material bone</h3>
+              <p>${listToString(findJson.material_bone, ' | ')}</p>`;
+            }
+            if (findJson.material_building !== null) {
+              findHTML += `<h3>Material building</h3>
+                <p>${listToString(findJson.material_building, ' | ')}</p>`;
+            }
+          } else {
+            findHTML = '<p>No information found on this find.</p>';
           }
-          if (findJson.features_architecture !== null) {
-            findHTML +=
-              '<h3>Features architecture</h3><p>' +
-              listToString(findJson.features_architecture, ' | ') +
-              '</p>';
+
+          console.log(photosJson);
+          let photosHTML;
+          if (typeof photosJson.message === 'undefined') {
+            photosHTML = '';
+            photosJson.forEach(p => {
+              photosHTML += `<img style="width: 100%" src="${p.url}" alt="">
+              <p>${p.date}</p>
+              <p>${p.description}</p>`;
+            });
+          } else {
+            photosHTML = '<p>No photos found for this find spot.</p>';
           }
-          if (findJson.features_sepulchral !== null) {
-            findHTML +=
-              '<h3>Features sepulchral</h3><p>' +
-              listToString(findJson.features_sepulchral, ' | ') +
-              '</p>';
-          }
-          if (findJson.material !== null) {
-            findHTML += '<h3>Material</h3><p>' + listToString(findJson.material, ' | ') + '</p>';
-          }
-          if (findJson.material_bone !== null) {
-            findHTML +=
-              '<h3>Material bone</h3><p>' + listToString(findJson.material_bone, ' | ') + '</p>';
-          }
-          if (findJson.material_building !== null) {
-            findHTML +=
-              '<h3>Material building</h3><p>' +
-              listToString(findJson.material_building, ' | ') +
-              '</p>';
-          }
-          findHTML += '</div>';
 
           entity.description = `<div class="info-item">
             <h2>Find Spot</h2>
@@ -865,6 +883,10 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
             <div class="info-item">
             <h2>Find</h2>
             ${findHTML}
+            </div>
+            <div class="info-item">
+            <h2>Photos</h2>
+            ${photosHTML}
             </div>`;
         });
       });

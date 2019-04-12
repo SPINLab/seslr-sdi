@@ -264,12 +264,12 @@ class Photos(Resource):
             if photo_info is None:
                 photos.append({
                     'id': photo_id,
-                    'url': 'https://euboia.labs.vu.nl/photos/{}'.format(photo_id),
+                    'url': 'https://euboia.labs.vu.nl/photos/{}.jpg'.format(photo_id),
                 })
             else:
                 photos.append({
                     'id': photo_id,
-                    'url': 'https://euboia.labs.vu.nl/photos/{}'.format(photo_id),
+                    'url': 'https://euboia.labs.vu.nl/photos/{}.jpg'.format(photo_id),
                     'date': photo_info[1].date().isoformat(),
                     'description': photo_info[3],
                     'direction': photo_info[2],
