@@ -25,6 +25,14 @@ find_spot = api.model('Find Spot', {
     'chronology': fields.List(fields.String(), description="The chronology of the find spot.")
 })
 
+photos = api.model('Find Spot Photos', {
+    'id': fields.Integer(description="The ID of the photo."),
+    'url': fields.String(description="The URL where the photo can be found."),
+    'date': fields.String(description="The date the photo was taken."),
+    'description': fields.String(description="A description of what is visible on the photo."),
+    'direction': fields.String(description="The compass direction the camera was pointed at."),
+    'orientation': fields.String(description="The orientation of the photo (landscape/portrait).")
+})
 
 @api.route('/')
 class FindSpots(Resource):
@@ -89,3 +97,45 @@ SELECT array_agg(col_name) AS true_col_names FROM coltorows WHERE col_value AND 
                  'type' : find_spot_info[1],
                  'description' : find_spot_info[2],
                  'chronology': chronology }
+
+
+@api.route('/<int:find_spot_id>/photos')
+class Photos(Resource):
+
+    @api.doc(params={"find_spot_id": "The id of the find spot"})
+    @api.marshal_list_with(photos)
+    def get(self, find_spot_id):
+        """Get the photos taken at a find spot"""
+
+        db = get_db()
+        cursor = db.cursor()
+
+        query = 'SELECT "photo_ID" FROM seslr.photo_link WHERE "find_spot_ID" = %s;'
+        cursor.execute(query, (find_spot_id,))
+        photo_ids = cursor.fetchall()
+
+        if photo_ids is None or photo_ids == []:
+            raise NotFound('No photos found for find spot: {}'.format(find_spot_id))
+
+        photos = []
+
+        for photo_id, in photo_ids:
+            query = 'SELECT * FROM seslr.photo_new WHERE "photo_ID" = %s;'
+            cursor.execute(query, (photo_id,))
+            photo_info = cursor.fetchone()
+            if photo_info is None:
+                photos.append({
+                    'id': photo_id,
+                    'url': 'https://euboia.labs.vu.nl/photos/{}'.format(photo_id),
+                })
+            else:
+                photos.append({
+                    'id': photo_id,
+                    'url': 'https://euboia.labs.vu.nl/photos/{}'.format(photo_id),
+                    'date': photo_info[1].date().isoformat(),
+                    'description': photo_info[3],
+                    'direction': photo_info[2],
+                    'orientation': 'landscape' if photo_info[4] else 'portrait'
+                })
+
+        return photos
