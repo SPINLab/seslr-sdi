@@ -148,15 +148,15 @@ export default {
       }
     },
     updateFindSpotInfo(findSpotID) {
-      const findSpotInfo = fetch(`../dev/api/find_spots/${findSpotID}`, {
+      const findSpotInfo = fetch(`../api/find_spots/${findSpotID}`, {
         credentials: 'include'
       });
 
-      const findInfo = fetch(`../dev/api/find_spots/${findSpotID}/find`, {
+      const findInfo = fetch(`../api/find_spots/${findSpotID}/find`, {
         credentials: 'include'
       });
 
-      const photos = fetch(`../dev/api/find_spots/${findSpotID}/photos`, {
+      const photos = fetch(`../api/find_spots/${findSpotID}/photos`, {
         credentials: 'include'
       });
 
