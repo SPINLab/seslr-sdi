@@ -1,14 +1,14 @@
 'use strict';
 
 const getUrlParams = function(prop) {
-  var params = {};
-  var search = decodeURIComponent(
+  const params = {};
+  const search = decodeURIComponent(
     window.location.href.slice(window.location.href.indexOf('?') + 1)
   );
-  var definitions = search.split('&');
+  const definitions = search.split('&');
 
   definitions.forEach(function(val, key) {
-    var parts = val.split('=', 2);
+    const parts = val.split('=', 2);
     params[parts[0]] = parts[1];
   });
 
@@ -146,10 +146,6 @@ const data = {};
 
 const features = [
   {
-    id: 'find_spots',
-    label: 'Find Spots'
-  },
-  {
     id: 'mines',
     label: 'Mines'
   },
@@ -188,20 +184,31 @@ const surveyColors = {
   'SESLR 2016-2019': '#EE0000'
 };
 
+{
+  const feature = new Cesium.GeoJsonDataSource();
+  feature
+    .load('../features/find_spots.json', {
+      clampToGround: true
+    })
+    .then(feature => {
+      viewer.dataSources.add(feature);
+      for (const entity of feature.entities.values) {
+        entity.billboard = undefined;
+      }
+    });
+  data.find_spots = feature;
+}
+
 for (let featureName of features) {
   const feature = new Cesium.GeoJsonDataSource();
   feature
     .load(`../features/${featureName.id}.json`, {
       clampToGround: true
     })
-    .then(function(feature) {
+    .then(feature => {
       viewer.dataSources.add(feature);
 
-      if (featureName.id === 'find_spots') {
-        for (const entity of feature.entities.values) {
-          entity.billboard = undefined;
-        }
-      } else if (featureName.id === 'mines') {
+      if (featureName.id === 'mines') {
         for (const entity of feature.entities.values) {
           entity.billboard = {
             image: 'assets/' + entity.properties.Mines + '.png',
@@ -314,12 +321,13 @@ const imagery = [
     id: 'drone',
     label: 'Drone',
     children: [
-      // { id: 'elliniko_terrace', label: 'Elliniko Terrace' },
-      // { id: 'kiln', label: 'Kiln' },
-      // { id: 'eba_settlement', label: 'EBA Settlement' },
+      { id: 'plakari', label: 'Plakari' },
+      { id: 'kiln', label: 'Kiln' },
+      { id: 'eba_settlement', label: 'EBA Settlement' },
       { id: 'n_headland_ortho', label: 'N Headland Ortho' },
-      // { id: 'karababa', label: 'Karababa' },
-      // { id: 'kazara', label: 'Kazara' },
+      { id: 'karababa', label: 'Karababa' },
+      { id: 'kazara', label: 'Kazara' },
+      { id: 'kastri', label: 'Kastri' },
       { id: 'kylindroi_ortho', label: 'Kylindroi Ortho' }
     ]
   }
@@ -377,7 +385,6 @@ function styleSpot(spot, period) {
       disableDepthTestDistance: 50000
     };
   } else {
-    console.log(type);
     spot.billboard = undefined;
   }
 }
@@ -455,6 +462,8 @@ window.onmousemove = e => {
   tooltip.style.left = x + 20 + 'px';
 };
 
+Vue.prototype.externalData = data;
+
 const layerSelector = new Vue({
   el: '#layerSelector',
   data: {
@@ -483,19 +492,19 @@ const layerSelector = new Vue({
         }
 
         viewer.scene.requestRender();
-        setTimeout(() => {
-          viewer.scene.requestRender();
-        }, 500);
-        setTimeout(() => {
-          viewer.scene.requestRender();
-        }, 1000);
-        setTimeout(() => {
-          loadingOverlay.style = 'visibility: hidden;';
-          viewer.scene.requestRender();
-        }, 2000);
-        setTimeout(() => {
-          viewer.scene.requestRender();
-        }, 4000);
+        // setTimeout(() => {
+        //   viewer.scene.requestRender();
+        // }, 500);
+        // setTimeout(() => {
+        //   viewer.scene.requestRender();
+        // }, 1000);
+        // setTimeout(() => {
+        //   loadingOverlay.style = 'visibility: hidden;';
+        //   viewer.scene.requestRender();
+        // }, 2000);
+        // setTimeout(() => {
+        //   viewer.scene.requestRender();
+        // }, 4000);
         tilesLoaded();
       }
     });
@@ -533,21 +542,23 @@ const layerSelector = new Vue({
     },
     onChangeFeatures() {
       let selectedFeature;
+      let show;
       if (this.prevSelectedFeatures.length > this.selectedFeatures.length) {
         for (let feature of this.prevSelectedFeatures) {
           if (!this.selectedFeatures.includes(feature)) {
             selectedFeature = feature;
+            show = false;
           }
         }
       } else {
         for (let feature of this.selectedFeatures) {
           if (!this.prevSelectedFeatures.includes(feature)) {
             selectedFeature = feature;
+            show = true;
           }
         }
       }
-      let shown = data[selectedFeature.id].show;
-      if (!shown) {
+      if (show) {
         switch (selectedFeature.id) {
           case 'find_spots':
             legendCarousel.$refs.carousel.goToPage(0);
@@ -600,7 +611,7 @@ const layerSelector = new Vue({
             break;
         }
       }
-      data[selectedFeature.id].show = !shown;
+      data[selectedFeature.id].show = show;
 
       viewer.scene.requestRender();
     },
@@ -628,6 +639,8 @@ const layerSelector = new Vue({
     },
     toggleLayer(node) {
       data[node.id].show = !data[node.id].show;
+      viewer.scene.requestRender();
+      this.$forceUpdate();
     },
     mouseOver(node) {
       data[node.id].hue = 2.0;
@@ -649,7 +662,7 @@ const layerSelector = new Vue({
 });
 
 const periodSelector = new Vue({
-  el: '#periodSelector',
+  el: '#top',
   data() {
     return {
       prehistoric: periods.prehistoric,
@@ -672,6 +685,33 @@ const periodSelector = new Vue({
     };
   },
   methods: {
+    selectAll() {
+      for (const component in this.$refs) {
+        if (this.$refs.hasOwnProperty(component)) {
+          const tree = this.$refs[component];
+          const uncheckedNodes = tree.findAll({ state: { checked: false } });
+          uncheckedNodes.forEach(node => {
+            node.check();
+          });
+        }
+      }
+    },
+    deselectAll() {
+      for (const component in this.$refs) {
+        if (this.$refs.hasOwnProperty(component)) {
+          const tree = this.$refs[component];
+          const checkedNodes = tree.checked();
+          checkedNodes.forEach(node => {
+            node.uncheck();
+          });
+        }
+      }
+    },
+    toggleVisibility() {
+      data.find_spots.show = !data.find_spots.show;
+      viewer.scene.requestRender();
+      this.$forceUpdate();
+    },
     onTreeMounted(tree) {
       if (parseInt(urlParams.findspots)) {
         tree.find(tree.data[0].text).check();
@@ -863,7 +903,6 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
             findHTML = '<p>No information found on this find.</p>';
           }
 
-          console.log(photosJson);
           let photosHTML;
           if (typeof photosJson.message === 'undefined') {
             photosHTML = '';
