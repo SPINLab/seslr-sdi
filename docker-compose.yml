@@ -1,49 +1,57 @@
 version: '3'
 
 services:
-    reverseproxy:
-        image: nginx:alpine
-        volumes:
-            - ./reverseproxy/nginx.conf:/etc/nginx/nginx.conf:ro
-            - ./data:/data:ro
-            - ./viewer:/viewer:ro
-            - ./website:/website:ro
-            - ./log:/var/log/nginx/
-        ports:
-            - 127.0.0.1:8000:80
-        restart: always
+  reverseproxy:
+    image: nginx:alpine
+    volumes:
+      - ./reverseproxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./data:/data:ro
+      - ./viewer:/viewer:ro
+      - ./website:/website:ro
+      - ./log:/var/log/nginx/
+    ports:
+      - 127.0.0.1:8000:80
+    restart: always
 
-    database:
-        image: mdillon/postgis:10-alpine
-        volumes:
-            - ./pgdata:/var/lib/postgresql/data
-        ports:
-            - 5432:5432
-        env_file:
-            - ./database/postgres.env
-        restart: always
+  database:
+    image: mdillon/postgis:10-alpine
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file:
+      - ./database/postgres.env
+    restart: always
 
-    terrain:
-        image: geodata/cesium-terrain-server
-        volumes:
-            - ./data/terrain:/data/terrain:ro
-        command: ['cesium-terrain-server', '-dir', '/data/terrain']
-        depends_on:
-            - reverseproxy
-        restart: always
+  terrain:
+    image: geodata/cesium-terrain-server
+    volumes:
+      - ./data/terrain:/data/terrain:ro
+    command: ['cesium-terrain-server', '-dir', '/data/terrain']
+    depends_on:
+      - reverseproxy
+    restart: always
 
-    api:
-        build: ./seslr-api
-        env_file:
-            - ./database/postgres.env
-        depends_on:
-            - reverseproxy
-            - database
-        restart: always
+  api:
+    build: ./seslr-api
+    env_file:
+      - ./database/postgres.env
+    depends_on:
+      - reverseproxy
+      - database
+    restart: always
 
-    tms:
-        image: nginx:alpine
-        volumes:
-            - ./data/tms:/data:ro
-            - ./tms/nginx.conf:/etc/nginx/nginx.conf:ro
-        restart: always
+  tms:
+    image: nginx:alpine
+    volumes:
+      - ./data/tms:/data:ro
+      - ./tms/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: always
+
+  viewer:
+    build: ./viewer
+    depends_on:
+      - api
+      - tms
+      - terrain
+    restart: always
