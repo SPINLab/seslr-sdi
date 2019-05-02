@@ -10,9 +10,9 @@
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "@riophae/vue-treeselect": "0.0.38",
-    "cesium": "^1.56.1",
+    "cesium": "^1.57.0",
     "core-js": "^2.6.5",
-    "liquor-tree": "^0.2.55",
+    "liquor-tree": "^0.2.56",
     "lodash": "^4.17.11",
     "v-img": "^0.2.0",
     "vue": "^2.6.10",
@@ -21,9 +21,9 @@
     "vuebar": "0.0.20"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.6.0",
-    "@vue/cli-plugin-eslint": "^3.6.0",
-    "@vue/cli-service": "^3.6.0",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
