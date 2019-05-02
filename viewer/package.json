@@ -1,23 +1,33 @@
 {
-  "name": "euboia-viewer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "seslr-viewer",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "author": "Chris Lucas (SPINLab)",
-  "license": "MIT",
   "dependencies": {
-    "@riophae/vue-treeselect": "0.0.37",
-    "axios": "^0.18.0",
+    "@mdi/font": "^3.6.95",
+    "@riophae/vue-treeselect": "0.0.38",
     "cesium": "^1.56.1",
-    "chroma-js": "^1.4.1",
-    "liquor-tree": "^0.2.53",
+    "core-js": "^2.6.5",
+    "liquor-tree": "^0.2.55",
     "lodash": "^4.17.11",
+    "v-img": "^0.2.0",
     "vue": "^2.6.10",
-    "vue-carousel": "^0.16.2",
-    "vue-slider-component": "^2.8.14",
+    "vue-carousel": "^0.18.0",
+    "vue-slider-component": "^3.0.31",
     "vuebar": "0.0.20"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.6.0",
+    "@vue/cli-plugin-eslint": "^3.6.0",
+    "@vue/cli-service": "^3.6.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
   }
 }

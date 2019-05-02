@@ -1,4 +1,4 @@
-const icons = {};
+export const icons = {};
 
 icons.artifact_or_artifact_scatter = `<svg
 xmlns:dc="http://purl.org/dc/elements/1.1/"
