@@ -48,6 +48,7 @@
             :min="0"
             :max="1"
             :interval="0.01"
+            tooltip="none"
             v-model="opacities[imageNode.id]"
             @change="changeOpacity(imageNode)"
           ></vue-slider>

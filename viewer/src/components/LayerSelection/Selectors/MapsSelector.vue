@@ -48,6 +48,7 @@
             :min="0"
             :max="1"
             :interval="0.01"
+            tooltip="none"
             v-model="opacities[mapNode.id]"
             @change="changeOpacity(mapNode)"
           ></vue-slider>
