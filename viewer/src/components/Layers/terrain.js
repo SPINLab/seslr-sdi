@@ -14,19 +14,19 @@ export const terrainProviders = {
 
 export const terrainProvidersViewModels = [
   new ProviderViewModel({
-    name: 'Cesium World Terrain',
-    tooltip: 'Cesium World Terrain',
-    iconUrl: './Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
-    creationFunction: () => {
-      return terrainProviders.cesiumWorld;
-    }
-  }),
-  new ProviderViewModel({
     name: 'SESLR Terrain Model',
     tooltip: 'SESLR Terrain Model',
     iconUrl: './Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
     creationFunction: () => {
       return terrainProviders.seslr;
+    }
+  }),
+  new ProviderViewModel({
+    name: 'Cesium World Terrain',
+    tooltip: 'Cesium World Terrain',
+    iconUrl: './Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
+    creationFunction: () => {
+      return terrainProviders.cesiumWorld;
     }
   }),
   new ProviderViewModel({
