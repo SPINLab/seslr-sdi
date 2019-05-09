@@ -433,6 +433,9 @@ class Photos(Resource):
                 'No photos found for find spot: {}'.format(find_spot_id)
             )
 
+        mode = os.environ['SESLR_APP_MODE']
+        mode = mode + '/' if mode != 'prod' else ''
+
         photos = []
 
         for photo_id, in photo_ids:
@@ -442,14 +445,14 @@ class Photos(Resource):
             if photo_info is None:
                 photos.append({
                     'id': photo_id,
-                    'url': ('https://euboia.labs.vu.nl/dev/photos/'
-                            '{}.jpg').format(photo_id),
+                    'url': ('https://euboia.labs.vu.nl/'
+                            '{}photos/{}.jpg').format(mode, photo_id),
                 })
             else:
                 photos.append({
                     'id': photo_id,
-                    'url': ('https://euboia.labs.vu.nl/dev/photos/'
-                            '{}.jpg').format(photo_id),
+                    'url': ('https://euboia.labs.vu.nl/'
+                            '{}photos/{}.jpg').format(mode, photo_id),
                     'date': photo_info[1].date().isoformat(),
                     'description': photo_info[3],
                     'direction': photo_info[2],

@@ -33,7 +33,7 @@ api = Api(
 
 api.add_namespace(find_spots, path='/find_spots')
 api.add_namespace(periods, path='/periods')
-if os.environ['SESLR_APP_MODE'] == 'full':
+if os.environ['SESLR_APP_MODE'] != 'demo':
     api.add_namespace(photos, path='/photos')
 api.namespaces.pop(0)
 
