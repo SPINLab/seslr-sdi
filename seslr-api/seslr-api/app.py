@@ -4,16 +4,16 @@
 @author: Chris Lucas
 """
 
+import os
+
 from flask import Flask, render_template
 from flask_restplus import Api
-# from werkzeug.contrib.fixers import ProxyFix
 
 from apis import find_spots, periods, photos
 from core import db
 
 
 app = Flask(__name__)
-# app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config['SWAGGER_UI_DOC_EXPANSION'] = 'list'
 app.config['RESTPLUS_VALIDATE'] = True
 app.config['RESTPLUS_MASK_SWAGGER'] = False
@@ -33,7 +33,8 @@ api = Api(
 
 api.add_namespace(find_spots, path='/find_spots')
 api.add_namespace(periods, path='/periods')
-api.add_namespace(photos, path='/photos')
+if os.environ['SESLR_APP_MODE'] == 'full':
+    api.add_namespace(photos, path='/photos')
 api.namespaces.pop(0)
 
 db.init_app(app)

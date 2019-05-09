@@ -6,7 +6,7 @@
 
 Go to ./seslr-hub/seslr-hub/static
 
-```
+```bash
 npm install
 ```
 
@@ -28,6 +28,12 @@ Create a ./pgdata folder
 
 Use docker-compose to set everything up
 
+```bash
+docker-compose up -e SESLR_APP_MODE=full
 ```
-docker-compose up
+
+For the demo version:
+
+```bash
+docker-compose up -e SESLR_APP_MODE=demo
 ```
