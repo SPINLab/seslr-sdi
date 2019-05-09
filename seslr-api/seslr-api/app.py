@@ -18,17 +18,20 @@ app.config['SWAGGER_UI_DOC_EXPANSION'] = 'list'
 app.config['RESTPLUS_VALIDATE'] = True
 app.config['RESTPLUS_MASK_SWAGGER'] = False
 
+mode = os.environ['SESLR_APP_MODE']
+mode = '/' + mode if mode != 'prod' else ''
+
 
 @app.route('/')
 def documentation():
-    return render_template('documentation.html')
+    return render_template('documentation.html', mode=mode)
 
 
 api = Api(
     app,
     title='SESLR Data API',
     version='1.0',
-    description='The data API for the SESLR project.',
+    description='The data API for the SESLR project.'
 )
 
 api.add_namespace(find_spots, path='/find_spots')
