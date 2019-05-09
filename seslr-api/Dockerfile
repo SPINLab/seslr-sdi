@@ -13,6 +13,9 @@ RUN apk del .build-deps
 
 ADD ./seslr-api /app
 
+ARG SESLR_APP_MODE
+ENV SESLR_APP_MODE $SESLR_APP_MODE
+
 RUN python3 /app/swagger.py
 
 EXPOSE 80

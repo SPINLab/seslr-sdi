@@ -33,7 +33,10 @@ services:
     restart: always
 
   api:
-    build: ./seslr-api
+    build:
+      context: ./seslr-api
+      args:
+        - SESLR_APP_MODE=prod
     environment:
       - SESLR_APP_MODE=prod
     env_file:
