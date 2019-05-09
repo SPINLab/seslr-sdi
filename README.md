@@ -4,17 +4,12 @@
 
 ### web
 
-Go to ./seslr-hub/seslr-hub/static
-
-```bash
-npm install
-```
-
 Create a ./data folder containing:
 
--   imagery/
+-   tms/
 -   features/
 -   terrain/
+-   pictures/
 
 and corresponding data.
 
