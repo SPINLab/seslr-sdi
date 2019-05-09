@@ -120,7 +120,7 @@ class FindSpot(Resource):
         if os.environ['SESLR_APP_MODE'] == 'demo':
             if find_spot_id not in DEMO_FIND_SPOTS:
                 raise NotFound(
-                    'No spots with id {} found'
+                    'No spots with id {} found '
                     'in demo database.'.format(find_spot_id)
                 )
 
@@ -208,7 +208,7 @@ class Find(Resource):
         if os.environ['SESLR_APP_MODE'] == 'demo':
             if find_spot_id not in DEMO_FIND_SPOTS:
                 raise NotFound(
-                    'No spots with id {} found'
+                    'No spots with id {} found '
                     'in demo database.'.format(find_spot_id)
                 )
 
@@ -412,7 +412,7 @@ class Photos(Resource):
         if os.environ['SESLR_APP_MODE'] == 'demo':
             if find_spot_id not in DEMO_FIND_SPOTS:
                 raise NotFound(
-                    'No spots with id {} found'
+                    'No spots with id {} found '
                     'in demo database.'.format(find_spot_id)
                 )
 
