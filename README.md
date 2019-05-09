@@ -24,11 +24,5 @@ Create a ./pgdata folder
 Use docker-compose to set everything up
 
 ```bash
-docker-compose up -e SESLR_APP_MODE=full
-```
-
-For the demo version:
-
-```bash
-docker-compose up -e SESLR_APP_MODE=demo
+docker-compose up
 ```
