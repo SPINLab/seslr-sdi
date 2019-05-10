@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN bash set_mode.sh
+RUN /bin/sh set_mode.sh
 RUN npm run build
 
 # production stage
