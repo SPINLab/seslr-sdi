@@ -20,4 +20,9 @@ with app.test_request_context():
     swagger = api.__schema__
     swagger['basePath'] = base_path
     with open(OUTPUT, 'w') as f:
-        f.write(json.dumps(swagger, sort_keys=True, indent=4, separators=(',', ': ')))
+        f.write(json.dumps(
+            swagger,
+            sort_keys=True,
+            indent=4,
+            separators=(',', ': ')
+        ))

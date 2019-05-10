@@ -5,6 +5,7 @@ services:
     image: nginx:stable-alpine
     volumes:
       - ./reverseproxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./reverseproxy/.htpasswd:/etc/nginx/.htpasswd:ro
       - ./data:/data:ro
       - ./viewer:/viewer:ro
       - ./website:/website:ro
@@ -46,6 +47,20 @@ services:
       - database
     restart: always
 
+  api-demo:
+    build:
+      context: ./seslr-api
+      args:
+        - SESLR_APP_MODE=demo
+    environment:
+      - SESLR_APP_MODE=demo
+    env_file:
+      - ./database/postgres.env
+    depends_on:
+      - reverseproxy
+      - database
+    restart: always
+
   tms:
     image: nginx:stable-alpine
     volumes:
@@ -54,7 +69,21 @@ services:
     restart: always
 
   viewer:
-    build: ./viewer
+    build:
+      context: ./viewer
+      args:
+        - SESLR_APP_MODE=prod
+    depends_on:
+      - api
+      - tms
+      - terrain
+    restart: always
+
+  viewer-demo:
+    build:
+      context: ./viewer
+      args:
+        - SESLR_APP_MODE=demo
     depends_on:
       - api
       - tms
