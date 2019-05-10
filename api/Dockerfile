@@ -11,7 +11,7 @@ RUN pip3 install -r /requirements.txt
 
 RUN apk del .build-deps
 
-ADD ./seslr-api /app
+ADD ./api /app
 
 ARG SESLR_APP_MODE
 ENV SESLR_APP_MODE $SESLR_APP_MODE

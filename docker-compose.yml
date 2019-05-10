@@ -35,7 +35,7 @@ services:
 
   api:
     build:
-      context: ./seslr-api
+      context: ./api
       args:
         - SESLR_APP_MODE=prod
     environment:
@@ -49,7 +49,7 @@ services:
 
   api-demo:
     build:
-      context: ./seslr-api
+      context: ./api
       args:
         - SESLR_APP_MODE=demo
     environment:
