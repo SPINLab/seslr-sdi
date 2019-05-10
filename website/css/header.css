@@ -1,9 +1,5 @@
 header {
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-    border-color: cornflowerblue;
-    padding: 5px;
-    margin-bottom: 30px;
+    padding: 1rem 1rem 0rem 1rem;
 }
 
 .title {
@@ -24,8 +20,16 @@ header {
     color: antiquewhite;
 }
 
-#headerTabs {
+#header-tabs {
     justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-color: cornflowerblue;
+}
+
+.tab-container {
+    padding-bottom: 0.3rem;
 }
 
 .tab {
@@ -36,4 +40,22 @@ header {
 }
 .tab:hover {
     background-color: rgb(100, 100, 100);
+}
+
+@media screen and (max-width: 575px) {
+    #header-tabs {
+        border-bottom-width: unset;
+        border-bottom-style: unset;
+        border-color: unset;
+    }
+    .tab-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1.8rem;
+        padding-bottom: unset;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-color: cornflowerblue;
+        width: 100%;
+    }
 }

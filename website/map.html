@@ -13,6 +13,8 @@
         <meta name="msapplication-TileColor" content="#0C3183" />
         <meta name="theme-color" content="#0C3183" />
 
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+
         <link rel="stylesheet" href="./css/main.css" />
         <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/map.css" />
@@ -22,88 +24,38 @@
         <div class="container">
             <header>
                 <div class="title">
-                    <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC.</h1>
+                    <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC</h1>
                     <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
                 </div>
 
-                <div class="tabs" id="headerTabs">
-                    <div>
+                <nav class="tabs" id="header-tabs">
+                    <div class="tab-container">
                         <a class="tab" href="index.html">Home</a>
                         <a class="tab" href="about.html">About Us</a>
                     </div>
-                    <div>
+                    <div class="tab-container">
                         <a class="tab" style="background-color: black" href="map.html"
-                            >Map Viewer</a
+                            >Viewer</a
                         >
                         <a class="tab" href="data.html">Data</a>
                     </div>
-                </div>
+                </nav>
             </header>
 
-            <div class="tabs" id="viewerTabs">
-                <div>
-                    <a
-                        class="tab unselected"
-                        id="2dButton"
-                        href="viewer/?mode=2&findspots=1"
-                        target="vieweriframe"
-                    >
-                        2D Viewer
-                    </a>
-                    <a
-                        class="tab selected"
-                        id="3dButton"
-                        href="viewer/?mode=3&findspots=1"
-                        target="vieweriframe"
-                    >
-                        3D Viewer
-                    </a>
-                </div>
-            </div>
-
-            <div class="viewer">
-                <iframe name="vieweriframe" src="viewer/?mode=3&findspots=1"></iframe>
-            </div>
-
-            <div class="tabs" id="bottomTabs">
-                <span style="font-weight: bold;">For a better experience:</span>
-                <a
-                    class="tab"
-                    id="newWindowButton"
-                    href="viewer/?mode=3&findspots=1"
-                    target="_blank"
-                    >Open in new window</a
-                >
+            <div class="cards-container">
+                <a class="card" href="viewer/?mode=2" target="_blank">
+                    <img class="card-image" src="./assets/2dview.PNG" alt="2D Viewer">
+                    <span class="card-label">2D Viewer <img src="./assets/lock.svg" alt="A password is needed for access."> </span>
+                </a>
+                <a class="card" href="viewer/?mode=3" target="_blank">
+                    <img class="card-image" src="./assets/3dview.PNG" alt="3D Viewer">
+                    <span class="card-label">3D Viewer <img src="./assets/lock.svg" alt="A password is needed for access."> </span>
+                </a>
+                <a class="card" href="demo/viewer/?mode=3" target="_blank">
+                    <img class="card-image" src="./assets/demoview.PNG" alt="Demo Viewer">
+                    <span class="card-label">Demo</span>
+                </a>
             </div>
         </div>
-
-        <script>
-            const button2D = document.getElementById('2dButton');
-            const button3D = document.getElementById('3dButton');
-            const buttonNewWindow = document.getElementById('newWindowButton');
-
-            const toggleSelected = function() {
-                if (button2D.className.includes('unselected')) {
-                    button2D.className = button2D.className.replace('unselected', 'selected');
-                } else {
-                    button2D.className = button2D.className.replace('selected', 'unselected');
-                }
-
-                if (button3D.className.includes('unselected')) {
-                    button3D.className = button3D.className.replace('unselected', 'selected');
-                } else {
-                    button3D.className = button3D.className.replace('selected', 'unselected');
-                }
-
-                if (newWindowButton.href.includes('mode=2')) {
-                    newWindowButton.href = newWindowButton.href.replace('mode=2', 'mode=3');
-                } else {
-                    newWindowButton.href = newWindowButton.href.replace('mode=3', 'mode=2');
-                }
-            };
-
-            button2D.onclick = toggleSelected;
-            button3D.onclick = toggleSelected;
-        </script>
     </body>
 </html>
