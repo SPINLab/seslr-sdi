@@ -34,9 +34,9 @@ header {
 
 .tab {
     background-color: cornflowerblue;
-    padding: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+    padding: 0.6rem;
+    margin-right: 0.6rem;
+    margin-left: 0.6rem;
 }
 .tab:hover {
     background-color: rgb(100, 100, 100);
