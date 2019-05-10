@@ -241,7 +241,10 @@ export default {
         if (this.$refs.hasOwnProperty(component)) {
           const tree = this.$refs[component];
           const uncheckedNodes = tree.findAll({ state: { checked: false } });
-          if (typeof uncheckedNodes !== 'undefined') {
+          if (
+            typeof uncheckedNodes !== 'undefined' ||
+            uncheckedNodes !== null
+          ) {
             uncheckedNodes.forEach(node => {
               node.check();
             });
@@ -254,7 +257,7 @@ export default {
         if (this.$refs.hasOwnProperty(component)) {
           const tree = this.$refs[component];
           const checkedNodes = tree.checked();
-          if (typeof checkedNodes !== 'undefined') {
+          if (typeof checkedNodes !== 'undefined' || checkedNodes !== null) {
             checkedNodes.forEach(node => {
               node.uncheck();
             });
