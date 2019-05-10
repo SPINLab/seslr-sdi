@@ -5,7 +5,7 @@ import ProviderViewModel from 'cesium/Widgets/BaseLayerPicker/ProviderViewModel'
 
 export const terrainProviders = {
   seslr: new CesiumTerrainProvider({
-    url: '/terrain/tilesets/tiles',
+    url: '../terrain/tilesets/tiles',
     requestVertexNormals: true
   }),
   cesiumWorld: createWorldTerrain(),
