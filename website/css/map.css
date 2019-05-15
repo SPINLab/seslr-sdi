@@ -2,11 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 2rem 1rem 0rem 1rem;
 }
 
 .card {
     position: relative;
-    padding: 1rem;
+    margin: 1rem;
 }
 
 .card-image {
@@ -18,8 +19,8 @@
 
 .card-label {
     position: absolute;
-    bottom: 28px;
-    left: 28px;
+    bottom: 1rem;
+    left: 1rem;
     display: flex;
     align-items: center;
     color: white;

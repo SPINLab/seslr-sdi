@@ -1,27 +1,26 @@
 .content {
-    padding-left: 10px;
-    padding-right: 10px;
-    overflow-x: scroll;
-    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
 }
 
 h3 {
     margin: 0;
-    margin-bottom: 5px;
-    margin-top: 20px;
+    margin-bottom: 0.1rem;
+    margin-top: 2rem;
 }
 
 h4 {
     font-weight: bolder;
     margin: 0;
-    margin-bottom: 3px;
+    margin-bottom: 0.2rem;
     color: rgb(119, 119, 119);
 }
 
 table {
-    width: 50rem;
+    width: 100%;
     table-layout: fixed;
     border-bottom-style: solid;
     border-bottom-width: 2px;
@@ -37,4 +36,19 @@ th {
 th,
 td {
     padding: 5px;
+}
+
+.lock-icon {
+    filter: invert(1);
+    width: 1rem;
+    transform: translateY(2px);
+}
+
+@media screen and (max-width: 1200px) {
+    .content {
+        overflow-x: scroll;
+    }
+    table {
+        width: 50rem;
+    }
 }
