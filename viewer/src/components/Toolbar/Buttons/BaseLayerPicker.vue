@@ -32,25 +32,41 @@ export default {
 <style scoped>
 #base-layer-picker >>> .cesium-baseLayerPicker-dropDown {
   max-height: none;
+  max-width: 70vw;
   z-index: 1;
+  direction: ltr;
+  top: 0;
+  right: 40px;
+}
+
+@media screen and (max-height: 930px) {
+  #base-layer-picker >>> .cesium-baseLayerPicker-dropDown {
+    max-height: 70vh;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  #base-layer-picker >>> .cesium-baseLayerPicker-dropDown {
+    max-height: 50vh;
+  }
 }
 
 #base-layer-picker >>> .cesium-baseLayerPicker-dropDown-visible {
-  border-radius: 2px;
+  border-radius: 3px;
   background-color: #2c3e50;
   border: 1px solid black;
 }
 
 #base-layer-picker >>> .cesium-baseLayerPicker-choices {
   border: 1px solid black;
-  border-radius: 2px;
+  border-radius: 3px;
   padding: 5px 0;
   margin-top: 5px;
 }
 
 #base-layer-picker >>> .cesium-baseLayerPicker-itemIcon {
   border: solid 1px black;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 #base-layer-picker

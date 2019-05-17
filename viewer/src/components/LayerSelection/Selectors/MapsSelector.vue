@@ -1,6 +1,7 @@
 <template>
   <div class="selector-container" id="maps-selector-container">
     <treeselect
+      ref="treeselect"
       placeholder="Maps"
       :value-format="valueFormat"
       :clearable="clearable"
@@ -12,6 +13,7 @@
       @input="onChange"
       @select="onSelect"
       @deselect="onSelect"
+      @open="onOpen"
     >
     </treeselect>
 
@@ -82,7 +84,8 @@ export default {
       searchable: false,
       valueFormat: 'object',
       opacities: {},
-      hidden: []
+      hidden: [],
+      menuOpening: false
     };
   },
   methods: {
@@ -127,9 +130,28 @@ export default {
     changeOpacity(node) {
       maps[node.id].alpha = this.opacities[node.id];
       this.$parent.$parent.$refs.CesiumViewer.$options.viewer.scene.requestRender();
+    },
+    onOpen() {
+      this.menuOpening = true;
+    },
+    documentClick(e) {
+      const target = e.target;
+      if (
+        target.classList.contains('vue-treeselect__control') ||
+        target.classList.contains('vue-treeselect__value-container') ||
+        target.classList.contains('vue-treeselect__multi-value')
+      ) {
+        if (!this.menuOpening) {
+          this.$refs.treeselect.closeMenu();
+        } else {
+          this.menuOpening = false;
+        }
+      }
     }
   },
   mounted() {
+    this.$el.addEventListener('click', this.documentClick);
+
     if (parseInt(this.$parent.$parent.urlParams.get('topo1860'))) {
       this.selected.push(mapNames.filter(x => x.id === 'topo_1860')[0]);
     }

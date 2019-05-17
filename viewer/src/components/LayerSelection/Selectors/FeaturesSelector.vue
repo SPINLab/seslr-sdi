@@ -1,6 +1,7 @@
 <template>
   <div class="selector-container" id="feature-selector-container">
     <treeselect
+      ref="treeselect"
       placeholder="Features"
       :value-format="valueFormat"
       :clearable="clearable"
@@ -12,6 +13,7 @@
       @input="onChange"
       @select="onSelect"
       @deselect="onSelect"
+      @open="onOpen"
     >
     </treeselect>
 
@@ -60,7 +62,8 @@ export default {
       clearable: false,
       searchable: false,
       valueFormat: 'object',
-      hidden: []
+      hidden: [],
+      menuOpening: false
     };
   },
   methods: {
@@ -142,7 +145,27 @@ export default {
         this.hidden.filter(x => x !== node.id);
       }
       this.$parent.$parent.$refs.CesiumViewer.$options.viewer.scene.requestRender();
+    },
+    onOpen() {
+      this.menuOpening = true;
+    },
+    documentClick(e) {
+      const target = e.target;
+      if (
+        target.classList.contains('vue-treeselect__control') ||
+        target.classList.contains('vue-treeselect__value-container') ||
+        target.classList.contains('vue-treeselect__multi-value')
+      ) {
+        if (!this.menuOpening) {
+          this.$refs.treeselect.closeMenu();
+        } else {
+          this.menuOpening = false;
+        }
+      }
     }
+  },
+  mounted() {
+    this.$el.addEventListener('click', this.documentClick);
   }
   //   mounted() {
   // if (parseInt(this.$parent.$parent.urlParams.get('mines'))) {

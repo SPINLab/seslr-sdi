@@ -63,11 +63,19 @@ export default {
 #cesium-toolbar {
   display: flex;
   z-index: 1;
+  flex-direction: column-reverse;
+  /* align-items: center; */
+  direction: rtl;
+}
+
+#cesium-toolbar div {
+  margin-top: 0.2rem;
 }
 
 #cesium-toolbar >>> .cesium-button {
   border-radius: 2px;
   background-color: #2c3e50;
+  /* margin: 0.5rem; */
 }
 
 #cesium-toolbar >>> .cesium-toolbar-button {

@@ -1,8 +1,8 @@
 <template>
   <div id="cesium-container">
     <CesiumToolbar v-if="viewerLoaded" />
-    <Tooltip ref="Tooltip" v-if="viewerLoaded" />
     <Infobox v-if="viewerLoaded" />
+    <Tooltip ref="Tooltip" v-if="viewerLoaded" />
   </div>
 </template>
 
@@ -93,7 +93,7 @@ export default {
 #infobox {
   position: absolute;
   top: 10%;
-  right: 1%;
+  right: 3rem;
   z-index: 2;
 }
 </style>

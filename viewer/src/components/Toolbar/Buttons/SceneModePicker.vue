@@ -25,11 +25,17 @@ export default {
 
 <style scoped>
 #scene-mode-picker {
-  margin: 2px;
+  padding-bottom: 3px;
   z-index: 1;
+}
+
+#scene-mode-picker >>> .cesium-sceneModePicker-wrapper {
+  display: flex;
+  width: 104px;
 }
 
 #scene-mode-picker >>> .cesium-sceneModePicker-dropDown-icon {
   z-index: 1;
+  margin-right: 4px;
 }
 </style>

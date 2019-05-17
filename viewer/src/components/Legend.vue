@@ -150,6 +150,7 @@ export default {
 }
 #legend >>> .legend-item svg {
   margin-right: 15px;
+  overflow: unset;
 }
 #legend >>> .legend-icon {
   width: 25px;
@@ -157,7 +158,7 @@ export default {
   margin-right: 15px;
 }
 #legend >>> .VueCarousel-slide {
-  width: 100%;
+  max-width: 100%;
 }
 #legend >>> .VueCarousel-dot[data-v-438fd353] {
   margin-top: 0 !important;

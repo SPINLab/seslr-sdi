@@ -1,6 +1,6 @@
 import CesiumTerrainProvider from 'cesium/Core/CesiumTerrainProvider';
 import EllipsoidTerrainProvider from 'cesium/Core/EllipsoidTerrainProvider';
-import createWorldTerrain from 'cesium/Core/createWorldTerrain';
+// import createWorldTerrain from 'cesium/Core/createWorldTerrain';
 import ProviderViewModel from 'cesium/Widgets/BaseLayerPicker/ProviderViewModel';
 
 export const terrainProviders = {
@@ -8,7 +8,7 @@ export const terrainProviders = {
     url: '../terrain/tilesets/tiles',
     requestVertexNormals: true
   }),
-  cesiumWorld: createWorldTerrain(),
+  // cesiumWorld: createWorldTerrain(),
   ellipsoid: new EllipsoidTerrainProvider()
 };
 
@@ -21,14 +21,14 @@ export const terrainProvidersViewModels = [
       return terrainProviders.seslr;
     }
   }),
-  new ProviderViewModel({
-    name: 'Cesium World Terrain',
-    tooltip: 'Cesium World Terrain',
-    iconUrl: './Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
-    creationFunction: () => {
-      return terrainProviders.cesiumWorld;
-    }
-  }),
+  // new ProviderViewModel({
+  //   name: 'Cesium World Terrain',
+  //   tooltip: 'Cesium World Terrain',
+  //   iconUrl: './Widgets/Images/TerrainProviders/CesiumWorldTerrain.png',
+  //   creationFunction: () => {
+  //     return terrainProviders.cesiumWorld;
+  //   }
+  // }),
   new ProviderViewModel({
     name: 'World Ellipsoid',
     tooltip: 'World Ellipsoid',

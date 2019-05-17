@@ -19,6 +19,8 @@ export default {
 #navigation-help-button >>> .cesium-navigation-help {
   max-height: none;
   z-index: 1;
+  top: 0;
+  right: 40px;
 }
 
 #navigation-help-button >>> .cesium-navigation-help-instructions {
