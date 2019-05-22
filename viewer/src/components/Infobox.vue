@@ -95,7 +95,6 @@ export default {
   },
   methods: {
     updateInfo(entity) {
-      console.log(entity);
       if (typeof entity !== 'undefined') {
         this.$el.style.visibility = 'visible';
 
