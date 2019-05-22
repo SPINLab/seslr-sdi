@@ -95,6 +95,7 @@ export default {
   },
   methods: {
     updateInfo(entity) {
+      console.log(entity);
       if (typeof entity !== 'undefined') {
         this.$el.style.visibility = 'visible';
 
@@ -106,6 +107,9 @@ export default {
           entity.properties.arch_proje
         );
         const mines = Property.getValueOrUndefined(entity.properties.Mines);
+        const flightPhoto = Property.getValueOrUndefined(
+          entity.properties.Name
+        );
 
         this.clickedFindSpot = false;
         if (typeof findSpotID !== 'undefined') {
@@ -142,6 +146,20 @@ export default {
             <h3>Description</h3>
             ${startCase(mines_long)}
             </div>`;
+        } else if (typeof flightPhoto !== 'undefined') {
+          let photoDescription = Property.getValueOrUndefined(
+            entity.properties.description
+          );
+          photoDescription = photoDescription.replace(/<img(.*?)\/>/g, '');
+          this.infoHTML = `<h2>Aerial Photo</h2>
+          <div class="info-item">
+          <h3>Description</h3>
+          ${photoDescription}
+          </div>
+          <a href="photos/air/${flightPhoto}" target="_blank">
+            <img src="photos/air/${flightPhoto}" alt="Aerial photo">
+          </a>
+          </div>`;
         }
       } else {
         this.$el.style.visibility = 'hidden';
@@ -277,6 +295,7 @@ export default {
 
 #infobox >>> .info-item {
   padding: 4px;
+  margin-bottom: 1rem;
 }
 
 #infobox >>> img {
@@ -284,6 +303,9 @@ export default {
   max-height: 20rem;
   width: auto;
   height: auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
 }
 
 #infobox >>> .VueCarousel-slide {

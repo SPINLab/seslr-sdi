@@ -446,13 +446,13 @@ class Photos(Resource):
                 photos.append({
                     'id': photo_id,
                     'url': ('https://euboia.labs.vu.nl/'
-                            '{}photos/{}.jpg').format(mode, photo_id),
+                            '{}photos/land/{}.jpg').format(mode, photo_id),
                 })
             else:
                 photos.append({
                     'id': photo_id,
                     'url': ('https://euboia.labs.vu.nl/'
-                            '{}photos/{}.jpg').format(mode, photo_id),
+                            '{}photos/land/{}.jpg').format(mode, photo_id),
                     'date': photo_info[1].date().isoformat(),
                     'description': photo_info[3],
                     'direction': photo_info[2],

@@ -1,5 +1,6 @@
 'use strict';
 import GeoJsonDataSource from 'cesium/DataSources/GeoJsonDataSource';
+import PointGraphics from 'cesium/DataSources/PointGraphics';
 import HeightReference from 'cesium/Scene/HeightReference';
 import Property from 'cesium/DataSources/Property';
 import Color from 'cesium/Core/Color';
@@ -16,6 +17,10 @@ export const featureNames = [
   {
     id: 'geology',
     label: 'Geology'
+  },
+  {
+    id: 'flight_10052016',
+    label: 'Flight 10-05-2016'
   }
 ];
 
@@ -78,6 +83,18 @@ for (let featureName of featureNames) {
           entity.polygon.material = Color.fromCssColorString(
             geologyColors[geologyUnit]
           );
+        }
+      } else if (featureName.id === 'flight_10052016') {
+        for (const entity of feature.entities.values) {
+          entity.billboard = undefined;
+          entity.point = new PointGraphics({
+            color: Color.PURPLE,
+            pixelSize: 8,
+            outlineColor: Color.BLACK,
+            outlineWidth: 1,
+            // heightReference: HeightReference.RELATIVE_TO_GROUND
+            disableDepthTestDistance: 50000
+          });
         }
       }
     });

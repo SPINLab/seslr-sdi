@@ -85,8 +85,8 @@ class Photos(Resource):
         mode = os.environ['SESLR_APP_MODE']
         mode = mode + '/' if mode != 'prod' else ''
 
-        url = 'https://euboia.labs.vu.nl/{}photos/{}.jpg'.format(mode,
-                                                                 photo_id)
+        url = 'https://euboia.labs.vu.nl/{}photos/land/{}.jpg'.format(mode,
+                                                                      photo_id)
 
         result = {
             'id': photo_id,

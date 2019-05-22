@@ -160,10 +160,10 @@ export default {
 #legend >>> .VueCarousel-slide {
   max-width: 100%;
 }
-#legend >>> .VueCarousel-dot[data-v-438fd353] {
+#legend >>> .VueCarousel-dot {
   margin-top: 0 !important;
 }
-#legend >>> .VueCarousel-dot-button[data-v-438fd353]:focus {
+#legend >>> .VueCarousel-dot-button:focus {
   outline: 0;
 }
 </style>
