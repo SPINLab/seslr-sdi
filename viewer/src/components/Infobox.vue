@@ -156,8 +156,8 @@ export default {
           <h3>Description</h3>
           ${photoDescription}
           </div>
-          <a href="photos/air/${flightPhoto}" target="_blank">
-            <img src="photos/air/${flightPhoto}" alt="Aerial photo">
+          <a href="../photos/air/${flightPhoto}" target="_blank">
+            <img src="../photos/air/${flightPhoto}" alt="Aerial photo">
           </a>
           </div>`;
         }
