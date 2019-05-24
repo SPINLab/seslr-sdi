@@ -7,6 +7,7 @@
       <div>
         <div class="info-container">
           <div v-if="clickedFindSpot">
+            <h1>Find Spot {{ findSpotID }}</h1>
             <div class="info-item">
               <h2>Find Spot</h2>
               <div v-html="findSpotHTML"></div>
@@ -76,6 +77,7 @@ export default {
   },
   data() {
     return {
+      findSpotID: null,
       findSpotHTML: '',
       findHTML: '',
       photos: [],
@@ -113,6 +115,7 @@ export default {
         this.clickedFindSpot = false;
         if (typeof findSpotID !== 'undefined') {
           this.clickedFindSpot = true;
+          this.findSpotID = findSpotID;
           this.updateFindSpotInfo(findSpotID);
         } else if (typeof geology !== 'undefined') {
           const geology_lo = Property.getValueOrUndefined(
