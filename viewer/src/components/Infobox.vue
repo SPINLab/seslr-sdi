@@ -98,7 +98,7 @@ export default {
   methods: {
     updateInfo(entity) {
       if (typeof entity !== 'undefined') {
-        this.$el.style.visibility = 'visible';
+        this.$el.style.display = 'block';
 
         const findSpotID = Property.getValueOrUndefined(
           entity.properties.find_spot_id
@@ -164,7 +164,7 @@ export default {
           </div>`;
         }
       } else {
-        this.$el.style.visibility = 'hidden';
+        this.$el.style.display = 'none';
       }
     },
     updateFindSpotInfo(findSpotID) {
