@@ -449,14 +449,17 @@ class Photos(Resource):
                             '{}photos/land/{}.jpg').format(mode, photo_id),
                 })
             else:
+                if photo_info[1] is not None:
+                    date = photo_info[1].date().isoformat()
+                else:
+                    date = '0000-00-00'
                 photos.append({
                     'id': photo_id,
                     'url': ('https://euboia.labs.vu.nl/'
                             '{}photos/land/{}.jpg').format(mode, photo_id),
-                    'date': photo_info[1].date().isoformat(),
+                    'date': date,
                     'description': photo_info[3],
                     'direction': photo_info[2],
-                    'orientation': 'landscape' if photo_info[4] else 'portrait'
                 })
 
         return photos
