@@ -1,5 +1,5 @@
 <template>
-  <div id="infobox" style="visibility: hidden;">
+  <div id="infobox" style="display: none;">
     <div
       v-bar="{ preventParentScroll: true, scrollThrottle: 30 }"
       style="height: 100%;"
