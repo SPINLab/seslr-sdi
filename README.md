@@ -1,5 +1,13 @@
 # SESLR Hub
 
+The ‘Sea and Land Routes of southern Euboia’ (SESLR) project aims to provide a detailed study of regional developments in interconnectivity between ca. 4000 and 1 BC and in this manner make a critical contribution to the present discussion about Mediterranean interconnectivity. An important basis for this research has been the creation of a data base of all known settlements, important roads and routes, and maritime infrastructural elements, supplemented with new data provided by fresh field surveys and remote sensing research. From the beginning the intention was to make the project’s data base accessible to a larger group of potential users, including planners, heritage policymakers and archaeologists working for the state archaeological service. This Knowledge Hub is the result of this effort.
+
+![SESLR Hub](screenshot.png)
+
+## Prerequisites
+
+- docker
+
 ## Setup
 
 ### reverse proxy
