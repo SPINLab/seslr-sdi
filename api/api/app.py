@@ -9,7 +9,7 @@ import os
 from flask import Flask, render_template
 from flask_restplus import Api
 
-from apis import find_spots, periods, photos
+from apis import find_spots, periods, photos, search
 from core import db
 
 
@@ -38,6 +38,7 @@ api.add_namespace(find_spots, path='/find_spots')
 api.add_namespace(periods, path='/periods')
 if os.environ['SESLR_APP_MODE'] != 'demo':
     api.add_namespace(photos, path='/photos')
+api.add_namespace(search, path='/search')
 api.namespaces.pop(0)
 
 db.init_app(app)
