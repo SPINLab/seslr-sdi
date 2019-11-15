@@ -5,8 +5,9 @@
 """
 
 import os
+import re
 
-from flask_restplus import Namespace, Resource, fields
+from flask_restplus import Namespace, Resource, fields, reqparse
 from werkzeug.exceptions import NotFound
 
 from core import DEMO_FIND_SPOTS
@@ -18,20 +19,30 @@ api = Namespace(
     description='Search the database.'
 )
 
-
-search = api.model('Search', {
-    'search_text': fields.String(description='The text to query.')
+find_spots = api.model('Find Spots', {
+    'find_spot_ids': fields.List(
+        fields.Integer(),
+        description='All find spot ids found in the database.'
+    )
 })
+
+parser = reqparse.RequestParser()
+parser.add_argument('query', type=str, help='The search query.')
 
 
 @api.route('/')
 class Search(Resource):
 
-    @api.marshal_with(search)
+    @api.expect(parser)
+    @api.marshal_with(find_spots)
     def get(self):
         """
         List all find spots in database with a match with the search query
         """
+
+        args = parser.parse_args()
+        query = args.query
+        query = re.sub(r'[ \t]+', ' & ', query)
 
         db = get_db()
         cursor = db.cursor()
@@ -43,7 +54,7 @@ class Search(Resource):
             OR toponym_tokens @@ to_tsquery(%s);
         """
 
-        cursor.execute(find_spot_query, (search,))
+        cursor.execute(find_spot_query, (query, query, query))
         find_spot_results = cursor.fetchall()
 
         find_query = """
@@ -53,7 +64,7 @@ class Search(Resource):
             OR features_architecture_tokens @@ to_tsquery(%s);
         """
 
-        cursor.execute(find_query, (search,))
+        cursor.execute(find_query, (query, query, query))
         find_results = cursor.fetchall()
         cursor.close()
 
