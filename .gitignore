@@ -5,3 +5,6 @@ pgdata/
 *.pyc
 *.sock
 postgres.env
+.htpasswd
+*.log
+log/
