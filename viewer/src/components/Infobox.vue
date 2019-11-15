@@ -60,8 +60,6 @@ import capitalize from 'lodash/capitalize';
 
 import Property from 'cesium/DataSources/Property';
 
-import { rotateImageExif, getImageRotationExif, base64ToBlob } from './image';
-
 Vue.use(VueImg);
 
 const listToString = (list, delimiter) => {
@@ -257,27 +255,6 @@ export default {
     parsePhotosData(photos) {
       if (typeof photos.message === 'undefined') {
         this.photos = photos;
-        for (const photo of photos) {
-          fetch(photo.url)
-            .then(response => {
-              return response.blob();
-            })
-            .then(blob => {
-              getImageRotationExif(blob, orientation => {
-                if (orientation !== 1) {
-                  const reader = new FileReader();
-                  reader.onload = () => {
-                    rotateImageExif(reader.result, orientation, photoBase64 => {
-                      photo.url = URL.createObjectURL(
-                        base64ToBlob(photoBase64)
-                      );
-                    });
-                  };
-                  reader.readAsDataURL(blob);
-                }
-              });
-            });
-        }
       } else {
         this.photos = [];
       }
