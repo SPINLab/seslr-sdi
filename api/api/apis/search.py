@@ -9,6 +9,7 @@ import re
 
 from flask_restplus import Namespace, Resource, fields, reqparse
 from werkzeug.exceptions import NotFound
+from psycopg2.extras import RealDictCursor
 
 from core.constants import DEMO_FIND_SPOTS
 from core.db import get_db
@@ -19,11 +20,9 @@ api = Namespace(
     description='Search the database.'
 )
 
-find_spots = api.model('Find Spots', {
-    'find_spot_ids': fields.List(
-        fields.Integer(),
-        description='All find spot ids found in the database.'
-    )
+search_result = api.model('Search Result', {
+    'find_spot_id': fields.Integer(description='The ID of the find spot.'),
+    'shortend_description': fields.String(description='A shortend description of the find spot.')
 })
 
 parser = reqparse.RequestParser()
@@ -34,46 +33,49 @@ parser.add_argument('query', type=str, help='The search query.')
 class Search(Resource):
 
     @api.expect(parser)
-    @api.marshal_with(find_spots)
+    @api.marshal_with(search_result)
     def get(self):
         """
-        List all find spots in database with a match with the search query
+        List all find spots in database with a match with the search query, ranked by computed relevancy.
         """
 
         args = parser.parse_args()
-        query = args.query
-        query = re.sub(r'[ \t]+', ' & ', query)
 
         db = get_db()
-        cursor = db.cursor()
+        cursor = db.cursor(cursor_factory=RealDictCursor)
 
-        find_spot_query = """
-        SELECT find_spot_id FROM seslr.find_spot_search_vectors
-        WHERE description_tokens @@ to_tsquery(%s)
-            OR type_tokens @@ to_tsquery(%s)
-            OR toponym_tokens @@ to_tsquery(%s);
+        query = """
+        WITH search_results AS (
+        SELECT fs.find_spot_id,
+                ts_rank(fs.description_tokens, websearch_to_tsquery(%(search_query)s)) AS rank1,
+                ts_rank(fs.type_tokens, websearch_to_tsquery(%(search_query)s)) AS rank2,
+                ts_rank(fs.toponym_tokens, websearch_to_tsquery(%(search_query)s)) AS rank3,
+                ts_rank(f.description_tokens, websearch_to_tsquery(%(search_query)s)) AS rank4,
+                ts_rank(f.features_tokens, websearch_to_tsquery(%(search_query)s)) AS rank5,
+                ts_rank(f.features_architecture_tokens, websearch_to_tsquery(%(search_query)s)) AS rank6
+                FROM seslr.find_spot_search_vectors fs JOIN seslr.find_search_vectors f ON fs.find_spot_id = f.find_spot_id
+                WHERE fs.description_tokens @@ websearch_to_tsquery(%(search_query)s)
+                OR fs.type_tokens @@ websearch_to_tsquery(%(search_query)s)
+                OR fs.toponym_tokens @@ websearch_to_tsquery(%(search_query)s)
+                OR f.description_tokens @@ websearch_to_tsquery(%(search_query)s)
+                OR f.features_tokens @@ websearch_to_tsquery(%(search_query)s)
+                OR f.features_architecture_tokens @@ websearch_to_tsquery(%(search_query)s)
+        )
+        SELECT sr.find_spot_id,
+               LEFT(fs.description, 30) shortend_description,
+               coalesce(sr.rank1, 0) + coalesce(sr.rank2, 0) + coalesce(sr.rank3, 0) + coalesce(sr.rank4, 0) + coalesce(sr.rank5, 0) + coalesce(sr.rank6, 0) AS rank
+        FROM search_results sr JOIN seslr.find_spot fs ON sr.find_spot_id = fs."find_spot_ID"
+        ORDER BY rank DESC
         """
 
-        cursor.execute(find_spot_query, (query, query, query))
-        find_spot_results = cursor.fetchall()
+        cursor.execute(query, {'search_query': args.query})
+        results = cursor.fetchall()
 
-        find_query = """
-        SELECT find_spot_id FROM seslr.find_search_vectors
-        WHERE description_tokens @@ to_tsquery(%s)
-            OR features_tokens @@ to_tsquery(%s)
-            OR features_architecture_tokens @@ to_tsquery(%s);
-        """
-
-        cursor.execute(find_query, (query, query, query))
-        find_results = cursor.fetchall()
         cursor.close()
 
-        if find_spot_results is None and find_results is None:
+        if results is None:
             raise NotFound('No matches found in database.')
         else:
-            find_spot_results = [int(r[0]) for r in find_spot_results]
-            find_results = [int(r[0]) for r in find_results]
-            results = list(set(find_spot_results + find_results))
             if os.environ['SESLR_APP_MODE'] == 'demo':
-                results = [r for r in results if r in DEMO_FIND_SPOTS]
-            return {'find_spot_ids': results}
+                results = [r for r in results if r['find_spot_id'] in DEMO_FIND_SPOTS]
+            return results
