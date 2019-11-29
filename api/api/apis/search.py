@@ -10,7 +10,7 @@ import re
 from flask_restplus import Namespace, Resource, fields, reqparse
 from werkzeug.exceptions import NotFound
 
-from core import DEMO_FIND_SPOTS
+from core.constants import DEMO_FIND_SPOTS
 from core.db import get_db
 
 
