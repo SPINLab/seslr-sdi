@@ -6,6 +6,7 @@
 
 import os
 import re
+import json
 
 from flask_restplus import Namespace, Resource, fields, reqparse
 from werkzeug.exceptions import NotFound
@@ -20,8 +21,16 @@ api = Namespace(
     description='Search the database.'
 )
 
+geometry_fields = api.model('geometry', {
+    'type': fields.String(),
+    'coordinates': fields.List(fields.Float),
+})
+geometry_nested = fields.Nested(geometry_fields)
+geometry_wildcard = fields.Wildcard(geometry_nested)
+
 search_result = api.model('Search Result', {
     'find_spot_id': fields.Integer(description='The ID of the find spot.'),
+    'geometry': geometry_wildcard,
     'shortend_description': fields.String(description='A shortend description of the find spot.')
 })
 
@@ -62,9 +71,10 @@ class Search(Resource):
                 OR f.features_architecture_tokens @@ websearch_to_tsquery(%(search_query)s)
         )
         SELECT sr.find_spot_id,
-               LEFT(fs.description, 30) shortend_description,
+               ST_AsGeoJSON(fsp.geom) geometry,
+               LEFT(fs.description, 50) shortend_description,
                coalesce(sr.rank1, 0) + coalesce(sr.rank2, 0) + coalesce(sr.rank3, 0) + coalesce(sr.rank4, 0) + coalesce(sr.rank5, 0) + coalesce(sr.rank6, 0) AS rank
-        FROM search_results sr JOIN seslr.find_spot fs ON sr.find_spot_id = fs."find_spot_ID"
+        FROM search_results sr JOIN seslr.find_spot fs ON sr.find_spot_id = fs."find_spot_ID" JOIN seslr.find_spot_points fsp ON sr.find_spot_id = fsp.find_spot_id
         ORDER BY rank DESC
         """
 
@@ -78,4 +88,6 @@ class Search(Resource):
         else:
             if os.environ['SESLR_APP_MODE'] == 'demo':
                 results = [r for r in results if r['find_spot_id'] in DEMO_FIND_SPOTS]
+            for r in results:
+                r['geometry'] = json.loads(r['geometry'])
             return results
