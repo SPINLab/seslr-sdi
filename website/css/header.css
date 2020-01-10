@@ -8,7 +8,6 @@ header {
 
 .tabs {
     display: flex;
-    padding-bottom: 3px;
 }
 .tabs a {
     text-decoration: none;

@@ -1,119 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>SESLR Project - Data</title>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-        <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0C3183" />
-        <meta name="msapplication-TileColor" content="#0C3183" />
-        <meta name="theme-color" content="#0C3183" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SESLR Project - Data</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#0C3183" />
+    <meta name="msapplication-TileColor" content="#0C3183" />
+    <meta name="theme-color" content="#0C3183" />
 
-        <link rel="stylesheet" href="./css/main.css" />
-        <link rel="stylesheet" href="./css/header.css" />
-        <link rel="stylesheet" href="./css/data.css" />
-    </head>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
 
-    <body>
-        <div class="container">
-            <header>
-                <div class="title">
-                    <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC</h1>
-                    <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/data.css" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="title">
+                <h1>THE SEA AND THE LANDROUTES OF SOUTHERN EUBOIA, CA. 4000-1 BC</h1>
+                <h2>A CASE STUDY IN MEDITERRANEAN INTERCONNECTIVITY</h2>
+            </div>
+
+            <nav class="tabs" id="header-tabs">
+                <div class="tab-container">
+                    <a class="tab" href="index.html">Home</a>
+                    <a class="tab" href="about.html">About Us</a>
                 </div>
-
-                <nav class="tabs" id="header-tabs">
-                    <div class="tab-container">
-                        <a class="tab" href="index.html">Home</a>
-                        <a class="tab" href="about.html">About Us</a>
-                    </div>
-                    <div class="tab-container">
-                        <a class="tab" href="map.html">Viewer</a>
-                        <a class="tab" style="background-color: black" href="data.html">Data</a>
-                    </div>
-                </nav>
-            </header>
-
-            <div class="content">
-                <div>
-                    <h3>Primary data</h3>
-                    <h4>Data which is the direct result of the project</h4>
-                    <table>
-                        <tr>
-                            <th align="left">Name</th>
-                            <th align="left">Acquisition</th>
-                            <th align="left">By</th>
-                            <th align="left">Map View</th>
-                            <th align="left">Get Data</th>
-                        </tr>
-                        <tr>
-                            <td>Find Spot</td>
-                            <td>Fieldwork</td>
-                            <td>Stefan & Ruben</td>
-                            <td>
-                                <a href="viewer/?mode=2&findspots=1">2D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="viewer/?mode=3&findspots=1">3D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="demo/viewer/?findspots=1">Demo</a>
-                            </td>
-                            <td><a href="api">API</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> | <a href="demo/api">Demo API</a></td>
-                        </tr>
-                    </table>
-
-                    <h3>Secondary data</h3>
-                    <h4>Data which is obtained by third parties and used in the project</h4>
-                    <table>
-                        <tr>
-                            <th align="left">Name</th>
-                            <th align="left"></th>
-                            <th align="left"></th>
-                            <th align="left">Map View</th>
-                            <th align="left"></th>
-                        </tr>
-
-                        <tr>
-                            <td>Geological Map</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="viewer/?mode=2&geomap=1">2D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="viewer/?mode=3&geomap=1">3D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="demo/viewer/?geomap=1">Demo</a>
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <td>Historical Aerial Photographs</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="viewer/?mode=2&histairphotos=1">2D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="viewer/?mode=3&histairphotos=1">3D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="demo/viewer/?histairphotos=1">Demo</a>
-                            </td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <td>Historical Maps</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="viewer/?mode=2&histmaps=1">2D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="viewer/?mode=3&histmaps=1">3D</a> <img class="lock-icon" src="./assets/lock.svg" alt="Requires password"> |
-                                <a href="demo/viewer/?histmaps=1">Demo</a>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </table>
+                <div class="tab-container">
+                    <a class="tab" href="map.html">Viewer</a>
+                    <a class="tab" style="background-color: black" href="data.html">Data</a>
                 </div>
+            </nav>
+        </header>
+
+        <div class="content">
+            <div>
+                <h3>Primary data</h3>
+                <h4>Data which is the direct result of the project</h4>
+                <table>
+                    <tr>
+                        <th align="left">Name</th>
+                        <th align="left">Acquisition</th>
+                        <th align="left">By</th>
+                        <th align="left">Map View</th>
+                        <th align="left">Get Data</th>
+                    </tr>
+                    <tr>
+                        <td>Find Spot</td>
+                        <td>Fieldwork</td>
+                        <td>Stefan & Ruben</td>
+                        <td>
+                            <a href="viewer/?mode=2&findspots=1">2D</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> |
+                            <a href="viewer/?mode=3&findspots=1">3D</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> |
+                            <a href="demo/viewer/?findspots=1">Demo</a>
+                        </td>
+                        <td><a href="api">API</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> | <a href="demo/api">Demo API</a></td>
+                    </tr>
+                </table>
+
+                <h3>Secondary data</h3>
+                <h4>Data which is obtained by third parties and used in the project</h4>
+                <table>
+                    <tr>
+                        <th align="left">Name</th>
+                        <th align="left"></th>
+                        <th align="left"></th>
+                        <th align="left">Map View</th>
+                        <th align="left"></th>
+                    </tr>
+
+                    <tr>
+                        <td>Geological Map</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2&geomap=1">2D</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> |
+                            <a href="viewer/?mode=3&geomap=1">3D</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> |
+                            <a href="demo/viewer/?geomap=1">Demo</a>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Historical Aerial Photographs</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2&histairphotos=1">2D</a> <img class="lock-icon"
+                                src="./assets/lock.svg" alt="Requires password"> |
+                            <a href="viewer/?mode=3&histairphotos=1">3D</a> <img class="lock-icon"
+                                src="./assets/lock.svg" alt="Requires password"> |
+                            <a href="demo/viewer/?histairphotos=1">Demo</a>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Historical Maps</td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="viewer/?mode=2&histmaps=1">2D</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> |
+                            <a href="viewer/?mode=3&histmaps=1">3D</a> <img class="lock-icon" src="./assets/lock.svg"
+                                alt="Requires password"> |
+                            <a href="demo/viewer/?histmaps=1">Demo</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
