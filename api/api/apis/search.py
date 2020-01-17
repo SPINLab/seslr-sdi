@@ -5,7 +5,6 @@
 """
 
 import os
-import re
 import json
 
 from flask_restplus import Namespace, Resource, fields, reqparse
@@ -53,6 +52,21 @@ class Search(Resource):
         db = get_db()
         cursor = db.cursor(cursor_factory=RealDictCursor)
 
+        search_query = args.query.strip()
+
+        find_spot_match = None
+        if search_query.isdecimal():
+            query = """
+            SELECT fs."find_spot_ID" find_spot_id,
+                   ST_AsGeoJSON(fsp.geom) geometry,
+                   LEFT(fs.description, 50) shortend_description
+            FROM seslr.find_spot fs JOIN seslr.find_spot_points fsp ON fs."find_spot_ID" = fsp.find_spot_id
+            WHERE fs."find_spot_ID" = %(search_query)s
+            """
+
+            cursor.execute(query, {'search_query': search_query})
+            find_spot_match = cursor.fetchone()
+
         query = """
         WITH search_results AS (
         SELECT fs.find_spot_id,
@@ -78,14 +92,16 @@ class Search(Resource):
         ORDER BY rank DESC
         """
 
-        cursor.execute(query, {'search_query': args.query})
+        cursor.execute(query, {'search_query': search_query})
         results = cursor.fetchall()
 
         cursor.close()
 
-        if results is None:
+        if results is None and find_spot_match is None:
             raise NotFound('No matches found in database.')
         else:
+            if find_spot_match is not None:
+                results.insert(0, find_spot_match)
             if os.environ['SESLR_APP_MODE'] == 'demo':
                 results = [r for r in results if r['find_spot_id'] in DEMO_FIND_SPOTS]
             for r in results:
