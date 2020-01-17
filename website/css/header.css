@@ -27,11 +27,8 @@ header {
     border-color: cornflowerblue;
 }
 
-.tab-container {
-    padding-bottom: 0.3rem;
-}
-
 .tab {
+    display: inline-flex;
     background-color: cornflowerblue;
     padding: 0.6rem;
     margin-right: 0.6rem;
