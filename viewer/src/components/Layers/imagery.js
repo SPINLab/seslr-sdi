@@ -1,6 +1,6 @@
 'use strict';
 import ImageryLayer from 'cesium/Scene/ImageryLayer';
-import createTileMapServiceImageryProvider from 'cesium/Scene/createTileMapServiceImageryProvider';
+import TileMapServiceImageryProvider from 'cesium/Scene/TileMapServiceImageryProvider';
 
 export const imageryNames = [
   {
@@ -106,7 +106,7 @@ export const imagery = {};
 for (const imageCategory of imageryNames) {
   for (const imageName of imageCategory.children) {
     imagery[imageName.id] = new ImageryLayer(
-      new createTileMapServiceImageryProvider({
+      new TileMapServiceImageryProvider({
         url: '../tms/1.0.0/' + imageName.id,
         credit: ''
       }),
