@@ -1,6 +1,6 @@
 <template>
   <div id="cesium-toolbar">
-    <Geocoder />
+    <DatabaseSearch />
     <SceneModePicker />
     <BaseLayerPicker :terrainProviderViewModels="terrainProvidersViewModels" />
     <HomeButton
@@ -18,7 +18,7 @@ import HomeButton from './Buttons/HomeButton';
 import BaseLayerPicker from './Buttons/BaseLayerPicker';
 import NavigationHelpButton from './Buttons/NavigationHelpButton';
 import SceneModePicker from './Buttons/SceneModePicker';
-import Geocoder from './Buttons/Geocoder';
+import DatabaseSearch from './Buttons/DatabaseSearch';
 
 import { terrainProvidersViewModels } from '../Layers/terrain';
 
@@ -29,7 +29,7 @@ export default {
     BaseLayerPicker,
     NavigationHelpButton,
     SceneModePicker,
-    Geocoder
+    DatabaseSearch
   },
   data() {
     return {

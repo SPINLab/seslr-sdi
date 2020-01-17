@@ -93,7 +93,7 @@ export default {
 #infobox {
   position: absolute;
   top: 10%;
-  right: 3rem;
+  right: 4rem;
   z-index: 2;
 }
 </style>
