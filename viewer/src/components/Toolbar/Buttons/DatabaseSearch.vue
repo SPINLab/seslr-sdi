@@ -16,7 +16,9 @@
         <li v-for="result in searchResults" :key="result.find_spot_id">
           <button @click="goToFindSpot(result)">
             <div class="find-spot-id">Find spot {{ result.find_spot_id }}</div>
-            <div class="find-spot-description">{{ result.shortend_description }}</div>
+            <div class="find-spot-description">
+              {{ result.shortend_description }}
+            </div>
           </button>
         </li>
       </ul>
@@ -25,17 +27,17 @@
 </template>
 
 <script>
-import debounce from "lodash/debounce";
+import debounce from 'lodash/debounce';
 
-import Cartesian3 from "cesium/Core/Cartesian3";
-import Property from "cesium/DataSources/Property";
-import Color from "cesium/Core/Color";
-import HeightReference from "cesium/Scene/HeightReference";
+import Cartesian3 from 'cesium/Core/Cartesian3';
+import Property from 'cesium/DataSources/Property';
+import Color from 'cesium/Core/Color';
+import HeightReference from 'cesium/Scene/HeightReference';
 
-import { findSpots } from "../../FindSpots/features";
+import { findSpots } from '../../FindSpots/features';
 
 export default {
-  name: "DatabaseSearch",
+  name: 'DatabaseSearch',
   data() {
     return {
       searchResults: []
@@ -79,8 +81,8 @@ export default {
         disableDepthTestDistance: 50000
       }
     });
-    const canvas = document.querySelector("canvas");
-    canvas.addEventListener("click", () => {
+    const canvas = document.querySelector('canvas');
+    canvas.addEventListener('click', () => {
       document.activeElement.blur();
     });
   }

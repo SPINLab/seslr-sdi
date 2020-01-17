@@ -97,7 +97,10 @@ export default {
   },
   methods: {
     updateInfo(entity) {
-      if (typeof entity !== 'undefined' && typeof entity.properties !== 'undefined') {
+      if (
+        typeof entity !== 'undefined' &&
+        typeof entity.properties !== 'undefined'
+      ) {
         this.$el.style.display = 'block';
 
         const findSpotID = Property.getValueOrUndefined(
